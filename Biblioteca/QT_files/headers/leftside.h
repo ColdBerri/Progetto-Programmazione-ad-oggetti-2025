@@ -36,21 +36,22 @@ class leftside : public QWidget {
         QString filtroAttivo;
         QToolBar *toolBar;
         QAction *salvaAzione;
+        QAction* importa;
 
         void popolaLista();
         void saveToJson();
         void loadJson(const std::string& filePath);
+        void importaLista();
     public:
         leftside(QWidget *parent = nullptr);
 
     public slots:
-        //void ricercaOggetti(const QString &);
-        //void selezionaTipoOggetto(const std::string tipo);
         //void addObj();
         //void removeObj();
         void filtraListaRicerca();
         void filtraPerCategoria(const QString &categoria, QPushButton *bottoneSelezionato);
         void salvaLista();
+
     signals : 
         void itemSelected(biblioteca *selectedItem);
 };

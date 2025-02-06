@@ -26,8 +26,10 @@ leftside::leftside(/*content* contWidget,*/ QWidget *parent) : QWidget(parent){
     filtroAttivo = QString::fromStdString("");
     toolBar = new QToolBar(this);
     salvaAzione = new QAction("Salva", this);
+    importa = new QAction("Importa", this);
 
     toolBar->addAction(salvaAzione);
+    toolBar->addAction(importa);
 
     bottoneArte->setCheckable(true);
     bottoenOrologi->setCheckable(true);
@@ -56,60 +58,39 @@ leftside::leftside(/*content* contWidget,*/ QWidget *parent) : QWidget(parent){
     connect(bottoneArte, &QPushButton::clicked, this, [this]() { filtraPerCategoria("arte", bottoneArte); });
     connect(bottoenOrologi, &QPushButton::clicked, this, [this]() { filtraPerCategoria("orologi", bottoenOrologi); });
     connect(bottoneGioielli, &QPushButton::clicked, this, [this]() { filtraPerCategoria("gioielli", bottoneGioielli); });
-    //conncet del salva
+    //conncet dei salva e importa
     connect(salvaAzione, &QAction::triggered, this, &leftside::salvaLista);
+    connect(importa, &QAction::triggered, this, &leftside::importaLista);
 
-//modficare il caricamento del json in modo che l'interfaccia dialoghi direttamente con il resto
-	std::string filePath = "/home/BRN/clion/Progetto-Programmazione-ad-oggetti-2025/Biblioteca/esempio.json";
-	if (!fileEsiste(filePath)) {
-    	std::cerr << "Errore: Il file " << filePath << " non esiste!" << std::endl;
-	} else {
-    	std::cout << "Il file esiste!" << std::endl;
-	}
-    loadJson("/home/BRN/clion/Progetto-Programmazione-ad-oggetti-2025/Biblioteca/esempio.json");
-    popolaLista();
-} 
+    //pezzo di codice per importare automaticamente qualcosa alla creazione, non necessario ma lo teniamo per ora
+    /*std::string filePath = "/home/BRN/Scrivania/gg.json";
+        if (!fileEsiste(filePath)) {
+            std::cerr << "Errore: Il file " << filePath << " non esiste!" << std::endl;
+        } else {
+            std::cout << "Il file esiste: " << filePath << std::endl;
+
+        }
+    loadJson(filePath);
+    popolaLista();*/
+}
 
 //METODI JSON
-/*void leftside::saveToJson() {
-    // Finestra di dialogo per scegliere il percorso di salvataggio
-    QString filePath = QFileDialog::getSaveFileName(this, "Salva Lista", "", "JSON Files (*.json);;All Files (*)");
-
-    // Se l'utente ha annullato, non fare nulla
-    if (filePath.isEmpty()) return;
-
-    jsonVisitorSave visitor;
-    for (biblioteca* obj : oggetti) {
-        obj->accetta(visitor);
-    }
-
-    QFile file(filePath);
-    if (file.open(QIODevice::WriteOnly)) {
-        file.write(QJsonDocument(visitor.arrayJ).toJson());
-        file.close();
-        QMessageBox::information(this, "Salvataggio", "Lista salvata correttamente in:\n" + filePath);
-    } else {
-        QMessageBox::warning(this, "Errore", "Impossibile salvare il file.");
-    }
-}*/
-
 void leftside::saveToJson() {
     // Finestra di dialogo per scegliere il percorso di salvataggio
     QString filePath = QFileDialog::getSaveFileName(this, "Salva Lista", "", "JSON Files (*.json);;All Files (*)");
 
-    // Se l'utente ha annullato, non fare nulla
+    //controlli vari
     if (filePath.isEmpty()) {
         qDebug() << "Salvataggio annullato dall'utente.";
         return;
     }
 
-    // Controllo che ci siano oggetti nella lista
     if (oggetti.empty()) {
         QMessageBox::warning(this, "Errore", "La lista è vuota, non c'è nulla da salvare.");
         return;
     }
 
-    // Inizializza il visitor per la serializzazione JSON
+    //Inzializzazione visitor
     jsonVisitorSave visitor;
 
     for (biblioteca* obj : oggetti) {
@@ -120,7 +101,6 @@ void leftside::saveToJson() {
         }
     }
 
-    // Controllo che l'array JSON non sia vuoto
     if (visitor.arrayJ.isEmpty()) {
         QMessageBox::warning(this, "Errore", "Errore nella generazione del JSON: l'array JSON è vuoto.");
         return;
@@ -131,12 +111,10 @@ void leftside::saveToJson() {
         QMessageBox::warning(this, "Errore", "Impossibile aprire il file per scrivere: " + filePath);
         return;
     }
-
+    //scrittura e chiusura del file
     file.write(QJsonDocument(visitor.arrayJ).toJson());
     file.close();
-    //QMessageBox::information(this, "Salvataggio", "Lista salvata correttamente in:\n" + filePath);
 }
-
 
 void leftside::loadJson(const std::string& filePath) {
     std::ifstream file(filePath);
@@ -210,7 +188,7 @@ void leftside::loadJson(const std::string& filePath) {
             bool vivo = jsonObj["artista vivo"].get<bool>();
 
             std::list<std::string> esp;
-            std::string esposizioni = jsonObj["esposizioni"].get<std::string>();
+            std::string esposizioni = jsonObj["esposizione"].get<std::string>();
             std::istringstream iss(esposizioni);
             std::string word;
             while (std::getline(iss, word, ';')) {  // Usa ';' come delimitatore
@@ -230,7 +208,7 @@ void leftside::loadJson(const std::string& filePath) {
 void leftside::popolaLista(){
     listaItems->clear();
     for(biblioteca* obj : oggetti) {
-        listaItems->addItem(QString::fromStdString(obj->getNome()));  // Aggiungi ogni oggetto alla lista
+        listaItems->addItem(QString::fromStdString(obj->getNome()));
     }
 }
 
@@ -292,4 +270,29 @@ void leftside::salvaLista() {
 
     saveToJson();
     QMessageBox::information(this, "Salvataggio", "Lista salvata correttamente!");
+}
+
+//importazione del file json
+void leftside::importaLista() {
+    QString filePath = QFileDialog::getOpenFileName(this, "Importa Lista", "", "JSON Files (*.json);;All Files (*)");
+
+    if (filePath.isEmpty()) return;
+
+    if (!fileEsiste(filePath.toStdString())) {
+        std::cerr << "Errore: Il file " << filePath.toStdString() << " non esiste!" << std::endl;
+        return;
+    } else {
+        std::cout << "Il file esiste: " << filePath.toStdString() << std::endl;
+    }
+
+    loadJson(filePath.toStdString());
+
+    for (biblioteca* obj : oggetti) {
+        delete obj;
+    }
+
+    oggetti.clear();
+    listaItems->clear();
+    loadJson(filePath.toStdString());
+    popolaLista();
 }

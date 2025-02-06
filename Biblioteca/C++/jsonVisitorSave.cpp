@@ -19,7 +19,6 @@ void jsonVisitorSave::visitArte(arte& a) {
     obj["artista"] = QString::fromStdString(a.getArtista());
     obj["tipo opera"] = QString::fromStdString(a.getTipoOpera());
     obj["artista vivo"] = a.getVivo();
-
     std::string result;
     std::list<std::string> lista = a.getEspo();
     for (auto it = lista.begin(); it != lista.end(); it++) {
@@ -28,7 +27,7 @@ void jsonVisitorSave::visitArte(arte& a) {
             result += ";";
         }
     }
-    obj["esposizioni"] = QString::fromStdString(result);
+    obj["esposizione"] = QString::fromStdString(result);
     arrayJ.append(obj);
 }
 
@@ -45,7 +44,7 @@ void jsonVisitorSave::visitOrologi(orologi& o) {
     obj["id"] = QString::fromStdString(o.getId());
     obj["modello"] = QString::fromStdString(o.getModello());
     obj["marca"] = QString::fromStdString(o.getMarca());
-    obj["numero esemplari"] = QString::fromStdString(std::to_string(o.getEsemplari()));
+    obj["numero esemplari"] = o.getEsemplari();
     obj["meccanismo"] = QString::fromStdString(o.getMecc());
     arrayJ.append(obj);
 }
@@ -60,8 +59,6 @@ void jsonVisitorSave::visitGioielli(gioielli& g) {
     obj["valore"] = g.getValAtt();
     obj["preferiti"] =  g.getPreferiti();
     obj["id"] = QString::fromStdString(g.getId());
-    obj["orafo"] = QString::fromStdString(g.getOrafo());
-    std::string result2;
     std::string result;
     std::list<std::string> lista = g.getMateriali();
     for (auto it = lista.begin(); it != lista.end(); it++) {
@@ -71,5 +68,6 @@ void jsonVisitorSave::visitGioielli(gioielli& g) {
         }
     }
     obj["materiali"] = QString::fromStdString(result);
+    obj["orafo"] = QString::fromStdString(g.getOrafo());
     arrayJ.append(obj);
 }

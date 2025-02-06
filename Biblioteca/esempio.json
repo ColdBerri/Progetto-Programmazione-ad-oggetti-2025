@@ -11,7 +11,7 @@
         "artista": "Leonardo da Vinci",
         "tipo opera": "Dipinto",
         "artista vivo": false,
-        "esposizioni": "Louvre; Uffizi; "
+        "esposizione": "Louvre; Uffizi; "
     },
     {
         "tipo": "orologi",

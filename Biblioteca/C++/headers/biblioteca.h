@@ -20,7 +20,7 @@ class biblioteca {
         //costruttore e distruttore
         biblioteca(std::string n, std::string d, std::string a, 
         std::string dc, double v, bool p, std::string id);
-        ~biblioteca();    
+        virtual ~biblioteca();
 
         //metodi getter
         std::string getNome() const;
