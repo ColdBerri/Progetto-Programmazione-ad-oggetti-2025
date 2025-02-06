@@ -1,0 +1,42 @@
+[
+    {
+        "tipo": "arte",
+        "nome": "La Gioconda",
+        "descrizione": "Un famoso dipinto di Leonardo da Vinci.",
+        "autentica": "sei",
+        "data creazione": "1503",
+        "valore": 86000,
+        "preferiti": false,
+        "id": "ART001",
+        "artista": "Leonardo da Vinci",
+        "tipo opera": "Dipinto",
+        "artista vivo": false,
+        "esposizioni": "Louvre; Uffizi; "
+    },
+    {
+        "tipo": "orologi",
+        "nome": "Rolex Submariner",
+        "descrizione": "Un orologio subacqueo di lusso.",
+        "autentica": "ciao",
+        "data creazione": "1953",
+        "valore": 10000,
+        "preferiti": false,
+        "id": "ORO001",
+        "modello": "Submariner",
+        "marca": "Rolex",
+        "numero esemplari": 1000,
+        "meccanismo": "Automatico"
+    },
+    {
+        "tipo": "gioielli",
+        "nome": "Collana di Diamanti",
+        "descrizione": "Una collana con diamanti di alta qualità.",
+        "autentica": "pinotto",
+        "data creazione": "2020",
+        "valore": 50000,
+        "preferiti": true,
+        "id": "GIO001",
+        "materiali": "Oro; Diamanti;",
+        "orafo": "Bulgari"
+    }
+]

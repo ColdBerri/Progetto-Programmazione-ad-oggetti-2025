@@ -28,7 +28,7 @@ class arte : public biblioteca{
         void setTipoOpera(const std::string);
         void setVivo(bool);
         void setEsposizione(const std::list<std::string>&);
-        //acc
+
         void accetta(bibliotecaVisitorInterface& visitor) override;
 };
 

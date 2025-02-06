@@ -37,7 +37,7 @@ MOVE          = mv -f
 TAR           = tar -cf
 COMPRESS      = gzip -9f
 DISTNAME      = Biblioteca1.0.0
-DISTDIR = /home/BRN/clion/Biblioteca/.tmp/Biblioteca1.0.0
+DISTDIR = /home/BRN/clion/Progetto-Programmazione-ad-oggetti-2025/Biblioteca/.tmp/Biblioteca1.0.0
 LINK          = g++
 LFLAGS        = -Wl,-O1 -pipe -O2 -flto=8 -fno-fat-lto-objects -fuse-linker-plugin -fPIC
 LIBS          = $(SUBLIBS) /usr/lib/libQt5Widgets.so /usr/lib/libQt5Gui.so /usr/lib/libQt5Core.so -lGL -lpthread   
@@ -229,11 +229,11 @@ DIST          = /usr/lib/qt/mkspecs/features/spec_pre.prf \
 		/usr/lib/qt/mkspecs/features/exceptions.prf \
 		/usr/lib/qt/mkspecs/features/yacc.prf \
 		/usr/lib/qt/mkspecs/features/lex.prf \
-		Biblioteca.pro C++/bibliotecaVisitorInterface.h \
-		C++/jsonVisitorSave.h \
-		C++/headers/arte.h \
+		Biblioteca.pro C++/headers/arte.h \
 		C++/headers/biblioteca.h \
+		C++/headers/bibliotecaVisitorInterface.h \
 		C++/headers/gioielli.h \
+		C++/headers/jsonVisitorSave.h \
 		C++/headers/orologi.h \
 		C++/headers/pietre.h \
 		QT_files/headers/leftside.h \
@@ -583,7 +583,7 @@ distdir: FORCE
 	@test -d $(DISTDIR) || mkdir -p $(DISTDIR)
 	$(COPY_FILE) --parents $(DIST) $(DISTDIR)/
 	$(COPY_FILE) --parents /usr/lib/qt/mkspecs/features/data/dummy.cpp $(DISTDIR)/
-	$(COPY_FILE) --parents C++/bibliotecaVisitorInterface.h C++/jsonVisitorSave.h C++/headers/arte.h C++/headers/biblioteca.h C++/headers/gioielli.h C++/headers/orologi.h C++/headers/pietre.h QT_files/headers/leftside.h QT_files/headers/libs.h QT_files/headers/mainwindow.h QT_files/headers/rightside.h QT_files/headers/show.h $(DISTDIR)/
+	$(COPY_FILE) --parents C++/headers/arte.h C++/headers/biblioteca.h C++/headers/bibliotecaVisitorInterface.h C++/headers/gioielli.h C++/headers/jsonVisitorSave.h C++/headers/orologi.h C++/headers/pietre.h QT_files/headers/leftside.h QT_files/headers/libs.h QT_files/headers/mainwindow.h QT_files/headers/rightside.h QT_files/headers/show.h $(DISTDIR)/
 	$(COPY_FILE) --parents main.cpp C++/arte.cpp C++/biblioteca.cpp C++/gioielli.cpp C++/jsonVisitorSave.cpp C++/orologi.cpp QT_files/leftside.cpp QT_files/mainwindow.cpp QT_files/rightside.cpp QT_files/show.cpp $(DISTDIR)/
 
 
@@ -624,9 +624,12 @@ moc_leftside.cpp: QT_files/headers/leftside.h \
 		C++/headers/biblioteca.h \
 		C++/headers/bibliotecaVisitorInterface.h \
 		C++/headers/jsonVisitorSave.h \
+		C++/headers/orologi.h \
+		C++/headers/arte.h \
+		C++/headers/gioielli.h \
 		moc_predefs.h \
 		/usr/bin/moc
-	/usr/bin/moc $(DEFINES) --include /home/BRN/clion/Biblioteca/moc_predefs.h -I/usr/lib/qt/mkspecs/linux-g++ -I/home/BRN/clion/Biblioteca -I/home/BRN/clion/Biblioteca -I/usr/include/qt -I/usr/include/qt/QtWidgets -I/usr/include/qt/QtGui -I/usr/include/qt/QtCore -I/usr/include/c++/14.2.1 -I/usr/include/c++/14.2.1/x86_64-pc-linux-gnu -I/usr/include/c++/14.2.1/backward -I/usr/lib/gcc/x86_64-pc-linux-gnu/14.2.1/include -I/usr/local/include -I/usr/lib/gcc/x86_64-pc-linux-gnu/14.2.1/include-fixed -I/usr/include QT_files/headers/leftside.h -o moc_leftside.cpp
+	/usr/bin/moc $(DEFINES) --include /home/BRN/clion/Progetto-Programmazione-ad-oggetti-2025/Biblioteca/moc_predefs.h -I/usr/lib/qt/mkspecs/linux-g++ -I/home/BRN/clion/Progetto-Programmazione-ad-oggetti-2025/Biblioteca -I/home/BRN/clion/Progetto-Programmazione-ad-oggetti-2025/Biblioteca -I/usr/include/qt -I/usr/include/qt/QtWidgets -I/usr/include/qt/QtGui -I/usr/include/qt/QtCore -I/usr/include/c++/14.2.1 -I/usr/include/c++/14.2.1/x86_64-pc-linux-gnu -I/usr/include/c++/14.2.1/backward -I/usr/lib/gcc/x86_64-pc-linux-gnu/14.2.1/include -I/usr/local/include -I/usr/lib/gcc/x86_64-pc-linux-gnu/14.2.1/include-fixed -I/usr/include QT_files/headers/leftside.h -o moc_leftside.cpp
 
 moc_mainwindow.cpp: QT_files/headers/mainwindow.h \
 		QT_files/headers/leftside.h \
@@ -634,10 +637,13 @@ moc_mainwindow.cpp: QT_files/headers/mainwindow.h \
 		C++/headers/biblioteca.h \
 		C++/headers/bibliotecaVisitorInterface.h \
 		C++/headers/jsonVisitorSave.h \
+		C++/headers/orologi.h \
+		C++/headers/arte.h \
+		C++/headers/gioielli.h \
 		QT_files/headers/rightside.h \
 		moc_predefs.h \
 		/usr/bin/moc
-	/usr/bin/moc $(DEFINES) --include /home/BRN/clion/Biblioteca/moc_predefs.h -I/usr/lib/qt/mkspecs/linux-g++ -I/home/BRN/clion/Biblioteca -I/home/BRN/clion/Biblioteca -I/usr/include/qt -I/usr/include/qt/QtWidgets -I/usr/include/qt/QtGui -I/usr/include/qt/QtCore -I/usr/include/c++/14.2.1 -I/usr/include/c++/14.2.1/x86_64-pc-linux-gnu -I/usr/include/c++/14.2.1/backward -I/usr/lib/gcc/x86_64-pc-linux-gnu/14.2.1/include -I/usr/local/include -I/usr/lib/gcc/x86_64-pc-linux-gnu/14.2.1/include-fixed -I/usr/include QT_files/headers/mainwindow.h -o moc_mainwindow.cpp
+	/usr/bin/moc $(DEFINES) --include /home/BRN/clion/Progetto-Programmazione-ad-oggetti-2025/Biblioteca/moc_predefs.h -I/usr/lib/qt/mkspecs/linux-g++ -I/home/BRN/clion/Progetto-Programmazione-ad-oggetti-2025/Biblioteca -I/home/BRN/clion/Progetto-Programmazione-ad-oggetti-2025/Biblioteca -I/usr/include/qt -I/usr/include/qt/QtWidgets -I/usr/include/qt/QtGui -I/usr/include/qt/QtCore -I/usr/include/c++/14.2.1 -I/usr/include/c++/14.2.1/x86_64-pc-linux-gnu -I/usr/include/c++/14.2.1/backward -I/usr/lib/gcc/x86_64-pc-linux-gnu/14.2.1/include -I/usr/local/include -I/usr/lib/gcc/x86_64-pc-linux-gnu/14.2.1/include-fixed -I/usr/include QT_files/headers/mainwindow.h -o moc_mainwindow.cpp
 
 moc_rightside.cpp: QT_files/headers/rightside.h \
 		QT_files/headers/libs.h \
@@ -645,9 +651,12 @@ moc_rightside.cpp: QT_files/headers/rightside.h \
 		C++/headers/biblioteca.h \
 		C++/headers/bibliotecaVisitorInterface.h \
 		C++/headers/jsonVisitorSave.h \
+		C++/headers/orologi.h \
+		C++/headers/arte.h \
+		C++/headers/gioielli.h \
 		moc_predefs.h \
 		/usr/bin/moc
-	/usr/bin/moc $(DEFINES) --include /home/BRN/clion/Biblioteca/moc_predefs.h -I/usr/lib/qt/mkspecs/linux-g++ -I/home/BRN/clion/Biblioteca -I/home/BRN/clion/Biblioteca -I/usr/include/qt -I/usr/include/qt/QtWidgets -I/usr/include/qt/QtGui -I/usr/include/qt/QtCore -I/usr/include/c++/14.2.1 -I/usr/include/c++/14.2.1/x86_64-pc-linux-gnu -I/usr/include/c++/14.2.1/backward -I/usr/lib/gcc/x86_64-pc-linux-gnu/14.2.1/include -I/usr/local/include -I/usr/lib/gcc/x86_64-pc-linux-gnu/14.2.1/include-fixed -I/usr/include QT_files/headers/rightside.h -o moc_rightside.cpp
+	/usr/bin/moc $(DEFINES) --include /home/BRN/clion/Progetto-Programmazione-ad-oggetti-2025/Biblioteca/moc_predefs.h -I/usr/lib/qt/mkspecs/linux-g++ -I/home/BRN/clion/Progetto-Programmazione-ad-oggetti-2025/Biblioteca -I/home/BRN/clion/Progetto-Programmazione-ad-oggetti-2025/Biblioteca -I/usr/include/qt -I/usr/include/qt/QtWidgets -I/usr/include/qt/QtGui -I/usr/include/qt/QtCore -I/usr/include/c++/14.2.1 -I/usr/include/c++/14.2.1/x86_64-pc-linux-gnu -I/usr/include/c++/14.2.1/backward -I/usr/lib/gcc/x86_64-pc-linux-gnu/14.2.1/include -I/usr/local/include -I/usr/lib/gcc/x86_64-pc-linux-gnu/14.2.1/include-fixed -I/usr/include QT_files/headers/rightside.h -o moc_rightside.cpp
 
 compiler_moc_objc_header_make_all:
 compiler_moc_objc_header_clean:
@@ -671,6 +680,9 @@ main.o: main.cpp QT_files/headers/mainwindow.h \
 		C++/headers/biblioteca.h \
 		C++/headers/bibliotecaVisitorInterface.h \
 		C++/headers/jsonVisitorSave.h \
+		C++/headers/orologi.h \
+		C++/headers/arte.h \
+		C++/headers/gioielli.h \
 		QT_files/headers/rightside.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o main.o main.cpp
 
@@ -689,7 +701,11 @@ gioielli.o: C++/gioielli.cpp C++/headers/gioielli.h \
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o gioielli.o C++/gioielli.cpp
 
 jsonVisitorSave.o: C++/jsonVisitorSave.cpp C++/headers/jsonVisitorSave.h \
-		C++/headers/bibliotecaVisitorInterface.h
+		C++/headers/bibliotecaVisitorInterface.h \
+		C++/headers/orologi.h \
+		C++/headers/biblioteca.h \
+		C++/headers/arte.h \
+		C++/headers/gioielli.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o jsonVisitorSave.o C++/jsonVisitorSave.cpp
 
 orologi.o: C++/orologi.cpp C++/headers/orologi.h \
@@ -701,7 +717,10 @@ leftside.o: QT_files/leftside.cpp QT_files/headers/leftside.h \
 		QT_files/headers/libs.h \
 		C++/headers/biblioteca.h \
 		C++/headers/bibliotecaVisitorInterface.h \
-		C++/headers/jsonVisitorSave.h
+		C++/headers/jsonVisitorSave.h \
+		C++/headers/orologi.h \
+		C++/headers/arte.h \
+		C++/headers/gioielli.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o leftside.o QT_files/leftside.cpp
 
 mainwindow.o: QT_files/mainwindow.cpp QT_files/headers/mainwindow.h \
@@ -710,6 +729,9 @@ mainwindow.o: QT_files/mainwindow.cpp QT_files/headers/mainwindow.h \
 		C++/headers/biblioteca.h \
 		C++/headers/bibliotecaVisitorInterface.h \
 		C++/headers/jsonVisitorSave.h \
+		C++/headers/orologi.h \
+		C++/headers/arte.h \
+		C++/headers/gioielli.h \
 		QT_files/headers/rightside.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o mainwindow.o QT_files/mainwindow.cpp
 
@@ -718,7 +740,10 @@ rightside.o: QT_files/rightside.cpp QT_files/headers/rightside.h \
 		QT_files/headers/leftside.h \
 		C++/headers/biblioteca.h \
 		C++/headers/bibliotecaVisitorInterface.h \
-		C++/headers/jsonVisitorSave.h
+		C++/headers/jsonVisitorSave.h \
+		C++/headers/orologi.h \
+		C++/headers/arte.h \
+		C++/headers/gioielli.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o rightside.o QT_files/rightside.cpp
 
 show.o: QT_files/show.cpp 

@@ -1,6 +1,9 @@
 #ifndef LEFTSIDE_H
 #define LEFTSIDE_H
 
+#include <QFileDialog>
+#include <QMessageBox>
+#include <QToolBar>
 #include <QWidget>
 #include <QVBoxLayout>
 #include <QLabel>
@@ -29,24 +32,27 @@ class leftside : public QWidget {
         QPushButton *bottoenOrologi;
         QLineEdit *ricerca;
         QListWidget *listaItems;
-        QPushButton *add;
         std::vector<biblioteca*> oggetti;
+        QString filtroAttivo;
+        QToolBar *toolBar;
+        QAction *salvaAzione;
 
         void popolaLista();
-        void keyPressEvent(QKeyEvent *event)override;
         void saveToJson();
-        void loadJson(nlohmann::json j);
+        void loadJson(const std::string& filePath);
     public:
         leftside(QWidget *parent = nullptr);
 
     public slots:
         //void ricercaOggetti(const QString &);
         //void selezionaTipoOggetto(const std::string tipo);
-        void addObj();
-        void removeObj();
+        //void addObj();
+        //void removeObj();
+        void filtraListaRicerca();
+        void filtraPerCategoria(const QString &categoria, QPushButton *bottoneSelezionato);
+        void salvaLista();
     signals : 
-        //void itemSelezionato(std::string id);
-        //void tipoSelezionato(std::string tipo);
+        void itemSelected(biblioteca *selectedItem);
 };
 
 #endif
