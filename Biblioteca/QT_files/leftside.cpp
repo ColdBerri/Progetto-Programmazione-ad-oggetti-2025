@@ -62,7 +62,6 @@ leftside::leftside(QWidget *parent) : QWidget(parent){
         }
     });
 
-
     //connect ricerca
     connect(ricerca, &QLineEdit::textChanged, this, &leftside::filtraListaRicerca);
     //connect dei filtri
@@ -92,7 +91,7 @@ void leftside::saveToJson() {
 
     //Inzializzazione visitor
     jsonVisitorSave visitor;
-
+    //controlli su oggetto
     for (biblioteca* obj : oggetti) {
         if (obj) {
             obj->accetta(visitor);
@@ -117,7 +116,7 @@ void leftside::saveToJson() {
 }
 
 void leftside::loadJson(const std::string& filePath) {
-    //controlloi su file e contenuto del file
+    //controlli su file e contenuto del file
     std::ifstream file(filePath);
     if (!file.is_open()) {
         std::cerr << "Errore: impossibile aprire il file " << filePath << std::endl;
@@ -296,6 +295,7 @@ void leftside::importaLista() {
     popolaLista();
 }
 
+//eliminazione e rimozione di un item
 void leftside::rimuoviItem(const QString& itemName) {
     auto it = std::find_if(oggetti.begin(), oggetti.end(), [&](biblioteca* obj) {
         return obj->getNome() == itemName.toStdString();
@@ -317,6 +317,7 @@ void leftside::rimuoviItem(const QString& itemName) {
     }
 }
 
+//deselezione dell'elemento
 void leftside::deselezionaElemento() {
     if (listaItems->selectedItems().isEmpty()) {
         emit elementoDeselezionato();

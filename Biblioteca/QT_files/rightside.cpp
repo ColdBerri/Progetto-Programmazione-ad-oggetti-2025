@@ -33,13 +33,20 @@ QWidget(parent), left(left) {
     connect(left, &leftside::elementoDeselezionato, this, &rightside::svuotaDescrizione);
 
     //connect per elimina
+    connect(left, &leftside::elementoDeselezionato, this, [this]() {
+        currentItem = nullptr;
+    });
     connect(elimina, &QPushButton::clicked, this, [this]() {
-        if (currentItem) { // Supponiamo che `currentItem` sia un membro di `rightside` aggiornato con `updateInfo()`
+        if (currentItem) {
             emit itemToDelete(QString::fromStdString(currentItem->getNome()));
+
+            currentItem = nullptr;
         } else {
             QMessageBox::warning(this, "Errore", "Nessun elemento selezionato da eliminare.");
         }
     });
+
+
 }
 
 void rightside::updateInfo(biblioteca *selectedItem) {
@@ -53,6 +60,7 @@ void rightside::updateInfo(biblioteca *selectedItem) {
     qDebug() << descrizione;   // Ora `descrizione` è già pronta
 
     currentItem = selectedItem;
+
     descriptionLabel->setText(visitor.descrizioneBuild);
     std::cout << "Descrizione aggiornata: " << selectedItem->getDescrizione() << std::endl;
     // Seleziona l'immagine (se esiste) associata all'oggetto
