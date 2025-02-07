@@ -1,4 +1,4 @@
-    #ifndef RIGHTSIDE_H
+#ifndef RIGHTSIDE_H
 #define RIGHTSIDE_H
 
 #include <QWidget>
@@ -14,6 +14,10 @@
 #include <iostream>
 #include "libs.h"
 #include "leftside.h"
+#include "C++/headers/descriptionBuildVisitor.h"
+#include "C++/headers/biblioteca.h"
+
+
 class rightside : public QWidget {
     Q_OBJECT
 
@@ -31,7 +35,7 @@ private:
     leftside *left;
     void eliminaItem();
 public:
-    rightside(/*content* contenuti,*/ leftside *left, QWidget *parent = nullptr);
+    rightside(leftside *left, QWidget *parent = nullptr);
 
     public slots:
     void updateInfo(biblioteca *selectedItem);

@@ -55,6 +55,7 @@ OBJECTS_DIR   = ./
 SOURCES       = main.cpp \
 		C++/arte.cpp \
 		C++/biblioteca.cpp \
+		C++/descriptionBuildvisitor.cpp \
 		C++/gioielli.cpp \
 		C++/jsonVisitorSave.cpp \
 		C++/orologi.cpp \
@@ -67,6 +68,7 @@ SOURCES       = main.cpp \
 OBJECTS       = main.o \
 		arte.o \
 		biblioteca.o \
+		descriptionBuildvisitor.o \
 		gioielli.o \
 		jsonVisitorSave.o \
 		orologi.o \
@@ -232,6 +234,7 @@ DIST          = /usr/lib/qt/mkspecs/features/spec_pre.prf \
 		Biblioteca.pro C++/headers/arte.h \
 		C++/headers/biblioteca.h \
 		C++/headers/bibliotecaVisitorInterface.h \
+		C++/headers/descriptionBuildVisitor.h \
 		C++/headers/gioielli.h \
 		C++/headers/jsonVisitorSave.h \
 		C++/headers/orologi.h \
@@ -243,6 +246,7 @@ DIST          = /usr/lib/qt/mkspecs/features/spec_pre.prf \
 		QT_files/headers/show.h main.cpp \
 		C++/arte.cpp \
 		C++/biblioteca.cpp \
+		C++/descriptionBuildvisitor.cpp \
 		C++/gioielli.cpp \
 		C++/jsonVisitorSave.cpp \
 		C++/orologi.cpp \
@@ -583,8 +587,8 @@ distdir: FORCE
 	@test -d $(DISTDIR) || mkdir -p $(DISTDIR)
 	$(COPY_FILE) --parents $(DIST) $(DISTDIR)/
 	$(COPY_FILE) --parents /usr/lib/qt/mkspecs/features/data/dummy.cpp $(DISTDIR)/
-	$(COPY_FILE) --parents C++/headers/arte.h C++/headers/biblioteca.h C++/headers/bibliotecaVisitorInterface.h C++/headers/gioielli.h C++/headers/jsonVisitorSave.h C++/headers/orologi.h C++/headers/pietre.h QT_files/headers/leftside.h QT_files/headers/libs.h QT_files/headers/mainwindow.h QT_files/headers/rightside.h QT_files/headers/show.h $(DISTDIR)/
-	$(COPY_FILE) --parents main.cpp C++/arte.cpp C++/biblioteca.cpp C++/gioielli.cpp C++/jsonVisitorSave.cpp C++/orologi.cpp QT_files/leftside.cpp QT_files/mainwindow.cpp QT_files/rightside.cpp QT_files/show.cpp $(DISTDIR)/
+	$(COPY_FILE) --parents C++/headers/arte.h C++/headers/biblioteca.h C++/headers/bibliotecaVisitorInterface.h C++/headers/descriptionBuildVisitor.h C++/headers/gioielli.h C++/headers/jsonVisitorSave.h C++/headers/orologi.h C++/headers/pietre.h QT_files/headers/leftside.h QT_files/headers/libs.h QT_files/headers/mainwindow.h QT_files/headers/rightside.h QT_files/headers/show.h $(DISTDIR)/
+	$(COPY_FILE) --parents main.cpp C++/arte.cpp C++/biblioteca.cpp C++/descriptionBuildvisitor.cpp C++/gioielli.cpp C++/jsonVisitorSave.cpp C++/orologi.cpp QT_files/leftside.cpp QT_files/mainwindow.cpp QT_files/rightside.cpp QT_files/show.cpp $(DISTDIR)/
 
 
 clean: compiler_clean 
@@ -694,6 +698,9 @@ arte.o: C++/arte.cpp C++/headers/arte.h \
 biblioteca.o: C++/biblioteca.cpp C++/headers/biblioteca.h \
 		C++/headers/bibliotecaVisitorInterface.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o biblioteca.o C++/biblioteca.cpp
+
+descriptionBuildvisitor.o: C++/descriptionBuildvisitor.cpp C++/headers/descriptionBuildVisitor.h
+	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o descriptionBuildvisitor.o C++/descriptionBuildvisitor.cpp
 
 gioielli.o: C++/gioielli.cpp C++/headers/gioielli.h \
 		C++/headers/biblioteca.h \

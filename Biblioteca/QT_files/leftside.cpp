@@ -13,9 +13,8 @@ bool fileEsiste(const std::string& filePath) {
     return (stat(filePath.c_str(), &buffer) == 0);
 }
 
-leftside::leftside(/*content* contWidget,*/ QWidget *parent) : QWidget(parent){
+leftside::leftside(QWidget *parent) : QWidget(parent){
     left = new QVBoxLayout(this);
-    //this->contWidget = contWidget;
 
     bottoneArte = new QPushButton("ARTE");
     bottoenOrologi = new QPushButton("OROLOGI");
@@ -42,12 +41,12 @@ leftside::leftside(/*content* contWidget,*/ QWidget *parent) : QWidget(parent){
     left->addWidget(bottoneGioielli);
     left->addWidget(listaItems);
 
-    //connect elemnto cliccato con rightside
+    //connect elemento cliccato con rightside
     connect(listaItems, &QListWidget::itemClicked, this, [this](QListWidgetItem* item) {
         std::string selectedItemName = item->text().toStdString();
         for (biblioteca* obj : oggetti) {
             if (obj->getNome() == selectedItemName) {
-                emit itemSelected(obj);  // Emit the selected item to rightside
+                emit itemSelected(obj);
                 break;
             }
         }
@@ -61,17 +60,6 @@ leftside::leftside(/*content* contWidget,*/ QWidget *parent) : QWidget(parent){
     //conncet dei salva e importa
     connect(salvaAzione, &QAction::triggered, this, &leftside::salvaLista);
     connect(importa, &QAction::triggered, this, &leftside::importaLista);
-
-    //pezzo di codice per importare automaticamente qualcosa alla creazione, non necessario ma lo teniamo per ora
-    /*std::string filePath = "/home/BRN/Scrivania/gg.json";
-        if (!fileEsiste(filePath)) {
-            std::cerr << "Errore: Il file " << filePath << " non esiste!" << std::endl;
-        } else {
-            std::cout << "Il file esiste: " << filePath << std::endl;
-
-        }
-    loadJson(filePath);
-    popolaLista();*/
 }
 
 //METODI JSON
@@ -117,6 +105,7 @@ void leftside::saveToJson() {
 }
 
 void leftside::loadJson(const std::string& filePath) {
+    //controlloi su file e contenuto del file
     std::ifstream file(filePath);
     if (!file.is_open()) {
         std::cerr << "Errore: impossibile aprire il file " << filePath << std::endl;
@@ -132,10 +121,10 @@ void leftside::loadJson(const std::string& filePath) {
     oggetti.clear();
 
     for (const auto& jsonObj : j) {
-        if (!jsonObj.contains("tipo")) continue;  // Ignora se il tipo non è presente
+        if (!jsonObj.contains("tipo")) continue;
 
         std::string type = jsonObj["tipo"];
-
+        //scelta in base al tipo
         if (type == "gioielli") {
             std::string nome = jsonObj["nome"].get<std::string>();
             std::string descrizione = jsonObj["descrizione"].get<std::string>();
@@ -159,7 +148,6 @@ void leftside::loadJson(const std::string& filePath) {
             oggetti.push_back(g);
         }
         else if (type == "orologi") {
-            // Recupera i dati per l'oggetto "orologi"
             std::string nome = jsonObj["nome"].get<std::string>();
             std::string descrizione = jsonObj["descrizione"].get<std::string>();
             std::string autentica = jsonObj["autentica"].get<std::string>();
@@ -175,7 +163,6 @@ void leftside::loadJson(const std::string& filePath) {
             oggetti.push_back(o);  // Aggiungi l'oggetto alla lista
         }
         else if (type == "arte") {
-            // Recupera i dati per l'oggetto "arte"
             std::string nome = jsonObj["nome"].get<std::string>();
             std::string descrizione = jsonObj["descrizione"].get<std::string>();
             std::string autentica = jsonObj["autentica"].get<std::string>();
@@ -191,16 +178,16 @@ void leftside::loadJson(const std::string& filePath) {
             std::string esposizioni = jsonObj["esposizione"].get<std::string>();
             std::istringstream iss(esposizioni);
             std::string word;
-            while (std::getline(iss, word, ';')) {  // Usa ';' come delimitatore
+            while (std::getline(iss, word, ';')) {
                 if (!word.empty()) {
-                    esp.push_back(word);  // Aggiungi la parola alla lista
+                    esp.push_back(word);
                 }
             }
             biblioteca *a = new arte(nome, descrizione, autentica, data, v, b, id, artista, opera, vivo, esp);
-            oggetti.push_back(a);  // Aggiungi l'oggetto alla lista
+            oggetti.push_back(a);
         }
     }
-    popolaLista();  // Aggiorna la lista visualizzata
+    popolaLista();
 }
 
 //METODI SULLA LISTA

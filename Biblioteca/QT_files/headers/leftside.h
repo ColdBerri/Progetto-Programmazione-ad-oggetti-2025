@@ -46,8 +46,6 @@ class leftside : public QWidget {
         leftside(QWidget *parent = nullptr);
 
     public slots:
-        //void addObj();
-        //void removeObj();
         void filtraListaRicerca();
         void filtraPerCategoria(const QString &categoria, QPushButton *bottoneSelezionato);
         void salvaLista();

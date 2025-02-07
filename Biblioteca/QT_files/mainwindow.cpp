@@ -12,7 +12,7 @@ mainwindow::mainwindow(QWidget* parent) : QWidget(parent){
     split->addWidget(right);
 
     QList<int> sizes;
-    sizes << 175 << 500 << 100; // Dimensione leftSideBarWidget, contentWidget, rightSideBarWidget
+    sizes << 175 << 500 << 100;
     split->setSizes(sizes);
 
     mainWind->addWidget(split);
