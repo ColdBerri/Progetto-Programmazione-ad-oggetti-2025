@@ -51,8 +51,9 @@ class leftside : public QWidget {
         void filtraListaRicerca();
         void filtraPerCategoria(const QString &categoria, QPushButton *bottoneSelezionato);
         void salvaLista();
+        void rimuoviItem(const QString& itemName);
 
-    signals : 
+    signals :
         void itemSelected(biblioteca *selectedItem);
 };
 

@@ -16,6 +16,8 @@ mainwindow::mainwindow(QWidget* parent) : QWidget(parent){
     split->setSizes(sizes);
 
     mainWind->addWidget(split);
+    connect(right, &rightside::itemToDelete, left, &leftside::rimuoviItem);
+
     setLayout(mainWind);
 }
     

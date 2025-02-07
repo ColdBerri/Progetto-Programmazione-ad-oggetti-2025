@@ -296,3 +296,24 @@ void leftside::importaLista() {
     loadJson(filePath.toStdString());
     popolaLista();
 }
+
+void leftside::rimuoviItem(const QString& itemName) {
+    auto it = std::find_if(oggetti.begin(), oggetti.end(), [&](biblioteca* obj) {
+        return obj->getNome() == itemName.toStdString();
+    });
+    QMessageBox::StandardButton risposta;
+    risposta = QMessageBox::question(this, "Conferma eliminazione",
+                                     "Sei sicuro di voler eliminare questo elemento?",
+                                     QMessageBox::Yes | QMessageBox::No);
+
+    if (risposta == QMessageBox::Yes) {
+        qDebug() << "Elemento eliminato!";
+        if (it != oggetti.end()) {
+            delete *it;
+            oggetti.erase(it);
+            popolaLista();
+        }
+    } else {
+        qDebug() << "Eliminazione annullata.";
+    }
+}

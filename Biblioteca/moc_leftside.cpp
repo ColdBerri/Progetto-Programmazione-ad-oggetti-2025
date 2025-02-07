@@ -22,8 +22,8 @@ QT_BEGIN_MOC_NAMESPACE
 QT_WARNING_PUSH
 QT_WARNING_DISABLE_DEPRECATED
 struct qt_meta_stringdata_leftside_t {
-    QByteArrayData data[11];
-    char stringdata0[139];
+    QByteArrayData data[13];
+    char stringdata0[160];
 };
 #define QT_MOC_LITERAL(idx, ofs, len) \
     Q_STATIC_BYTE_ARRAY_DATA_HEADER_INITIALIZER_WITH_OFFSET(len, \
@@ -42,13 +42,16 @@ QT_MOC_LITERAL(6, 67, 18), // "filtraPerCategoria"
 QT_MOC_LITERAL(7, 86, 9), // "categoria"
 QT_MOC_LITERAL(8, 96, 12), // "QPushButton*"
 QT_MOC_LITERAL(9, 109, 18), // "bottoneSelezionato"
-QT_MOC_LITERAL(10, 128, 10) // "salvaLista"
+QT_MOC_LITERAL(10, 128, 10), // "salvaLista"
+QT_MOC_LITERAL(11, 139, 11), // "rimuoviItem"
+QT_MOC_LITERAL(12, 151, 8) // "itemName"
 
     },
     "leftside\0itemSelected\0\0biblioteca*\0"
     "selectedItem\0filtraListaRicerca\0"
     "filtraPerCategoria\0categoria\0QPushButton*\0"
-    "bottoneSelezionato\0salvaLista"
+    "bottoneSelezionato\0salvaLista\0rimuoviItem\0"
+    "itemName"
 };
 #undef QT_MOC_LITERAL
 
@@ -58,7 +61,7 @@ static const uint qt_meta_data_leftside[] = {
        8,       // revision
        0,       // classname
        0,    0, // classinfo
-       4,   14, // methods
+       5,   14, // methods
        0,    0, // properties
        0,    0, // enums/sets
        0,    0, // constructors
@@ -66,12 +69,13 @@ static const uint qt_meta_data_leftside[] = {
        1,       // signalCount
 
  // signals: name, argc, parameters, tag, flags
-       1,    1,   34,    2, 0x06 /* Public */,
+       1,    1,   39,    2, 0x06 /* Public */,
 
  // slots: name, argc, parameters, tag, flags
-       5,    0,   37,    2, 0x0a /* Public */,
-       6,    2,   38,    2, 0x0a /* Public */,
-      10,    0,   43,    2, 0x0a /* Public */,
+       5,    0,   42,    2, 0x0a /* Public */,
+       6,    2,   43,    2, 0x0a /* Public */,
+      10,    0,   48,    2, 0x0a /* Public */,
+      11,    1,   49,    2, 0x0a /* Public */,
 
  // signals: parameters
     QMetaType::Void, 0x80000000 | 3,    4,
@@ -80,6 +84,7 @@ static const uint qt_meta_data_leftside[] = {
     QMetaType::Void,
     QMetaType::Void, QMetaType::QString, 0x80000000 | 8,    7,    9,
     QMetaType::Void,
+    QMetaType::Void, QMetaType::QString,   12,
 
        0        // eod
 };
@@ -94,6 +99,7 @@ void leftside::qt_static_metacall(QObject *_o, QMetaObject::Call _c, int _id, vo
         case 1: _t->filtraListaRicerca(); break;
         case 2: _t->filtraPerCategoria((*reinterpret_cast< const QString(*)>(_a[1])),(*reinterpret_cast< QPushButton*(*)>(_a[2]))); break;
         case 3: _t->salvaLista(); break;
+        case 4: _t->rimuoviItem((*reinterpret_cast< const QString(*)>(_a[1]))); break;
         default: ;
         }
     } else if (_c == QMetaObject::RegisterMethodArgumentMetaType) {
@@ -148,13 +154,13 @@ int leftside::qt_metacall(QMetaObject::Call _c, int _id, void **_a)
     if (_id < 0)
         return _id;
     if (_c == QMetaObject::InvokeMetaMethod) {
-        if (_id < 4)
+        if (_id < 5)
             qt_static_metacall(this, _c, _id, _a);
-        _id -= 4;
+        _id -= 5;
     } else if (_c == QMetaObject::RegisterMethodArgumentMetaType) {
-        if (_id < 4)
+        if (_id < 5)
             qt_static_metacall(this, _c, _id, _a);
-        _id -= 4;
+        _id -= 5;
     }
     return _id;
 }

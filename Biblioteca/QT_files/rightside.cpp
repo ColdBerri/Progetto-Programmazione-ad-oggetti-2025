@@ -1,6 +1,6 @@
 #include "headers/rightside.h"
 
-rightside::rightside (/*content* contenuti,*/ leftside* left, QWidget *parent) : 
+rightside::rightside (/*content* contenuti,*/ leftside* left, QWidget *parent) :
 QWidget(parent), /*contenuti(contenuti),*/ left(left) {
     right = new QVBoxLayout(this);
 
@@ -33,21 +33,20 @@ QWidget(parent), /*contenuti(contenuti),*/ left(left) {
 
     setLayout(right);
 
+    //connect per fare update delle info dell'elemnto selezionato
     connect(left, &leftside::itemSelected, this, &rightside::updateInfo);
+
+    //connect per elimina
+    connect(elimina, &QPushButton::clicked, this, [this]() {
+        if (currentItem) { // Supponiamo che `currentItem` sia un membro di `rightside` aggiornato con `updateInfo()`
+            emit itemToDelete(QString::fromStdString(currentItem->getNome()));
+        } else {
+            QMessageBox::warning(this, "Errore", "Nessun elemento selezionato da eliminare.");
+        }
+    });
+
 }
 
-/*void rightside::removeObj(){
-    QListWidgetItem *selezionato = listaItems->currentItem();
-    if(!selezionato) return;
-
-    int i = listaItems->row(selezionato);
-    if (i>=0 && i<oggetti.size()){
-        delete oggetti[i];
-        oggetti.erase(oggetti.begin()+i);
-        delete selezionato;
-        saveToJson();
-    }
-}*/
 /*void rightside::updateInfo(biblioteca *selectedItem) {
     // Aggiorna la descrizione
     descriptionLabel->setText(QString::fromStdString(selectedItem->getDescrizione()));
@@ -62,10 +61,16 @@ void rightside::updateInfo(biblioteca *selectedItem) {
         std::cerr << "Errore: oggetto selezionato nullo!" << std::endl;
         return;
     }
-
-    // Aggiorna la descrizione
+    currentItem = selectedItem;
     descriptionLabel->setText(QString::fromStdString(selectedItem->getDescrizione()));
-
-    // (Non gestiamo l'immagine per ora)
     std::cout << "Descrizione aggiornata: " << selectedItem->getDescrizione() << std::endl;
+}
+
+void rightside::eliminaItem() {
+    if (currentItem) {
+        emit eliminazione(QString::fromStdString(currentItem->getNome())); // Invio segnale a leftside
+        currentItem = nullptr;
+    } else {
+        QMessageBox::warning(this, "Errore", "Nessun elemento selezionato da eliminare!");
+    }
 }
