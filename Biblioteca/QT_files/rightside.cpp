@@ -15,11 +15,17 @@ QWidget(parent), left(left) {
     // Cambia con il percorso della tua immagine
     imageLabel->setPixmap(pixmap);
     imageLabel->setFixedSize(200, 200);  */ // Imposta la dimensione dell'immagine
-    descriptionLabel = new QLabel("Questa è la descrizione dell'immagine.", this);
+    descriptionLabel = new QLabel("", this);
 
+    descriptionLabel->setAlignment(Qt::AlignLeft);
     descriptionLabel->setWordWrap(true);
-    imageDescLayout->addWidget(imageLabel);
-    imageDescLayout->addWidget(descriptionLabel);
+    imageLabel->setAlignment(Qt::AlignRight);
+    imageLabel->setScaledContents(true);
+    imageDescLayout->addWidget(descriptionLabel, 1);
+    imageDescLayout->addWidget(imageLabel, 2);
+    descriptionLabel->setSizePolicy(QSizePolicy::Expanding, QSizePolicy::Expanding);
+    imageLabel->setSizePolicy(QSizePolicy::Expanding, QSizePolicy::Expanding);
+
     infobox->addLayout(imageDescLayout);
     right->addWidget(modifica);
     right->addWidget(elimina);
@@ -39,14 +45,12 @@ QWidget(parent), left(left) {
     connect(elimina, &QPushButton::clicked, this, [this]() {
         if (currentItem) {
             emit itemToDelete(QString::fromStdString(currentItem->getNome()));
-
             currentItem = nullptr;
+            svuotaDescrizione();
         } else {
             QMessageBox::warning(this, "Errore", "Nessun elemento selezionato da eliminare.");
         }
     });
-
-
 }
 
 void rightside::updateInfo(biblioteca *selectedItem) {
