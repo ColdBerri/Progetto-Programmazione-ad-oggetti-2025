@@ -42,6 +42,7 @@ class leftside : public QWidget {
         void saveToJson();
         void loadJson(const std::string& filePath);
         void importaLista();
+        void deselezionaElemento();
     public:
         leftside(QWidget *parent = nullptr);
 
@@ -53,6 +54,8 @@ class leftside : public QWidget {
 
     signals :
         void itemSelected(biblioteca *selectedItem);
+        void elementoDeselezionato();
+
 };
 
 #endif

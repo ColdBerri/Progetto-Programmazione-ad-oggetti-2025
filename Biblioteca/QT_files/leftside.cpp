@@ -43,14 +43,26 @@ leftside::leftside(QWidget *parent) : QWidget(parent){
 
     //connect elemento cliccato con rightside
     connect(listaItems, &QListWidget::itemClicked, this, [this](QListWidgetItem* item) {
-        std::string selectedItemName = item->text().toStdString();
-        for (biblioteca* obj : oggetti) {
-            if (obj->getNome() == selectedItemName) {
-                emit itemSelected(obj);
-                break;
+        static QListWidgetItem* lastClickedItem = nullptr;
+        if (lastClickedItem == item) {
+            item->setSelected(false);
+            listaItems->setCurrentItem(nullptr);
+            lastClickedItem = nullptr;
+            deselezionaElemento();
+        } else {
+            listaItems->setCurrentItem(item);
+            lastClickedItem = item;
+            std::string selectedItemName = item->text().toStdString();
+            for (biblioteca* obj : oggetti) {
+                if (obj->getNome() == selectedItemName) {
+                    emit itemSelected(obj);
+                    break;
+                }
             }
         }
     });
+
+
     //connect ricerca
     connect(ricerca, &QLineEdit::textChanged, this, &leftside::filtraListaRicerca);
     //connect dei filtri
@@ -294,13 +306,19 @@ void leftside::rimuoviItem(const QString& itemName) {
                                      QMessageBox::Yes | QMessageBox::No);
 
     if (risposta == QMessageBox::Yes) {
-        qDebug() << "Elemento eliminato!";
         if (it != oggetti.end()) {
             delete *it;
             oggetti.erase(it);
             popolaLista();
         }
+        qDebug() << "Elemento eliminato!";
     } else {
         qDebug() << "Eliminazione annullata.";
+    }
+}
+
+void leftside::deselezionaElemento() {
+    if (listaItems->selectedItems().isEmpty()) {
+        emit elementoDeselezionato();
     }
 }

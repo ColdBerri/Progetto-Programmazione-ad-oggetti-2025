@@ -28,8 +28,9 @@ QWidget(parent), left(left) {
 
     setLayout(right);
 
-    //connect per fare update delle info dell'elemnto selezionato
+    //connect per fare update delle info dell'elemnto selezionato e per svuotare quando deselezionato
     connect(left, &leftside::itemSelected, this, &rightside::updateInfo);
+    connect(left, &leftside::elementoDeselezionato, this, &rightside::svuotaDescrizione);
 
     //connect per elimina
     connect(elimina, &QPushButton::clicked, this, [this]() {
@@ -66,4 +67,8 @@ void rightside::eliminaItem() {
     } else {
         QMessageBox::warning(this, "Errore", "Nessun elemento selezionato da eliminare!");
     }
+}
+
+void rightside::svuotaDescrizione() {
+    descriptionLabel->clear();
 }

@@ -29,9 +29,9 @@ private:
     QPushButton *elimina;
     QPushButton *aggiungi;
     QVBoxLayout *infobox;
-    QHBoxLayout *imageDescLayout;  // Layout orizzontale per immagine e descrizione
-    QLabel *imageLabel;            // QLabel per l'immagine
-    QLabel *descriptionLabel;      // QLabel per la descrizione
+    QHBoxLayout *imageDescLayout;
+    QLabel *imageLabel;
+    QLabel *descriptionLabel;
     leftside *left;
     void eliminaItem();
 public:
@@ -39,6 +39,8 @@ public:
 
     public slots:
     void updateInfo(biblioteca *selectedItem);
+    void svuotaDescrizione();
+
     signals:
         void itemToDelete(const QString& itemName);
         void eliminazione(const QString& nomeElemento);
