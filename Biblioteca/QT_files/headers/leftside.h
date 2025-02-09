@@ -39,7 +39,7 @@ class leftside : public QWidget {
         QAction* importa;
 
         void popolaLista();
-        void saveToJson();
+        bool saveToJson();
         void loadJson(const std::string& filePath);
         void importaLista();
         void deselezionaElemento();
@@ -51,11 +51,10 @@ class leftside : public QWidget {
         void filtraPerCategoria(const QString &categoria, QPushButton *bottoneSelezionato);
         void salvaLista();
         void rimuoviItem(const QString& itemName);
-
+        void aggiornaItem(biblioteca* );
     signals :
         void itemSelected(biblioteca *selectedItem);
         void elementoDeselezionato();
-
 };
 
 #endif

@@ -61,9 +61,11 @@ SOURCES       = main.cpp \
 		C++/orologi.cpp \
 		QT_files/leftside.cpp \
 		QT_files/mainwindow.cpp \
+		QT_files/modificadialog.cpp \
 		QT_files/rightside.cpp \
 		QT_files/show.cpp moc_leftside.cpp \
 		moc_mainwindow.cpp \
+		moc_modificadialog.cpp \
 		moc_rightside.cpp
 OBJECTS       = main.o \
 		arte.o \
@@ -74,10 +76,12 @@ OBJECTS       = main.o \
 		orologi.o \
 		leftside.o \
 		mainwindow.o \
+		modificadialog.o \
 		rightside.o \
 		show.o \
 		moc_leftside.o \
 		moc_mainwindow.o \
+		moc_modificadialog.o \
 		moc_rightside.o
 DIST          = /usr/lib/qt/mkspecs/features/spec_pre.prf \
 		/usr/lib/qt/mkspecs/common/unix.conf \
@@ -242,6 +246,7 @@ DIST          = /usr/lib/qt/mkspecs/features/spec_pre.prf \
 		QT_files/headers/leftside.h \
 		QT_files/headers/libs.h \
 		QT_files/headers/mainwindow.h \
+		QT_files/headers/modificadialog.h \
 		QT_files/headers/rightside.h \
 		QT_files/headers/show.h main.cpp \
 		C++/arte.cpp \
@@ -252,6 +257,7 @@ DIST          = /usr/lib/qt/mkspecs/features/spec_pre.prf \
 		C++/orologi.cpp \
 		QT_files/leftside.cpp \
 		QT_files/mainwindow.cpp \
+		QT_files/modificadialog.cpp \
 		QT_files/rightside.cpp \
 		QT_files/show.cpp
 QMAKE_TARGET  = Biblioteca
@@ -587,8 +593,8 @@ distdir: FORCE
 	@test -d $(DISTDIR) || mkdir -p $(DISTDIR)
 	$(COPY_FILE) --parents $(DIST) $(DISTDIR)/
 	$(COPY_FILE) --parents /usr/lib/qt/mkspecs/features/data/dummy.cpp $(DISTDIR)/
-	$(COPY_FILE) --parents C++/headers/arte.h C++/headers/biblioteca.h C++/headers/bibliotecaVisitorInterface.h C++/headers/descriptionBuildVisitor.h C++/headers/gioielli.h C++/headers/jsonVisitorSave.h C++/headers/orologi.h C++/headers/pietre.h QT_files/headers/leftside.h QT_files/headers/libs.h QT_files/headers/mainwindow.h QT_files/headers/rightside.h QT_files/headers/show.h $(DISTDIR)/
-	$(COPY_FILE) --parents main.cpp C++/arte.cpp C++/biblioteca.cpp C++/descriptionBuildvisitor.cpp C++/gioielli.cpp C++/jsonVisitorSave.cpp C++/orologi.cpp QT_files/leftside.cpp QT_files/mainwindow.cpp QT_files/rightside.cpp QT_files/show.cpp $(DISTDIR)/
+	$(COPY_FILE) --parents C++/headers/arte.h C++/headers/biblioteca.h C++/headers/bibliotecaVisitorInterface.h C++/headers/descriptionBuildVisitor.h C++/headers/gioielli.h C++/headers/jsonVisitorSave.h C++/headers/orologi.h C++/headers/pietre.h QT_files/headers/leftside.h QT_files/headers/libs.h QT_files/headers/mainwindow.h QT_files/headers/modificadialog.h QT_files/headers/rightside.h QT_files/headers/show.h $(DISTDIR)/
+	$(COPY_FILE) --parents main.cpp C++/arte.cpp C++/biblioteca.cpp C++/descriptionBuildvisitor.cpp C++/gioielli.cpp C++/jsonVisitorSave.cpp C++/orologi.cpp QT_files/leftside.cpp QT_files/mainwindow.cpp QT_files/modificadialog.cpp QT_files/rightside.cpp QT_files/show.cpp $(DISTDIR)/
 
 
 clean: compiler_clean 
@@ -620,9 +626,9 @@ compiler_moc_predefs_clean:
 moc_predefs.h: /usr/lib/qt/mkspecs/features/data/dummy.cpp
 	g++ -pipe -O2 -flto -fno-fat-lto-objects -Wall -Wextra -dM -E -o moc_predefs.h /usr/lib/qt/mkspecs/features/data/dummy.cpp
 
-compiler_moc_header_make_all: moc_leftside.cpp moc_mainwindow.cpp moc_rightside.cpp
+compiler_moc_header_make_all: moc_leftside.cpp moc_mainwindow.cpp moc_modificadialog.cpp moc_rightside.cpp
 compiler_moc_header_clean:
-	-$(DEL_FILE) moc_leftside.cpp moc_mainwindow.cpp moc_rightside.cpp
+	-$(DEL_FILE) moc_leftside.cpp moc_mainwindow.cpp moc_modificadialog.cpp moc_rightside.cpp
 moc_leftside.cpp: QT_files/headers/leftside.h \
 		QT_files/headers/libs.h \
 		C++/headers/biblioteca.h \
@@ -645,9 +651,17 @@ moc_mainwindow.cpp: QT_files/headers/mainwindow.h \
 		C++/headers/arte.h \
 		C++/headers/gioielli.h \
 		QT_files/headers/rightside.h \
+		C++/headers/descriptionBuildVisitor.h \
 		moc_predefs.h \
 		/usr/bin/moc
 	/usr/bin/moc $(DEFINES) --include /home/BRN/clion/Progetto-Programmazione-ad-oggetti-2025/Biblioteca/moc_predefs.h -I/usr/lib/qt/mkspecs/linux-g++ -I/home/BRN/clion/Progetto-Programmazione-ad-oggetti-2025/Biblioteca -I/home/BRN/clion/Progetto-Programmazione-ad-oggetti-2025/Biblioteca -I/usr/include/qt -I/usr/include/qt/QtWidgets -I/usr/include/qt/QtGui -I/usr/include/qt/QtCore -I/usr/include/c++/14.2.1 -I/usr/include/c++/14.2.1/x86_64-pc-linux-gnu -I/usr/include/c++/14.2.1/backward -I/usr/lib/gcc/x86_64-pc-linux-gnu/14.2.1/include -I/usr/local/include -I/usr/lib/gcc/x86_64-pc-linux-gnu/14.2.1/include-fixed -I/usr/include QT_files/headers/mainwindow.h -o moc_mainwindow.cpp
+
+moc_modificadialog.cpp: QT_files/headers/modificadialog.h \
+		C++/headers/biblioteca.h \
+		C++/headers/bibliotecaVisitorInterface.h \
+		moc_predefs.h \
+		/usr/bin/moc
+	/usr/bin/moc $(DEFINES) --include /home/BRN/clion/Progetto-Programmazione-ad-oggetti-2025/Biblioteca/moc_predefs.h -I/usr/lib/qt/mkspecs/linux-g++ -I/home/BRN/clion/Progetto-Programmazione-ad-oggetti-2025/Biblioteca -I/home/BRN/clion/Progetto-Programmazione-ad-oggetti-2025/Biblioteca -I/usr/include/qt -I/usr/include/qt/QtWidgets -I/usr/include/qt/QtGui -I/usr/include/qt/QtCore -I/usr/include/c++/14.2.1 -I/usr/include/c++/14.2.1/x86_64-pc-linux-gnu -I/usr/include/c++/14.2.1/backward -I/usr/lib/gcc/x86_64-pc-linux-gnu/14.2.1/include -I/usr/local/include -I/usr/lib/gcc/x86_64-pc-linux-gnu/14.2.1/include-fixed -I/usr/include QT_files/headers/modificadialog.h -o moc_modificadialog.cpp
 
 moc_rightside.cpp: QT_files/headers/rightside.h \
 		QT_files/headers/libs.h \
@@ -658,6 +672,7 @@ moc_rightside.cpp: QT_files/headers/rightside.h \
 		C++/headers/orologi.h \
 		C++/headers/arte.h \
 		C++/headers/gioielli.h \
+		C++/headers/descriptionBuildVisitor.h \
 		moc_predefs.h \
 		/usr/bin/moc
 	/usr/bin/moc $(DEFINES) --include /home/BRN/clion/Progetto-Programmazione-ad-oggetti-2025/Biblioteca/moc_predefs.h -I/usr/lib/qt/mkspecs/linux-g++ -I/home/BRN/clion/Progetto-Programmazione-ad-oggetti-2025/Biblioteca -I/home/BRN/clion/Progetto-Programmazione-ad-oggetti-2025/Biblioteca -I/usr/include/qt -I/usr/include/qt/QtWidgets -I/usr/include/qt/QtGui -I/usr/include/qt/QtCore -I/usr/include/c++/14.2.1 -I/usr/include/c++/14.2.1/x86_64-pc-linux-gnu -I/usr/include/c++/14.2.1/backward -I/usr/lib/gcc/x86_64-pc-linux-gnu/14.2.1/include -I/usr/local/include -I/usr/lib/gcc/x86_64-pc-linux-gnu/14.2.1/include-fixed -I/usr/include QT_files/headers/rightside.h -o moc_rightside.cpp
@@ -687,7 +702,8 @@ main.o: main.cpp QT_files/headers/mainwindow.h \
 		C++/headers/orologi.h \
 		C++/headers/arte.h \
 		C++/headers/gioielli.h \
-		QT_files/headers/rightside.h
+		QT_files/headers/rightside.h \
+		C++/headers/descriptionBuildVisitor.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o main.o main.cpp
 
 arte.o: C++/arte.cpp C++/headers/arte.h \
@@ -699,7 +715,12 @@ biblioteca.o: C++/biblioteca.cpp C++/headers/biblioteca.h \
 		C++/headers/bibliotecaVisitorInterface.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o biblioteca.o C++/biblioteca.cpp
 
-descriptionBuildvisitor.o: C++/descriptionBuildvisitor.cpp C++/headers/descriptionBuildVisitor.h
+descriptionBuildvisitor.o: C++/descriptionBuildvisitor.cpp C++/headers/descriptionBuildVisitor.h \
+		C++/headers/biblioteca.h \
+		C++/headers/bibliotecaVisitorInterface.h \
+		C++/headers/gioielli.h \
+		C++/headers/arte.h \
+		C++/headers/orologi.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o descriptionBuildvisitor.o C++/descriptionBuildvisitor.cpp
 
 gioielli.o: C++/gioielli.cpp C++/headers/gioielli.h \
@@ -739,8 +760,14 @@ mainwindow.o: QT_files/mainwindow.cpp QT_files/headers/mainwindow.h \
 		C++/headers/orologi.h \
 		C++/headers/arte.h \
 		C++/headers/gioielli.h \
-		QT_files/headers/rightside.h
+		QT_files/headers/rightside.h \
+		C++/headers/descriptionBuildVisitor.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o mainwindow.o QT_files/mainwindow.cpp
+
+modificadialog.o: QT_files/modificadialog.cpp QT_files/headers/modificadialog.h \
+		C++/headers/biblioteca.h \
+		C++/headers/bibliotecaVisitorInterface.h
+	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o modificadialog.o QT_files/modificadialog.cpp
 
 rightside.o: QT_files/rightside.cpp QT_files/headers/rightside.h \
 		QT_files/headers/libs.h \
@@ -750,7 +777,9 @@ rightside.o: QT_files/rightside.cpp QT_files/headers/rightside.h \
 		C++/headers/jsonVisitorSave.h \
 		C++/headers/orologi.h \
 		C++/headers/arte.h \
-		C++/headers/gioielli.h
+		C++/headers/gioielli.h \
+		C++/headers/descriptionBuildVisitor.h \
+		QT_files/headers/modificadialog.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o rightside.o QT_files/rightside.cpp
 
 show.o: QT_files/show.cpp 
@@ -761,6 +790,9 @@ moc_leftside.o: moc_leftside.cpp
 
 moc_mainwindow.o: moc_mainwindow.cpp 
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o moc_mainwindow.o moc_mainwindow.cpp
+
+moc_modificadialog.o: moc_modificadialog.cpp 
+	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o moc_modificadialog.o moc_modificadialog.cpp
 
 moc_rightside.o: moc_rightside.cpp 
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o moc_rightside.o moc_rightside.cpp

@@ -14,7 +14,7 @@ int orologi::getEsemplari() const {return nEsemplari;}
 std::string orologi::getMecc() const {return meccanismo;}
 
 //setter
-void orologi::setModdello(std::string m) {modello = m;}
+void orologi::setModello(std::string m) {modello = m;}
 void orologi::setMarca(std::string ma) {marca = ma;}
 void orologi::setEsemplari(int i) {nEsemplari = i;}
 void orologi::setMecc(std::string me) {meccanismo = me;}

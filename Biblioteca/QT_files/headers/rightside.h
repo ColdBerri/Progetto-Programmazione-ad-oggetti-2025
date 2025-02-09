@@ -40,9 +40,11 @@ public:
     public slots:
     void updateInfo(biblioteca *selectedItem);
     void svuotaDescrizione();
+    void modificare();
+
 
     signals:
-        void itemToDelete(const QString& itemName);
+        void itemPointed(const QString& itemName);
         void eliminazione(const QString& nomeElemento);
 };
 

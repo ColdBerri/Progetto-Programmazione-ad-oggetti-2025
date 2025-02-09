@@ -1,4 +1,5 @@
 #include "headers/rightside.h"
+#include "headers/modificadialog.h"
 
 rightside::rightside (leftside* left, QWidget *parent) :
 QWidget(parent), left(left) {
@@ -9,12 +10,7 @@ QWidget(parent), left(left) {
     aggiungi = new QPushButton("Aggiungi item");
     infobox = new QVBoxLayout();
     imageDescLayout = new QHBoxLayout();
-    // Creazione QLabel per l'immagine
     imageLabel = new QLabel(this);
-    /*QPixmap pixmap("");
-    // Cambia con il percorso della tua immagine
-    imageLabel->setPixmap(pixmap);
-    imageLabel->setFixedSize(200, 200);  */ // Imposta la dimensione dell'immagine
     descriptionLabel = new QLabel("", this);
 
     descriptionLabel->setAlignment(Qt::AlignLeft);
@@ -44,15 +40,18 @@ QWidget(parent), left(left) {
     });
     connect(elimina, &QPushButton::clicked, this, [this]() {
         if (currentItem) {
-            emit itemToDelete(QString::fromStdString(currentItem->getNome()));
+            emit itemPointed(QString::fromStdString(currentItem->getNome()));
             currentItem = nullptr;
             svuotaDescrizione();
         } else {
             QMessageBox::warning(this, "Errore", "Nessun elemento selezionato da eliminare.");
         }
     });
+
+    connect(modifica, &QPushButton::clicked, this, &rightside::modificare);
 }
 
+//metodo di update delle informazioni dell'oggetto
 void rightside::updateInfo(biblioteca *selectedItem) {
     if (!selectedItem) {
         std::cerr << "Errore: oggetto selezionato nullo!" << std::endl;
@@ -67,11 +66,9 @@ void rightside::updateInfo(biblioteca *selectedItem) {
 
     descriptionLabel->setText(visitor.descrizioneBuild);
     std::cout << "Descrizione aggiornata: " << selectedItem->getDescrizione() << std::endl;
-    // Seleziona l'immagine (se esiste) associata all'oggetto
-    /*QPixmap pixmap("/path/to/image/directory/" + QString::fromStdString(selectedItem->getNome()) + ".jpg");
-    imageLabel->setPixmap(pixmap.scaled(imageLabel->size(), Qt::KeepAspectRatio));*/
 }
 
+//metodo di eliminazione
 void rightside::eliminaItem() {
     if (currentItem) {
         emit eliminazione(QString::fromStdString(currentItem->getNome())); // Invio segnale a leftside
@@ -83,4 +80,21 @@ void rightside::eliminaItem() {
 
 void rightside::svuotaDescrizione() {
     descriptionLabel->clear();
+}
+
+//metodo per modifica dell'elemento selezionato
+void rightside::modificare() {
+    if (!currentItem) {
+        QMessageBox::warning(this, "Errore", "Nessun elemento selezionato per la modifica.");
+        return;
+    }
+
+    // Apri finestra di modifica specifica per il tipo dell'oggetto
+    ModificaDialog dialog(currentItem, this);
+    if (dialog.exec() == QDialog::Accepted) {
+        // Dopo la modifica aggiorna la visualizzazione
+        updateInfo(currentItem);
+        left->aggiornaItem(currentItem);  // Aggiorna la lista in leftside
+        //left->salvaSuJson();  // Salva le modifiche nel file JSON
+    }
 }

@@ -74,19 +74,19 @@ leftside::leftside(QWidget *parent) : QWidget(parent){
 }
 
 //METODI JSON
-void leftside::saveToJson() {
+bool leftside::saveToJson() {
     // Finestra di dialogo per scegliere il percorso di salvataggio
     QString filePath = QFileDialog::getSaveFileName(this, "Salva Lista", "", "JSON Files (*.json);;All Files (*)");
 
     //controlli vari
     if (filePath.isEmpty()) {
         qDebug() << "Salvataggio annullato dall'utente.";
-        return;
+        return false;
     }
 
     if (oggetti.empty()) {
         QMessageBox::warning(this, "Errore", "La lista è vuota, non c'è nulla da salvare.");
-        return;
+        return false;
     }
 
     //Inzializzazione visitor
@@ -99,20 +99,19 @@ void leftside::saveToJson() {
             qDebug() << "Errore: oggetto nullo trovato nella lista!";
         }
     }
-
     if (visitor.arrayJ.isEmpty()) {
         QMessageBox::warning(this, "Errore", "Errore nella generazione del JSON: l'array JSON è vuoto.");
-        return;
+        return false;
     }
-
     QFile file(filePath);
     if (!file.open(QIODevice::WriteOnly)) {
         QMessageBox::warning(this, "Errore", "Impossibile aprire il file per scrivere: " + filePath);
-        return;
+        return false;
     }
     //scrittura e chiusura del file
     file.write(QJsonDocument(visitor.arrayJ).toJson());
     file.close();
+    return true;
 }
 
 void leftside::loadJson(const std::string& filePath) {
@@ -265,11 +264,10 @@ void leftside::salvaLista() {
     bottoneGioielli->setChecked(false);
 
     popolaLista();
+    bool salvataggio = saveToJson();
 
-    saveToJson();
-    QMessageBox::information(this, "Salvataggio", "Lista salvata correttamente!");
+    if (salvataggio) QMessageBox::information(this, "Salvataggio", "Lista salvata correttamente!");
 }
-
 //importazione del file json
 void leftside::importaLista() {
     QString filePath = QFileDialog::getOpenFileName(this, "Importa Lista", "", "JSON Files (*.json);;All Files (*)");
@@ -316,6 +314,21 @@ void leftside::rimuoviItem(const QString& itemName) {
         qDebug() << "Eliminazione annullata.";
     }
 }
+
+
+void leftside::aggiornaItem(biblioteca *item) {
+    for (int i = 0; i < listaItems->count(); ++i) {
+        QListWidgetItem *list = listaItems->item(i);
+        if (list->text() == QString::fromStdString(item->getNome())) {
+            list->setText(QString::fromStdString(item->getNome()));  // Aggiorna il nome
+            break;
+        }
+    }
+}
+
+/*void leftside::salvaSuJson() {
+
+}*/
 
 //deselezione dell'elemento
 void leftside::deselezionaElemento() {

@@ -16,7 +16,6 @@ class mainwindow : public QWidget {
         QSplitter *split;
         leftside* left;
         rightside *right;
-        //conent* content;
     public:
         explicit mainwindow(QWidget *parent = nullptr);
 };

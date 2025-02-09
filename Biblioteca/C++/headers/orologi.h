@@ -25,7 +25,7 @@ class orologi : public biblioteca{
         std::string getMecc()const;
 
         //setter
-        void setModdello(std::string);
+        void setModello(std::string);
         void setMarca(std::string);
         void setEsemplari(int);
         void setMecc(std::string);
