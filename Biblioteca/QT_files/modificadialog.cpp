@@ -16,7 +16,9 @@
 ModificaDialog::ModificaDialog(biblioteca *item, QWidget *parent) :
     QDialog(parent), item(item){
 
+
     setWindowTitle("Modifica Elemento");
+    setFixedSize(800, 600);
     QVBoxLayout *layout = new QVBoxLayout(this);
     QFormLayout *formLayout = new QFormLayout();
 

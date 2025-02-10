@@ -659,6 +659,12 @@ moc_mainwindow.cpp: QT_files/headers/mainwindow.h \
 moc_modificadialog.cpp: QT_files/headers/modificadialog.h \
 		C++/headers/biblioteca.h \
 		C++/headers/bibliotecaVisitorInterface.h \
+		C++/headers/arte.h \
+		C++/headers/gioielli.h \
+		C++/headers/orologi.h \
+		QT_files/headers/leftside.h \
+		QT_files/headers/libs.h \
+		C++/headers/jsonVisitorSave.h \
 		moc_predefs.h \
 		/usr/bin/moc
 	/usr/bin/moc $(DEFINES) --include /home/BRN/clion/Progetto-Programmazione-ad-oggetti-2025/Biblioteca/moc_predefs.h -I/usr/lib/qt/mkspecs/linux-g++ -I/home/BRN/clion/Progetto-Programmazione-ad-oggetti-2025/Biblioteca -I/home/BRN/clion/Progetto-Programmazione-ad-oggetti-2025/Biblioteca -I/usr/include/qt -I/usr/include/qt/QtWidgets -I/usr/include/qt/QtGui -I/usr/include/qt/QtCore -I/usr/include/c++/14.2.1 -I/usr/include/c++/14.2.1/x86_64-pc-linux-gnu -I/usr/include/c++/14.2.1/backward -I/usr/lib/gcc/x86_64-pc-linux-gnu/14.2.1/include -I/usr/local/include -I/usr/lib/gcc/x86_64-pc-linux-gnu/14.2.1/include-fixed -I/usr/include QT_files/headers/modificadialog.h -o moc_modificadialog.cpp
@@ -766,7 +772,13 @@ mainwindow.o: QT_files/mainwindow.cpp QT_files/headers/mainwindow.h \
 
 modificadialog.o: QT_files/modificadialog.cpp QT_files/headers/modificadialog.h \
 		C++/headers/biblioteca.h \
-		C++/headers/bibliotecaVisitorInterface.h
+		C++/headers/bibliotecaVisitorInterface.h \
+		C++/headers/arte.h \
+		C++/headers/gioielli.h \
+		C++/headers/orologi.h \
+		QT_files/headers/leftside.h \
+		QT_files/headers/libs.h \
+		C++/headers/jsonVisitorSave.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o modificadialog.o QT_files/modificadialog.cpp
 
 rightside.o: QT_files/rightside.cpp QT_files/headers/rightside.h \

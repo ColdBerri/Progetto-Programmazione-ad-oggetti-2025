@@ -329,24 +329,23 @@ void leftside::rimuoviItem(const QString& itemName) {
 
 
 void leftside::aggiornaItem(biblioteca *item) {
-    int j=0;
-    for (j = 0; j < listaItems->count(); ++j) {
-        QListWidgetItem *list = listaItems->item(j);
-        break;
+    int j;
+    while(oggetti[j]->getNome() != item->getNome()) {
+        ++j;
     }
 
-    for(int i = 0; i < oggetti.size(); i++) {
+    for(long unsigned int i = 0; i < oggetti.size(); i++) {
         if(oggetti[i]->getNome() == item->getNome() && i!=j) {
-            std::string nome = item->getNome() + std::to_string(i+1);
+            std::string nome = item->getNome() + " " + std::to_string(i+1);
             item->setNome(nome);
+            break;
         }
-      }
-      for (int i = 0; i < listaItems->count(); ++i) {
-        QListWidgetItem *list = listaItems->item(i);
-        list->setText(QString::fromStdString(item->getNome()));
+        }
+        for (int i = 0; i < listaItems->count(); ++i) {
+            QListWidgetItem *list = listaItems->item(i);
+            list->setText(QString::fromStdString(item->getNome()));
         break;
-      }
-
+        }
     popolaLista();
 }
 

@@ -1,5 +1,5 @@
-#ifndef MODIFICADIALOG_H
-#define MODIFICADIALOG_H
+#ifndef AGGIUNGIDIALOG_H
+#define AGGIUNGIDIALOG_H
 
 #include <QDialog>
 #include <QLineEdit>
@@ -58,8 +58,8 @@ private:
     QPushButton *salvaButton;
     QPushButton *annullaButton;
 
-private slots:
-    void salvaModifiche();
+    private slots:
+        void salvaModifiche();
     void aggiungiAListaEsp();
     void aggiungiAListaMat();
     void togliDaListaEsp();
@@ -68,5 +68,4 @@ private slots:
 
 };
 
-#endif // MODIFICADIALOG_H
-
+#endif //AGGIUNGIDIALOG_H
