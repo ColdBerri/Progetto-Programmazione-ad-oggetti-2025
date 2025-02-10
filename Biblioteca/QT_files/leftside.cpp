@@ -200,6 +200,7 @@ void leftside::loadJson(const std::string& filePath) {
     popolaLista();
 }
 
+
 //METODI SULLA LISTA
 //popola la lista
 void leftside::popolaLista(){
@@ -268,6 +269,7 @@ void leftside::salvaLista() {
 
     if (salvataggio) QMessageBox::information(this, "Salvataggio", "Lista salvata correttamente!");
 }
+
 //importazione del file json
 void leftside::importaLista() {
     QString filePath = QFileDialog::getOpenFileName(this, "Importa Lista", "", "JSON Files (*.json);;All Files (*)");
@@ -326,9 +328,6 @@ void leftside::aggiornaItem(biblioteca *item) {
     }
 }
 
-/*void leftside::salvaSuJson() {
-
-}*/
 
 //deselezione dell'elemento
 void leftside::deselezionaElemento() {

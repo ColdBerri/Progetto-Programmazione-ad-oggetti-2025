@@ -55,17 +55,17 @@ ModificaDialog::ModificaDialog(biblioteca *item, QWidget *parent) :
         }
 
         //modifica della lista delle esposizioni
-        QVBoxLayout *layout = new QVBoxLayout(this);
+        QVBoxLayout *espLayout = new QVBoxLayout();
         QLabel *label = new QLabel("Esposizioni:");
-        layout->addWidget(label);
-        emList = new QListWidget(this);
-        layout->addWidget(emList);
+        espLayout->addWidget(label);
+        eList = new QListWidget(this);
+        espLayout->addWidget(eList);
         int cont = 0;
         for (const auto &i : m->getEspo()) {
             if (!i.empty()) {
-                emList->addItem(QString::fromStdString(i));
+                eList->addItem(QString::fromStdString(i));
             }
-            if (i.empty() || i == " ") delete emList->takeItem(cont);
+            if (i == " ") delete eList->takeItem(cont);
             cont++;
         }
         QHBoxLayout *addLayout = new QHBoxLayout();
@@ -76,22 +76,60 @@ ModificaDialog::ModificaDialog(biblioteca *item, QWidget *parent) :
         addLayout->addWidget(nuovaEsposizioneInput);
         addLayout->addWidget(emAddButton);
         addLayout->addWidget(emDelButton);
-        layout->addLayout(addLayout);
-        connect(emAddButton, &QPushButton::clicked, this, &ModificaDialog::aggiungiAList);
-        connect(emDelButton, &QPushButton::clicked, this, &ModificaDialog::togliDaList);
+        espLayout->addLayout(addLayout);
+        connect(emAddButton, &QPushButton::clicked, this, &ModificaDialog::aggiungiAListaEsp);
+        connect(emDelButton, &QPushButton::clicked, this, &ModificaDialog::togliDaListaEsp);
 
         //assegnazione campi alla finestra
         formLayout->addRow("Artista:", artistaEdit);
         formLayout->addRow("Artista Vivo", radioWidget);
         formLayout->addRow("Tipo Opera:", tipoOperaEdit);
-        formLayout->addRow("Esposizioni",layout);
+        formLayout->addRow("Esposizioni",espLayout);
 
     } else if (auto m = dynamic_cast<gioielli*>(item)) {
         orafoEdit = new QLineEdit(QString::fromStdString(m->getOrafo()), this);
+        QVBoxLayout *matLayout = new QVBoxLayout();
+        QLabel *label = new QLabel("Materiali:");
+        matLayout->addWidget(label);
+        mList = new QListWidget(this);
+        matLayout->addWidget(mList);
+        int cont = 0;
+        for (const auto &i : m->getMateriali()) {
+            if (!i.empty()) {
+                mList->addItem(QString::fromStdString(i));
+            }
+            if (i == " ") delete mList->takeItem(cont);
+            cont++;
+        }
+        QHBoxLayout *addLayout = new QHBoxLayout();
+        nuovoMaterialeInput = new QLineEdit(this);
+        emAddButton = new QPushButton("Aggiungi Materiale");
+        emDelButton = new QPushButton("Rimuovi Materiale", this);
+
+        addLayout->addWidget(nuovoMaterialeInput);
+        addLayout->addWidget(emAddButton);
+        addLayout->addWidget(emDelButton);
+        matLayout->addLayout(addLayout);
+        connect(emAddButton, &QPushButton::clicked, this, &ModificaDialog::aggiungiAListaMat);
+        connect(emDelButton, &QPushButton::clicked, this, &ModificaDialog::togliDaListaMat);
+
         formLayout->addRow("Orafo:", orafoEdit);
+        formLayout->addRow("Materiali:", matLayout);
+
     }else if (auto m = dynamic_cast<orologi*>(item)){
         modelloEdit = new QLineEdit(QString::fromStdString(m->getModello()), this);
+        marcaEdit = new QLineEdit(QString::fromStdString(m->getMarca()), this);
+        esemplariEdit = new QLineEdit(QString::number(m->getEsemplari()), this);
+        meccanismoEdit = new QComboBox(this);
+        meccanismoEdit->addItem("Al Quarzo");
+        meccanismoEdit->addItem("Automatico");
+        meccanismoEdit->addItem("A Pila");
+        meccanismoEdit->addItem("Manuale");
+
         formLayout->addRow("Modello:", modelloEdit);
+        formLayout->addRow("Marca:", marcaEdit);
+        formLayout->addRow("Esemplari:", esemplariEdit);
+        formLayout->addRow("Meccanismo:", meccanismoEdit);
     }
 
     salvaButton = new QPushButton("Salva", this);
@@ -112,53 +150,98 @@ void ModificaDialog::salvaModifiche() {
     item->setAutentica(autenticaEdit->text().toStdString());
     item->setData(dataEdit->text().toStdString());
 
-    if (auto o = dynamic_cast<arte*>(item)) {
-        o->setArtista(artistaEdit->text().toStdString());
-        o->setVivo(bottoneSi->isChecked());
+    if (auto a = dynamic_cast<arte*>(item)) {
+        a->setArtista(artistaEdit->text().toStdString());
+        a->setVivo(bottoneSi->isChecked());
 
-        // **Conversione della lista esposizioni**
         std::list<std::string> esposizioniStd;
-        for (int i = 0; i < emList->count(); ++i) {
-            esposizioniStd.push_back(emList->item(i)->text().toStdString());
+        for (int i = 0; i < eList->count(); ++i) {
+            QString esposizione = eList->item(i)->text().trimmed();
+            if (!esposizione.isEmpty()) {  // Filtra elementi vuoti
+                esposizioniStd.push_back(esposizione.toStdString());
+            }
         }
-        o->setEsposizione(esposizioniStd);  // **Ora viene effettivamente salvata**
+        if (esposizioniStd.empty()) {
+            esposizioniStd.push_back("Nessuna esposizione");
+        }
+        a->setEsposizione(esposizioniStd);
 
         QString tipoOp = tipoOperaEdit->currentText();
-        o->setTipoOpera(tipoOp.toStdString());
-    } else if (auto o = dynamic_cast<gioielli*>(item)) {
-        o->setOrafo(orafoEdit->text().toStdString());
+        a->setTipoOpera(tipoOp.toStdString());
+
+    } else if (auto g = dynamic_cast<gioielli*>(item)) {
+        g->setOrafo(orafoEdit->text().toStdString());
+        std::list<std::string> materialiStd;
+        for (int i = 0; i < mList->count(); ++i) {
+            QString materiale = mList->item(i)->text().trimmed();
+            if (!materiale.isEmpty()) {  // Filtra elementi vuoti
+                materialiStd.push_back(materiale.toStdString());
+            }
+        }
+        if (materialiStd.empty()) {
+                QMessageBox::warning(this, "Errore di Salvataggio",
+                                     "Non puoi salvare un gioiello senza almeno un materiale!");
+                return;}
+        g->setMateriali(materialiStd);
+
     } else if (auto o = dynamic_cast<orologi*>(item)) {
         o->setModello(modelloEdit->text().toStdString());
+        o->setMarca(marcaEdit->text().toStdString());
+        o->setEsemplari(esemplariEdit->text().toInt());
+        QString mecca = meccanismoEdit->currentText();
+        o->setMecc(mecca.toStdString());
+
     }
 
     accept();
 }
 
 
-void ModificaDialog::aggiungiAList() {
+void ModificaDialog::aggiungiAListaEsp() {
     QString nuovaEsposizione = nuovaEsposizioneInput->text().trimmed();
     if (!nuovaEsposizione.isEmpty()) {
         // Cerca e rimuove eventuali elementi vuoti nella lista
-        for (int i = 0; i < emList->count(); ++i) {
-            if (emList->item(i)->text().isEmpty()) {
-                delete emList->takeItem(i);
+        for (int i = 0; i < eList->count(); ++i) {
+            if (eList->item(i)->text().isEmpty()) {
+                delete eList->takeItem(i);
                 i--; // Decrementa l'indice perché la lista si riduce di uno
             }
         }
         // Aggiunge la nuova esposizione solo se non è vuota
-        emList->addItem(nuovaEsposizione);
+        eList->addItem(nuovaEsposizione);
         nuovaEsposizioneInput->clear();
     }else QMessageBox::information(this, "Esposizione Nulla","Stai cercando di inserire una stringa vuota!");
 }
 
 
 // **Metodo per rimuovere un'esposizione selezionata**
-void ModificaDialog::togliDaList() {
-    QListWidgetItem* selectedItem = emList->currentItem();
+void ModificaDialog::togliDaListaEsp() {
+    QListWidgetItem* selectedItem = eList->currentItem();
     if (selectedItem) {
         delete selectedItem;
     }
 }
 
+void ModificaDialog::aggiungiAListaMat() {
+    QString nuovoMateriale = nuovoMaterialeInput->text().trimmed();
+    if (!nuovoMateriale.isEmpty()) {
+        // Cerca e rimuove eventuali elementi vuoti nella lista
+        for (int i = 0; i < mList->count(); ++i) {
+            if (mList->item(i)->text().isEmpty()) {
+                delete mList->takeItem(i);
+                i--; // Decrementa l'indice perché la lista si riduce di uno
+            }
+        }
 
+        mList->addItem(nuovoMateriale);
+        nuovoMaterialeInput->clear();
+    }else QMessageBox::information(this, "Materiale Nullo","Stai cercando di inserire una stringa vuota!");
+}
+
+void ModificaDialog::togliDaListaMat() {
+    QListWidgetItem* selectedItem = mList->currentItem();
+    if (selectedItem) {
+        delete selectedItem;
+    }
+}
 

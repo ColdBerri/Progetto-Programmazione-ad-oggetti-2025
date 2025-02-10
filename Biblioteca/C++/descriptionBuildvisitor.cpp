@@ -57,24 +57,47 @@ void descriptionBuildVisitor::visitGioielli(gioielli &gio) {
 }
 
 void descriptionBuildVisitor::visitOrologi(orologi &oro) {
-    QString desc = QString ("⌚ <b>Orologio</b>: %1<br>"
-                               "🔹 <b>Descrizione</b>: %2<br>"
-                               "✅ <b>Autenticità</b>: %3<br>"
-                               "📆 <b>Data Creazione</b>: %4<br>"
-                               "💰 <b>Valore</b>: %5€<br>"
-                               "⌛ <b>Modello</b>: %8<br>"
-                               "🏭 <b>Marca</b>: %9<br>"
-                               "🔢 <b>Numero esemplari</b>: %10<br>"
-                               "⚙️ <b>Meccanismo</b>: %11<br>")
-    .arg(QString::fromStdString(oro.getNome()))
-    .arg(QString::fromStdString(oro.getDescrizione()))
-    .arg(QString::fromStdString(oro.getAutentica()))
-    .arg(QString::fromStdString(oro.getDataCreazione()))
-    .arg(oro.getValAtt())
-    .arg(QString::fromStdString(oro.getModello()))
-    .arg(QString::fromStdString(oro.getMarca()))
-    .arg(oro.getEsemplari())
-    .arg(QString::fromStdString(oro.getMecc()));
-    descrizioneBuild = desc;
+    if (oro.getEsemplari() == 0) {
+        QString desc = QString ("⌚ <b>Orologio</b>: %1<br>"
+                           "🔹 <b>Descrizione</b>: %2<br>"
+                           "✅ <b>Autenticità</b>: %3<br>"
+                           "📆 <b>Data Creazione</b>: %4<br>"
+                           "💰 <b>Valore</b>: %5€<br>"
+                           "⌛ <b>Modello</b>: %8<br>"
+                           "🏭 <b>Marca</b>: %9<br>"
+                           "🔢 <b>Numero esemplari</b>: %10<br>"
+                           "⚙️ <b>Meccanismo</b>: %11<br>")
+        .arg(QString::fromStdString(oro.getNome()))
+        .arg(QString::fromStdString(oro.getDescrizione()))
+        .arg(QString::fromStdString(oro.getAutentica()))
+        .arg(QString::fromStdString(oro.getDataCreazione()))
+        .arg(oro.getValAtt())
+        .arg(QString::fromStdString(oro.getModello()))
+        .arg(QString::fromStdString(oro.getMarca()))
+        .arg(QString::fromStdString("Numero esemplari non specificato"))
+        .arg(QString::fromStdString(oro.getMecc()));
+        descrizioneBuild = desc;
+    }else {
+        QString desc = QString ("⌚ <b>Orologio</b>: %1<br>"
+                           "🔹 <b>Descrizione</b>: %2<br>"
+                           "✅ <b>Autenticità</b>: %3<br>"
+                           "📆 <b>Data Creazione</b>: %4<br>"
+                           "💰 <b>Valore</b>: %5€<br>"
+                           "⌛ <b>Modello</b>: %8<br>"
+                           "🏭 <b>Marca</b>: %9<br>"
+                           "🔢 <b>Numero esemplari</b>: %10<br>"
+                           "⚙️ <b>Meccanismo</b>: %11<br>")
+        .arg(QString::fromStdString(oro.getNome()))
+        .arg(QString::fromStdString(oro.getDescrizione()))
+        .arg(QString::fromStdString(oro.getAutentica()))
+        .arg(QString::fromStdString(oro.getDataCreazione()))
+        .arg(oro.getValAtt())
+        .arg(QString::fromStdString(oro.getModello()))
+        .arg(QString::fromStdString(oro.getMarca()))
+        .arg(oro.getEsemplari())
+        .arg(QString::fromStdString(oro.getMecc()));
+        descrizioneBuild = desc;
+    }
+
 }
 

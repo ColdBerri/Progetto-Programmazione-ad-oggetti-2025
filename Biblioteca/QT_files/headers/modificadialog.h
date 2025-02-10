@@ -39,7 +39,9 @@ private:
     QComboBox *tipoOperaEdit;
 
     //serve sia ad arte che gioielli
-    QListWidget *emList;
+    QListWidget *eList;
+    QListWidget *mList;
+    QLineEdit *nuovoMaterialeInput;
     QLineEdit *nuovaEsposizioneInput;
     QPushButton *emAddButton;
     QPushButton *emDelButton;
@@ -52,15 +54,17 @@ private:
     QLineEdit *modelloEdit;
     QLineEdit *marcaEdit;
     QLineEdit *esemplariEdit;
-    //Tendina per modificare il meccanismo scelta tra : automatico, al quarzo e mecanico
+    QComboBox *meccanismoEdit;
 
     QPushButton *salvaButton;
     QPushButton *annullaButton;
 
 private slots:
     void salvaModifiche();
-    void aggiungiAList();
-    void togliDaList();
+    void aggiungiAListaEsp();
+    void aggiungiAListaMat();
+    void togliDaListaEsp();
+    void togliDaListaMat();
 };
 
 #endif // MODIFICADIALOG_H
