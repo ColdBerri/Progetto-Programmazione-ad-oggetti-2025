@@ -49,6 +49,7 @@ QWidget(parent), left(left) {
     });
 
     connect(modifica, &QPushButton::clicked, this, &rightside::modificare);
+
 }
 
 //metodo di update delle informazioni dell'oggetto
@@ -82,6 +83,7 @@ void rightside::svuotaDescrizione() {
     descriptionLabel->clear();
 }
 
+
 //metodo per modifica dell'elemento selezionato
 void rightside::modificare() {
     if (!currentItem) {
@@ -92,9 +94,9 @@ void rightside::modificare() {
     // Apri finestra di modifica specifica per il tipo dell'oggetto
     ModificaDialog dialog(currentItem, this);
     if (dialog.exec() == QDialog::Accepted) {
-        // Dopo la modifica aggiorna la visualizzazione
         updateInfo(currentItem);
-        left->aggiornaItem(currentItem);  // Aggiorna la lista in leftside
-        //left->salvaSuJson();  // Salva le modifiche nel file JSON
+        left->aggiornaItem(currentItem);
     }
 }
+
+

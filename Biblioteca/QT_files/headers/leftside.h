@@ -37,12 +37,13 @@ class leftside : public QWidget {
         QToolBar *toolBar;
         QAction *salvaAzione;
         QAction* importa;
-
+        QString *jsonFilePath;
         void popolaLista();
-        bool saveToJson();
         void loadJson(const std::string& filePath);
         void importaLista();
         void deselezionaElemento();
+        bool saveToJson();
+
     public:
         leftside(QWidget *parent = nullptr);
 
@@ -52,6 +53,7 @@ class leftside : public QWidget {
         void salvaLista();
         void rimuoviItem(const QString& itemName);
         void aggiornaItem(biblioteca* );
+
     signals :
         void itemSelected(biblioteca *selectedItem);
         void elementoDeselezionato();

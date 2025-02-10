@@ -1,4 +1,6 @@
 #include "headers/modificadialog.h"
+
+#include <ios>
 #include <QVBoxLayout>
 #include <QFormLayout>
 #include <QVBoxLayout>
@@ -7,8 +9,12 @@
 #include <QMessageBox>
 #include <list>
 #include <string>
+#include <bits/ios_base.h>
+
+#include "../C++/headers/biblioteca.h"
+
 ModificaDialog::ModificaDialog(biblioteca *item, QWidget *parent) :
-    QDialog(parent), item(item) {
+    QDialog(parent), item(item){
 
     setWindowTitle("Modifica Elemento");
     QVBoxLayout *layout = new QVBoxLayout(this);
@@ -141,9 +147,11 @@ ModificaDialog::ModificaDialog(biblioteca *item, QWidget *parent) :
 
     connect(salvaButton, &QPushButton::clicked, this, &ModificaDialog::salvaModifiche);
     connect(annullaButton, &QPushButton::clicked, this, &QDialog::reject);
+
 }
 
 void ModificaDialog::salvaModifiche() {
+
     item->setNome(nomeEdit->text().toStdString());
     item->setDescrizione(descrizioneEdit->text().toStdString());
     item->setVal(valoreEdit->text().toDouble());
@@ -192,7 +200,11 @@ void ModificaDialog::salvaModifiche() {
         o->setMecc(mecca.toStdString());
 
     }
-
+    if (item->getNome().empty()) {
+        QMessageBox::warning(this, "Errore di Salvataggio",
+                                        "Non puoi salvare un oggetto senza nome!");
+        return;
+    }
     accept();
 }
 
@@ -244,4 +256,3 @@ void ModificaDialog::togliDaListaMat() {
         delete selectedItem;
     }
 }
-

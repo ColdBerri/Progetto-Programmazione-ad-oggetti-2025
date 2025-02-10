@@ -17,7 +17,6 @@
 #include "C++/headers/descriptionBuildVisitor.h"
 #include "C++/headers/biblioteca.h"
 
-
 class rightside : public QWidget {
     Q_OBJECT
 
@@ -41,7 +40,6 @@ public:
     void updateInfo(biblioteca *selectedItem);
     void svuotaDescrizione();
     void modificare();
-
 
     signals:
         void itemPointed(const QString& itemName);

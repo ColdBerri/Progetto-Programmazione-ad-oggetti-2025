@@ -75,9 +75,13 @@ leftside::leftside(QWidget *parent) : QWidget(parent){
 
 //METODI JSON
 bool leftside::saveToJson() {
-    // Finestra di dialogo per scegliere il percorso di salvataggio
-    QString filePath = QFileDialog::getSaveFileName(this, "Salva Lista", "", "JSON Files (*.json);;All Files (*)");
-
+  //controllo per vedere se il file è nuovo o è stato importato
+  QString filePath;
+  if (jsonFilePath == nullptr){
+    	filePath = QFileDialog::getSaveFileName(this, "Salva Lista", "", "JSON Files (*.json);;All Files (*)");
+    }else{
+		filePath = (*jsonFilePath);
+    }
     //controlli vari
     if (filePath.isEmpty()) {
         qDebug() << "Salvataggio annullato dall'utente.";
@@ -116,6 +120,7 @@ bool leftside::saveToJson() {
 
 void leftside::loadJson(const std::string& filePath) {
     //controlli su file e contenuto del file
+    jsonFilePath = new QString(QString::fromStdString(filePath));
     std::ifstream file(filePath);
     if (!file.is_open()) {
         std::cerr << "Errore: impossibile aprire il file " << filePath << std::endl;
@@ -257,17 +262,22 @@ void leftside::filtraPerCategoria(const QString &categoria, QPushButton *bottone
 //METODI DI AZIONE
 //salvataggio
 void leftside::salvaLista() {
+  	QMessageBox::StandardButton risposta;
+    risposta = QMessageBox::question(this, "Conferma Salvataggio",
+                                     "Sei sicuro di voler salvare le modifiche sul file corrente?",
+                                     QMessageBox::Yes | QMessageBox::No);
     // Rimuovi i filtri e la ricerca
     filtroAttivo = "";  // Reset del filtro
     ricerca->clear();
     bottoneArte->setChecked(false);
     bottoenOrologi->setChecked(false);
     bottoneGioielli->setChecked(false);
-
-    popolaLista();
+	if(risposta == QMessageBox::Yes) {
+   	popolaLista();
     bool salvataggio = saveToJson();
-
     if (salvataggio) QMessageBox::information(this, "Salvataggio", "Lista salvata correttamente!");
+	}else return;
+
 }
 
 //importazione del file json
@@ -319,15 +329,26 @@ void leftside::rimuoviItem(const QString& itemName) {
 
 
 void leftside::aggiornaItem(biblioteca *item) {
-    for (int i = 0; i < listaItems->count(); ++i) {
-        QListWidgetItem *list = listaItems->item(i);
-        if (list->text() == QString::fromStdString(item->getNome())) {
-            list->setText(QString::fromStdString(item->getNome()));  // Aggiorna il nome
-            break;
-        }
+    int j=0;
+    for (j = 0; j < listaItems->count(); ++j) {
+        QListWidgetItem *list = listaItems->item(j);
+        break;
     }
-}
 
+    for(int i = 0; i < oggetti.size(); i++) {
+        if(oggetti[i]->getNome() == item->getNome() && i!=j) {
+            std::string nome = item->getNome() + std::to_string(i+1);
+            item->setNome(nome);
+        }
+      }
+      for (int i = 0; i < listaItems->count(); ++i) {
+        QListWidgetItem *list = listaItems->item(i);
+        list->setText(QString::fromStdString(item->getNome()));
+        break;
+      }
+
+    popolaLista();
+}
 
 //deselezione dell'elemento
 void leftside::deselezionaElemento() {
@@ -335,3 +356,5 @@ void leftside::deselezionaElemento() {
         emit elementoDeselezionato();
     }
 }
+
+

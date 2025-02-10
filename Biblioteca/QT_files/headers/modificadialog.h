@@ -17,7 +17,7 @@
 #include "C++/headers/arte.h"
 #include "C++/headers/gioielli.h"
 #include "C++/headers/orologi.h"
-
+#include "leftside.h"
 class ModificaDialog : public QDialog {
     Q_OBJECT
 
@@ -65,6 +65,8 @@ private slots:
     void aggiungiAListaMat();
     void togliDaListaEsp();
     void togliDaListaMat();
+
+
 };
 
 #endif // MODIFICADIALOG_H

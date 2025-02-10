@@ -1,42 +1,42 @@
 [
     {
-        "tipo": "arte",
-        "nome": "La Gioconda",
-        "descrizione": "Un famoso dipinto di Leonardo da Vinci.",
-        "autentica": "sei",
-        "data creazione": "1503",
-        "valore": 86000,
-        "preferiti": false,
-        "id": "ART001",
         "artista": "Leonardo da Vinci",
-        "tipo opera": "Dipinto",
         "artista vivo": false,
-        "esposizione": "Louvre; Uffizi; "
+        "autentica": "sei",
+        "data creazione": "60",
+        "descrizione": "Un famoso dipinto di Leonardo da Vinci.",
+        "esposizione": "Louvre;Uffizi",
+        "id": "ART001",
+        "nome": "La Gioconda",
+        "preferiti": false,
+        "tipo": "arte",
+        "tipo opera": "Quadro",
+        "valore": 86000
     },
     {
-        "tipo": "orologi",
-        "nome": "Rolex Submariner",
-        "descrizione": "Un orologio subacqueo di lusso.",
         "autentica": "ciao",
         "data creazione": "1953",
-        "valore": 10000,
-        "preferiti": false,
+        "descrizione": "Un orologio subacqueo di lusso.",
         "id": "ORO001",
-        "modello": "Submariner",
         "marca": "Rolex",
+        "meccanismo": "Automatico",
+        "modello": "Submariner",
+        "nome": "Rolex Submariner",
         "numero esemplari": 1000,
-        "meccanismo": "Automatico"
+        "preferiti": false,
+        "tipo": "orologi",
+        "valore": 10000
     },
     {
-        "tipo": "gioielli",
-        "nome": "Collana di Diamanti",
-        "descrizione": "Una collana con diamanti di alta qualità.",
         "autentica": "pinotto",
         "data creazione": "2020",
-        "valore": 50000,
-        "preferiti": true,
+        "descrizione": "Una collana con diamanti di alta qualità.",
         "id": "GIO001",
-        "materiali": "Oro; Diamanti;",
-        "orafo": "Bulgari"
+        "materiali": "Oro; Diamanti",
+        "nome": "Collana di Diamanti",
+        "orafo": "Bulgari",
+        "preferiti": true,
+        "tipo": "gioielli",
+        "valore": 50000
     }
 ]
