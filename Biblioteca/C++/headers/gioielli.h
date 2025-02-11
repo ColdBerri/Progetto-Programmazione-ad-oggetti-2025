@@ -13,8 +13,7 @@ class gioielli : public biblioteca {
     public:
         //costruttore e distruttore
         gioielli(std::string n, std::string d, std::string a, std::string dc, 
-        double vt, bool p,
-        std::string id, std::list<std::string> ma, std::string ora);
+        double vt, bool p, std::list<std::string> ma, std::string ora);
         ~gioielli();
 
         //metodi getter

@@ -2,70 +2,80 @@
 #define AGGIUNGIDIALOG_H
 
 #include <QDialog>
-#include <QLineEdit>
-#include <QFormLayout>
-#include <QPushButton>
+#include <QVariantMap>
 #include <QRadioButton>
 #include <QButtonGroup>
-#include <QComboBox>
-#include <QVBoxLayout>
-#include <QLabel>
-#include <QWidget>
-#include <QListWidget>
 #include <QPushButton>
-#include "C++/headers/biblioteca.h"
-#include "C++/headers/arte.h"
-#include "C++/headers/gioielli.h"
-#include "C++/headers/orologi.h"
-class ModificaDialog : public QDialog {
+#include <QLineEdit>
+#include <QComboBox>
+#include <QListWidget>
+#include <QFormLayout>
+
+class AggiungiDialog : public QDialog {
     Q_OBJECT
-
 public:
-    explicit ModificaDialog(biblioteca *item, QWidget *parent = nullptr);
+    explicit AggiungiDialog(QWidget *parent = nullptr);
 
+    signals:
+        void datiInseriti(const QString &tipo, const QVariantMap &dati);
+
+    private slots:
+        void abilitaConferma();
+        void confermaScelta();
+        void salvaNuovo();
+    // Metodi per gestire eventuali aggiunte/rimozioni nella lista
+        void aggiungiAListaEsp();
+        void togliDaListaEsp();
+        void aggiungiAListaMat();
+        void togliDaListaMat();
+        void mostraArte();
+        void mostraGioielli();
+        void mostraOrologi();
+        void pulisciForm();
 private:
-    biblioteca *item;
-    QLineEdit *nomeEdit;
-    QLineEdit *descrizioneEdit;
-    QLineEdit *autenticaEdit;
-    QLineEdit *dataEdit;
-    QLineEdit *valoreEdit;
+    // Bottoni per la scelta del tipo
+    QRadioButton *bottoneArte;
+    QRadioButton *bottoneGioielli;
+    QRadioButton *bottoneOrologi;
+    QButtonGroup *tipoGroup;
+    QPushButton *confermaTipoButton;
 
-    //modifiche solo per arte
-    QLineEdit *artistaEdit;
-    QRadioButton *bottoneSi; //vivo
+    // Layout e widget del form di input (residenza per i campi dinamici)
+    QWidget *formWidget;
+    QFormLayout *formLayout;
+
+    // Bottoni finali
+    QPushButton *salvaButton;
+    QPushButton *annullaButton;
+
+    // Campi comuni
+    QLineEdit *nomeNew;
+    QLineEdit *descrizioneNew;
+    QLineEdit *valoreNew;
+    QLineEdit *autenticaNew;
+    QLineEdit *dataNew;
+
+    // Campi per "Arte"
+    QLineEdit *artistaNew;
+    QRadioButton *bottoneSi;
     QRadioButton *bottoneNO;
     QComboBox *tipoOperaEdit;
-
-    //serve sia ad arte che gioielli
     QListWidget *eList;
-    QListWidget *mList;
-    QLineEdit *nuovoMaterialeInput;
     QLineEdit *nuovaEsposizioneInput;
     QPushButton *emAddButton;
     QPushButton *emDelButton;
 
-    //modifiche solo per gioielli
-    QLineEdit *materialiEdit;
-    QLineEdit *orafoEdit;
+    // Campi per "Gioielli"
+    QLineEdit *orafoNew;
+    QListWidget *mList;
+    QLineEdit *nuovoMaterialeInput;
+    // I bottoni per aggiungere/rimuovere materiale sono già dichiarati (riutilizziamo emAddButton ed emDelButton se non servono entrambi)
 
-    //modifiche sollo per orologi
-    QLineEdit *modelloEdit;
-    QLineEdit *marcaEdit;
-    QLineEdit *esemplariEdit;
-    QComboBox *meccanismoEdit;
-
-    QPushButton *salvaButton;
-    QPushButton *annullaButton;
-
-    private slots:
-        void salvaModifiche();
-    void aggiungiAListaEsp();
-    void aggiungiAListaMat();
-    void togliDaListaEsp();
-    void togliDaListaMat();
-
-
+    // Campi per "Orologi"
+    QLineEdit *modelloNew;
+    QLineEdit *marcaNew;
+    QLineEdit *esemplariNew;
+    QComboBox *meccanismoNew;
 };
 
-#endif //AGGIUNGIDIALOG_H
+#endif // AGGIUNGIDIALOG_H

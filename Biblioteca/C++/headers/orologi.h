@@ -14,7 +14,7 @@ class orologi : public biblioteca{
         std::string meccanismo;
     public:
         orologi(std::string n, std::string d, std::string a, std::string dc, 
-        double v, bool p, std::string id, std::string mod,
+        double v, bool p, std::string mod,
         std::string ma, int ne, std::string tm);
         ~orologi();
 

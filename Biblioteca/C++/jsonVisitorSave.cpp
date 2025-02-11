@@ -15,7 +15,6 @@ void jsonVisitorSave::visitArte(arte& a) {
     obj["data creazione"] = QString::fromStdString(a.getDataCreazione());
     obj["valore"] = a.getValAtt();
     obj["preferiti"] = a.getPreferiti();
-    obj["id"] = QString::fromStdString(a.getId());
     obj["artista"] = QString::fromStdString(a.getArtista());
     obj["tipo opera"] = QString::fromStdString(a.getTipoOpera());
     obj["artista vivo"] = a.getVivo();
@@ -41,7 +40,6 @@ void jsonVisitorSave::visitOrologi(orologi& o) {
     obj["data creazione"] = QString::fromStdString(o.getDataCreazione());
     obj["valore"] = o.getValAtt();
     obj["preferiti"] =  o.getPreferiti();
-    obj["id"] = QString::fromStdString(o.getId());
     obj["modello"] = QString::fromStdString(o.getModello());
     obj["marca"] = QString::fromStdString(o.getMarca());
     obj["numero esemplari"] = o.getEsemplari();
@@ -58,7 +56,6 @@ void jsonVisitorSave::visitGioielli(gioielli& g) {
     obj["data creazione"] = QString::fromStdString(g.getDataCreazione());
     obj["valore"] = g.getValAtt();
     obj["preferiti"] =  g.getPreferiti();
-    obj["id"] = QString::fromStdString(g.getId());
     std::string result;
     std::list<std::string> lista = g.getMateriali();
     for (auto it = lista.begin(); it != lista.end(); it++) {

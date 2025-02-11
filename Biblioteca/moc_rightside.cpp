@@ -22,8 +22,8 @@ QT_BEGIN_MOC_NAMESPACE
 QT_WARNING_PUSH
 QT_WARNING_DISABLE_DEPRECATED
 struct qt_meta_stringdata_rightside_t {
-    QByteArrayData data[11];
-    char stringdata0[123];
+    QByteArrayData data[15];
+    char stringdata0[160];
 };
 #define QT_MOC_LITERAL(idx, ofs, len) \
     Q_STATIC_BYTE_ARRAY_DATA_HEADER_INITIALIZER_WITH_OFFSET(len, \
@@ -38,17 +38,22 @@ QT_MOC_LITERAL(2, 22, 0), // ""
 QT_MOC_LITERAL(3, 23, 8), // "itemName"
 QT_MOC_LITERAL(4, 32, 12), // "eliminazione"
 QT_MOC_LITERAL(5, 45, 12), // "nomeElemento"
-QT_MOC_LITERAL(6, 58, 10), // "updateInfo"
-QT_MOC_LITERAL(7, 69, 11), // "biblioteca*"
-QT_MOC_LITERAL(8, 81, 12), // "selectedItem"
-QT_MOC_LITERAL(9, 94, 17), // "svuotaDescrizione"
-QT_MOC_LITERAL(10, 112, 10) // "modificare"
+QT_MOC_LITERAL(6, 58, 15), // "oggettoAggiunto"
+QT_MOC_LITERAL(7, 74, 4), // "tipo"
+QT_MOC_LITERAL(8, 79, 4), // "dati"
+QT_MOC_LITERAL(9, 84, 10), // "updateInfo"
+QT_MOC_LITERAL(10, 95, 11), // "biblioteca*"
+QT_MOC_LITERAL(11, 107, 12), // "selectedItem"
+QT_MOC_LITERAL(12, 120, 17), // "svuotaDescrizione"
+QT_MOC_LITERAL(13, 138, 10), // "modificare"
+QT_MOC_LITERAL(14, 149, 10) // "aggiungere"
 
     },
     "rightside\0itemPointed\0\0itemName\0"
-    "eliminazione\0nomeElemento\0updateInfo\0"
-    "biblioteca*\0selectedItem\0svuotaDescrizione\0"
-    "modificare"
+    "eliminazione\0nomeElemento\0oggettoAggiunto\0"
+    "tipo\0dati\0updateInfo\0biblioteca*\0"
+    "selectedItem\0svuotaDescrizione\0"
+    "modificare\0aggiungere"
 };
 #undef QT_MOC_LITERAL
 
@@ -58,28 +63,32 @@ static const uint qt_meta_data_rightside[] = {
        8,       // revision
        0,       // classname
        0,    0, // classinfo
-       5,   14, // methods
+       7,   14, // methods
        0,    0, // properties
        0,    0, // enums/sets
        0,    0, // constructors
        0,       // flags
-       2,       // signalCount
+       3,       // signalCount
 
  // signals: name, argc, parameters, tag, flags
-       1,    1,   39,    2, 0x06 /* Public */,
-       4,    1,   42,    2, 0x06 /* Public */,
+       1,    1,   49,    2, 0x06 /* Public */,
+       4,    1,   52,    2, 0x06 /* Public */,
+       6,    2,   55,    2, 0x06 /* Public */,
 
  // slots: name, argc, parameters, tag, flags
-       6,    1,   45,    2, 0x0a /* Public */,
-       9,    0,   48,    2, 0x0a /* Public */,
-      10,    0,   49,    2, 0x0a /* Public */,
+       9,    1,   60,    2, 0x0a /* Public */,
+      12,    0,   63,    2, 0x0a /* Public */,
+      13,    0,   64,    2, 0x0a /* Public */,
+      14,    0,   65,    2, 0x0a /* Public */,
 
  // signals: parameters
     QMetaType::Void, QMetaType::QString,    3,
     QMetaType::Void, QMetaType::QString,    5,
+    QMetaType::Void, QMetaType::QString, QMetaType::QVariantMap,    7,    8,
 
  // slots: parameters
-    QMetaType::Void, 0x80000000 | 7,    8,
+    QMetaType::Void, 0x80000000 | 10,   11,
+    QMetaType::Void,
     QMetaType::Void,
     QMetaType::Void,
 
@@ -94,9 +103,11 @@ void rightside::qt_static_metacall(QObject *_o, QMetaObject::Call _c, int _id, v
         switch (_id) {
         case 0: _t->itemPointed((*reinterpret_cast< const QString(*)>(_a[1]))); break;
         case 1: _t->eliminazione((*reinterpret_cast< const QString(*)>(_a[1]))); break;
-        case 2: _t->updateInfo((*reinterpret_cast< biblioteca*(*)>(_a[1]))); break;
-        case 3: _t->svuotaDescrizione(); break;
-        case 4: _t->modificare(); break;
+        case 2: _t->oggettoAggiunto((*reinterpret_cast< const QString(*)>(_a[1])),(*reinterpret_cast< const QVariantMap(*)>(_a[2]))); break;
+        case 3: _t->updateInfo((*reinterpret_cast< biblioteca*(*)>(_a[1]))); break;
+        case 4: _t->svuotaDescrizione(); break;
+        case 5: _t->modificare(); break;
+        case 6: _t->aggiungere(); break;
         default: ;
         }
     } else if (_c == QMetaObject::IndexOfMethod) {
@@ -112,6 +123,13 @@ void rightside::qt_static_metacall(QObject *_o, QMetaObject::Call _c, int _id, v
             using _t = void (rightside::*)(const QString & );
             if (*reinterpret_cast<_t *>(_a[1]) == static_cast<_t>(&rightside::eliminazione)) {
                 *result = 1;
+                return;
+            }
+        }
+        {
+            using _t = void (rightside::*)(const QString & , const QVariantMap & );
+            if (*reinterpret_cast<_t *>(_a[1]) == static_cast<_t>(&rightside::oggettoAggiunto)) {
+                *result = 2;
                 return;
             }
         }
@@ -147,13 +165,13 @@ int rightside::qt_metacall(QMetaObject::Call _c, int _id, void **_a)
     if (_id < 0)
         return _id;
     if (_c == QMetaObject::InvokeMetaMethod) {
-        if (_id < 5)
+        if (_id < 7)
             qt_static_metacall(this, _c, _id, _a);
-        _id -= 5;
+        _id -= 7;
     } else if (_c == QMetaObject::RegisterMethodArgumentMetaType) {
-        if (_id < 5)
+        if (_id < 7)
             *reinterpret_cast<int*>(_a[0]) = -1;
-        _id -= 5;
+        _id -= 7;
     }
     return _id;
 }
@@ -170,6 +188,13 @@ void rightside::eliminazione(const QString & _t1)
 {
     void *_a[] = { nullptr, const_cast<void*>(reinterpret_cast<const void*>(std::addressof(_t1))) };
     QMetaObject::activate(this, &staticMetaObject, 1, _a);
+}
+
+// SIGNAL 2
+void rightside::oggettoAggiunto(const QString & _t1, const QVariantMap & _t2)
+{
+    void *_a[] = { nullptr, const_cast<void*>(reinterpret_cast<const void*>(std::addressof(_t1))), const_cast<void*>(reinterpret_cast<const void*>(std::addressof(_t2))) };
+    QMetaObject::activate(this, &staticMetaObject, 2, _a);
 }
 QT_WARNING_POP
 QT_END_MOC_NAMESPACE

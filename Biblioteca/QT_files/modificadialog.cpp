@@ -10,15 +10,13 @@
 #include <list>
 #include <string>
 #include <bits/ios_base.h>
-
 #include "../C++/headers/biblioteca.h"
 
 ModificaDialog::ModificaDialog(biblioteca *item, QWidget *parent) :
     QDialog(parent), item(item){
 
-
     setWindowTitle("Modifica Elemento");
-    setFixedSize(800, 600);
+    setFixedSize(700, 600);
     QVBoxLayout *layout = new QVBoxLayout(this);
     QFormLayout *formLayout = new QFormLayout();
 

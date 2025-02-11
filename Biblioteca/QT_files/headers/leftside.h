@@ -17,6 +17,7 @@
 #include <QKeyEvent>
 #include <iostream>
 #include <QListWidget>
+#include <QVariantMap>
 #include "libs.h"
 #include "C++/headers/biblioteca.h"
 #include "C++/headers/jsonVisitorSave.h"
@@ -53,6 +54,7 @@ class leftside : public QWidget {
         void salvaLista();
         void rimuoviItem(const QString& itemName);
         void aggiornaItem(biblioteca* );
+        void costruisciOggetto(const QString &tipo, const QVariantMap &dati);
 
     signals :
         void itemSelected(biblioteca *selectedItem);

@@ -1,5 +1,7 @@
 #include "headers/rightside.h"
 #include "headers/modificadialog.h"
+#include "headers/aggiungidialog.h"
+
 
 rightside::rightside (leftside* left, QWidget *parent) :
 QWidget(parent), left(left) {
@@ -49,7 +51,7 @@ QWidget(parent), left(left) {
     });
 
     connect(modifica, &QPushButton::clicked, this, &rightside::modificare);
-
+    connect(aggiungi, &QPushButton::clicked, this, &rightside::aggiungere);
 }
 
 //metodo di update delle informazioni dell'oggetto
@@ -99,4 +101,12 @@ void rightside::modificare() {
     }
 }
 
+void rightside::aggiungere() {
+    AggiungiDialog *dialog = new AggiungiDialog(this);
+    connect(dialog, &AggiungiDialog::datiInseriti, this, &rightside::inviaDatiAggiunti);
+    dialog->exec();
+}
 
+void rightside::inviaDatiAggiunti(const QString &tipo, const QVariantMap &dati) {
+    emit oggettoAggiunto(tipo, dati);
+}

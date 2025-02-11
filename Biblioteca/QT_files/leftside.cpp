@@ -147,8 +147,6 @@ void leftside::loadJson(const std::string& filePath) {
             std::string data = jsonObj["data creazione"].get<std::string>();
             double v = jsonObj["valore"].get<double>();
             bool b = jsonObj["preferiti"].get<bool>();
-            std::string id = jsonObj["id"].get<std::string>();
-
             std::list<std::string> ma;
             std::string materiali = jsonObj["materiali"].get<std::string>();
             std::istringstream iss(materiali);
@@ -159,7 +157,7 @@ void leftside::loadJson(const std::string& filePath) {
                 }
             }
             std::string orafo = jsonObj["orafo"].get<std::string>();
-            biblioteca *g = new gioielli(nome, descrizione, autentica, data, v, b, id, ma, orafo);
+            biblioteca *g = new gioielli(nome, descrizione, autentica, data, v, b, ma, orafo);
             oggetti.push_back(g);
         }
         else if (type == "orologi") {
@@ -169,12 +167,11 @@ void leftside::loadJson(const std::string& filePath) {
             std::string data = jsonObj["data creazione"].get<std::string>();
             double v = jsonObj["valore"].get<double>();
             bool b = jsonObj["preferiti"].get<bool>();
-            std::string id = jsonObj["id"].get<std::string>();
             std::string modello = jsonObj["modello"].get<std::string>();
             std::string marca = jsonObj["marca"].get<std::string>();
             int ne = jsonObj["numero esemplari"].get<int>();
             std::string meccanismo = jsonObj["meccanismo"].get<std::string>();
-            biblioteca *o = new orologi(nome, descrizione, autentica, data, v, b, id, modello, marca, ne, meccanismo);
+            biblioteca *o = new orologi(nome, descrizione, autentica, data, v, b, modello, marca, ne, meccanismo);
             oggetti.push_back(o);  // Aggiungi l'oggetto alla lista
         }
         else if (type == "arte") {
@@ -184,7 +181,6 @@ void leftside::loadJson(const std::string& filePath) {
             std::string data = jsonObj["data creazione"].get<std::string>();
             double v = jsonObj["valore"].get<double>();
             bool b = jsonObj["preferiti"].get<bool>();
-            std::string id = jsonObj["id"].get<std::string>();
             std::string artista = jsonObj["artista"].get<std::string>();
             std::string opera = jsonObj["tipo opera"].get<std::string>();
             bool vivo = jsonObj["artista vivo"].get<bool>();
@@ -198,7 +194,7 @@ void leftside::loadJson(const std::string& filePath) {
                     esp.push_back(word);
                 }
             }
-            biblioteca *a = new arte(nome, descrizione, autentica, data, v, b, id, artista, opera, vivo, esp);
+            biblioteca *a = new arte(nome, descrizione, autentica, data, v, b, artista, opera, vivo, esp);
             oggetti.push_back(a);
         }
     }
@@ -262,19 +258,19 @@ void leftside::filtraPerCategoria(const QString &categoria, QPushButton *bottone
 //METODI DI AZIONE
 //salvataggio
 void leftside::salvaLista() {
-  	QMessageBox::StandardButton risposta;
-    risposta = QMessageBox::question(this, "Conferma Salvataggio",
-                                     "Sei sicuro di voler salvare le modifiche sul file corrente?",
-                                     QMessageBox::Yes | QMessageBox::No);
-    // Rimuovi i filtri e la ricerca
     filtroAttivo = "";  // Reset del filtro
     ricerca->clear();
     bottoneArte->setChecked(false);
     bottoenOrologi->setChecked(false);
     bottoneGioielli->setChecked(false);
+  	QMessageBox::StandardButton risposta;
+    risposta = QMessageBox::question(this, "Conferma Salvataggio",
+                                     "Sei sicuro di voler salvare le modifiche sul file corrente?",
+                                     QMessageBox::Yes | QMessageBox::No);
+
 	if(risposta == QMessageBox::Yes) {
-   	popolaLista();
-    bool salvataggio = saveToJson();
+   	    popolaLista();
+        bool salvataggio = saveToJson();
     if (salvataggio) QMessageBox::information(this, "Salvataggio", "Lista salvata correttamente!");
 	}else return;
 
@@ -329,7 +325,7 @@ void leftside::rimuoviItem(const QString& itemName) {
 
 
 void leftside::aggiornaItem(biblioteca *item) {
-    int j;
+    int j=0;
     while(oggetti[j]->getNome() != item->getNome()) {
         ++j;
     }
@@ -356,4 +352,53 @@ void leftside::deselezionaElemento() {
     }
 }
 
+void leftside::costruisciOggetto(const QString &tipo, const QVariantMap &dati) {
+    if (tipo == "Arte") {
+        arte *art = new arte(
+            dati["nome"].toString().toStdString(),
+            dati["descrizione"].toString().toStdString(),
+            dati["autentica"].toString().toStdString(),
+            dati["data creazione"].toString().toStdString(),
+            dati["valore"].toDouble(),
+            dati["preferiti"].toBool(),
+            dati["artista"].toString().toStdString(),
+            dati["tipo opera"].toString().toStdString(),
+            dati["artista vivo"].toBool(),
+            {dati["esposizioni"].toString().toStdString()});
+            if(art) {
+                oggetti.push_back(art);
+                popolaLista();
+            }
+    } else if (tipo == "Gioielli") {
+        gioielli *gio = new gioielli(
+            dati["nome"].toString().toStdString(),
+        dati["descrizione"].toString().toStdString(),
+        dati["autentica"].toString().toStdString(),
+        dati["data creazione"].toString().toStdString(),
+        dati["valore"].toDouble(),
+        dati["preferiti"].toBool(),
+        {dati["materiali"].toString().toStdString()},  // Se è una lista, converti ogni elemento
+        dati["orafo"].toString().toStdString());
+        if(gio) {
+            oggetti.push_back(gio);
+            popolaLista();
+        }
+    } else if (tipo == "Orologi") {
+        orologi *orol = new orologi(
+            dati["nome"].toString().toStdString(),
+            dati["descrizione"].toString().toStdString(),
+            dati["autentica"].toString().toStdString(),
+            dati["data creazione"].toString().toStdString(),
+            dati["valore"].toDouble(),
+            dati["preferiti"].toBool(),
+            dati["modello"].toString().toStdString(),
+            dati["marca"].toString().toStdString(),
+            dati["esemplari"].toInt(),
+            dati["meccanismo"].toString().toStdString()
+        );
+        if(orol) {
+            oggetti.push_back(orol);
+            popolaLista();}
+    }
+}
 

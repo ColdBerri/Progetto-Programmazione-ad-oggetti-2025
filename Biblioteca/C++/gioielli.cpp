@@ -2,8 +2,8 @@
 
 gioielli::gioielli(std::string n, std::string d, std::string a, std::string dc, 
 double vt, bool p,
-std::string id, std::list<std::string> ma, std::string ora) :
-biblioteca(n, d, a, dc, vt, p, id), materiali(ma), orafo(ora) {}
+std::list<std::string> ma, std::string ora) :
+biblioteca(n, d, a, dc, vt, p), materiali(ma), orafo(ora) {}
 
 gioielli::~gioielli(){}
 

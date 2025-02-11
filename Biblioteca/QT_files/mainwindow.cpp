@@ -17,6 +17,8 @@ mainwindow::mainwindow(QWidget* parent) : QWidget(parent){
 
     mainWind->addWidget(split);
     connect(right, &rightside::itemPointed, left, &leftside::rimuoviItem);
+    connect(right, &rightside::oggettoAggiunto, left, &leftside::costruisciOggetto);
+
     setLayout(mainWind);
 }
     

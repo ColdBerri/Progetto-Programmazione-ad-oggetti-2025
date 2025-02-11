@@ -15,12 +15,11 @@ class biblioteca {
         std::string dataCreazione;
         double valore;
         bool preferiti;
-        std::string id;
     public:
         //costruttore e distruttore
         biblioteca(std::string n, std::string d, std::string a, 
-        std::string dc, double v, bool p, std::string id);
-        virtual ~biblioteca();
+        std::string dc, double v, bool p);
+        virtual ~biblioteca()=0;
 
         //metodi getter
         std::string getNome() const;
@@ -29,7 +28,6 @@ class biblioteca {
         std::string getDataCreazione()const;
         bool getPreferiti() const;
         double getValAtt() const;
-        std::string getId() const;
 
         //metodi setter
         void setNome(const std::string);
@@ -38,12 +36,7 @@ class biblioteca {
         void setData(std::string);
         void setVal(double);
         void setPreferiti(bool);
-        void setId(std::string);
 
-        //metodi virtuali puri
-        //virtual double calcolaVarValore(biblioteca&)=0;
-        //virtual std::string calcolaId(biblioteca&)=0;
-        //virtual void aggiornaValore(double)=0;
         virtual void accetta(bibliotecaVisitorInterface& visitor) =0;
     };
 

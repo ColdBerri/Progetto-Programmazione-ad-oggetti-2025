@@ -33,6 +33,8 @@ private:
     QLabel *descriptionLabel;
     leftside *left;
     void eliminaItem();
+    void inviaDatiAggiunti(const QString &tipo, const QVariantMap &dati);
+
 public:
     rightside(leftside *left, QWidget *parent = nullptr);
 
@@ -40,10 +42,13 @@ public:
     void updateInfo(biblioteca *selectedItem);
     void svuotaDescrizione();
     void modificare();
+    void aggiungere();
 
     signals:
         void itemPointed(const QString& itemName);
         void eliminazione(const QString& nomeElemento);
+        void oggettoAggiunto(const QString &tipo, const QVariantMap &dati);
+
 };
 
 #endif
