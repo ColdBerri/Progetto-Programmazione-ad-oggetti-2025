@@ -8,8 +8,11 @@ QWidget(parent), left(left) {
     right = new QVBoxLayout(this);
 
     modifica = new QPushButton("Modifica item");
+    modifica->setFixedSize(250,30);
     elimina = new QPushButton("Elimina item");
+    elimina->setFixedSize(250,30);
     aggiungi = new QPushButton("Aggiungi item");
+    aggiungi->setFixedSize(250,30);
     infobox = new QVBoxLayout();
     imageDescLayout = new QHBoxLayout();
     imageLabel = new QLabel(this);
@@ -122,44 +125,6 @@ void rightside::updateInfo(biblioteca *selectedItem) {
         preferitiButton->blockSignals(false);
     }
 }
-
-/*void rightside::updateInfo(biblioteca *selectedItem) {
-    if (!selectedItem) {
-        std::cerr << "Errore: oggetto selezionato nullo!" << std::endl;
-        return;
-    }else{
-        preferitiButton->setEnabled(true);
-        QString descrizione;
-        descriptionBuildVisitor visitor(descrizione);
-        selectedItem->accetta(visitor);  // `oggetto` è un puntatore a `biblioteca`
-        qDebug() << descrizione;   // Ora `descrizione` è già pronta
-
-        descriptionLabel->setText(visitor.descrizioneBuild);
-        std::cout << "Descrizione aggiornata: " << selectedItem->getDescrizione() << std::endl;
-
-        if (dynamic_cast<orologi*>(selectedItem)) {
-            QPixmap pixmap(":/QT_files/assets/polso.png");
-            QPixmap scaledMap = pixmap.scaled(200, 200, Qt::KeepAspectRatio);  // Mantiene proporzioni        imageLabel->setScaledContents(true);
-            imageLabel->setPixmap(scaledMap);
-            imageLabel->setScaledContents(true);
-
-        }else if(dynamic_cast<arte*>(selectedItem)) {
-            QPixmap pixmap(":/QT_files/assets/quadro.png");
-            imageLabel->setPixmap(pixmap);
-            QPixmap scaledMap = pixmap.scaled(200, 200, Qt::KeepAspectRatio);  // Mantiene proporzioni        imageLabel->setScaledContents(true);
-            imageLabel->setPixmap(scaledMap);
-            imageLabel->setScaledContents(true);
-
-        }else if(dynamic_cast<gioielli*>(selectedItem)) {
-            QPixmap pixmap(":/QT_files/assets/anello.png");
-            imageLabel->setPixmap(pixmap);
-            QPixmap scaledMap = pixmap.scaled(200, 200, Qt::KeepAspectRatio);  // Mantiene proporzioni        imageLabel->setScaledContents(true);
-            imageLabel->setPixmap(scaledMap);
-            imageLabel->setScaledContents(true);
-        }
-        currentItem = selectedItem;
-    }
-}*/
 
 
 void rightside::svuotaDescrizione() {

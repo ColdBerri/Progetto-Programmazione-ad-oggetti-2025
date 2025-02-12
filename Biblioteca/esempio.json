@@ -32,8 +32,21 @@
         "materiali": "Oro; Diamanti",
         "nome": "Collana di Diamanti",
         "orafo": "Bulgari",
-        "preferiti": true,
+        "preferiti": false,
         "tipo": "gioielli",
         "valore": 50000
+    },
+    {
+        "artista": "Michelangelo",
+        "artista vivo": false,
+        "autentica": "presente",
+        "data creazione": "",
+        "descrizione": "Una famosa scultura di Michelangelo",
+        "esposizione": "",
+        "nome": "David di Michelangelo",
+        "preferiti": true,
+        "tipo": "arte",
+        "tipo opera": "",
+        "valore": 1000000
     }
 ]
