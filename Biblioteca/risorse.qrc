@@ -1,0 +1,12 @@
+<RCC>
+    <qresource prefix="/">
+        <file>QT_files/assets/orlogiopolso.png</file>
+        <file>QT_files/assets/diamante.png</file>
+        <file>QT_files/assets/tavolozza.png</file>
+        <file>QT_files/assets/polso.png</file>
+        <file>QT_files/assets/anello.png</file>
+        <file>QT_files/assets/quadro.png</file>
+        <file>QT_files/assets/piena.png</file>
+        <file>QT_files/assets/vuota.png</file>
+    </qresource>
+</RCC>

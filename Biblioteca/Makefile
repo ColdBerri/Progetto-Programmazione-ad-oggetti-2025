@@ -64,7 +64,8 @@ SOURCES       = main.cpp \
 		QT_files/mainwindow.cpp \
 		QT_files/modificadialog.cpp \
 		QT_files/rightside.cpp \
-		QT_files/show.cpp moc_aggiungidialog.cpp \
+		QT_files/show.cpp qrc_risorse.cpp \
+		moc_aggiungidialog.cpp \
 		moc_leftside.cpp \
 		moc_mainwindow.cpp \
 		moc_modificadialog.cpp \
@@ -82,6 +83,7 @@ OBJECTS       = main.o \
 		modificadialog.o \
 		rightside.o \
 		show.o \
+		qrc_risorse.o \
 		moc_aggiungidialog.o \
 		moc_leftside.o \
 		moc_mainwindow.o \
@@ -429,7 +431,8 @@ Makefile: Biblioteca.pro /usr/lib/qt/mkspecs/linux-g++/qmake.conf /usr/lib/qt/mk
 		/usr/lib/qt/mkspecs/features/exceptions.prf \
 		/usr/lib/qt/mkspecs/features/yacc.prf \
 		/usr/lib/qt/mkspecs/features/lex.prf \
-		Biblioteca.pro
+		Biblioteca.pro \
+		risorse.qrc
 	$(QMAKE) -o Makefile Biblioteca.pro
 /usr/lib/qt/mkspecs/features/spec_pre.prf:
 /usr/lib/qt/mkspecs/common/unix.conf:
@@ -584,6 +587,7 @@ Makefile: Biblioteca.pro /usr/lib/qt/mkspecs/linux-g++/qmake.conf /usr/lib/qt/mk
 /usr/lib/qt/mkspecs/features/yacc.prf:
 /usr/lib/qt/mkspecs/features/lex.prf:
 Biblioteca.pro:
+risorse.qrc:
 qmake: FORCE
 	@$(QMAKE) -o Makefile Biblioteca.pro
 
@@ -598,6 +602,7 @@ dist: distdir FORCE
 distdir: FORCE
 	@test -d $(DISTDIR) || mkdir -p $(DISTDIR)
 	$(COPY_FILE) --parents $(DIST) $(DISTDIR)/
+	$(COPY_FILE) --parents risorse.qrc risorse.qrc $(DISTDIR)/
 	$(COPY_FILE) --parents /usr/lib/qt/mkspecs/features/data/dummy.cpp $(DISTDIR)/
 	$(COPY_FILE) --parents C++/headers/arte.h C++/headers/biblioteca.h C++/headers/bibliotecaVisitorInterface.h C++/headers/descriptionBuildVisitor.h C++/headers/gioielli.h C++/headers/jsonVisitorSave.h C++/headers/orologi.h C++/headers/pietre.h QT_files/headers/aggiungidialog.h QT_files/headers/leftside.h QT_files/headers/libs.h QT_files/headers/mainwindow.h QT_files/headers/modificadialog.h QT_files/headers/rightside.h QT_files/headers/show.h $(DISTDIR)/
 	$(COPY_FILE) --parents main.cpp C++/arte.cpp C++/biblioteca.cpp C++/descriptionBuildvisitor.cpp C++/gioielli.cpp C++/jsonVisitorSave.cpp C++/orologi.cpp QT_files/aggiungidialog.cpp QT_files/leftside.cpp QT_files/mainwindow.cpp QT_files/modificadialog.cpp QT_files/rightside.cpp QT_files/show.cpp $(DISTDIR)/
@@ -624,8 +629,33 @@ check: first
 
 benchmark: first
 
-compiler_rcc_make_all:
+compiler_rcc_make_all: qrc_risorse.cpp qrc_risorse.cpp
 compiler_rcc_clean:
+	-$(DEL_FILE) qrc_risorse.cpp qrc_risorse.cpp
+qrc_risorse.cpp: risorse.qrc \
+		/usr/bin/rcc \
+		QT_files/assets/anello.png \
+		QT_files/assets/piena.png \
+		QT_files/assets/quadro.png \
+		QT_files/assets/polso.png \
+		QT_files/assets/vuota.png \
+		QT_files/assets/diamante.png \
+		QT_files/assets/tavolozza.png \
+		QT_files/assets/orlogiopolso.png
+	/usr/bin/rcc -name risorse risorse.qrc -o qrc_risorse.cpp
+
+qrc_risorse.cpp: risorse.qrc \
+		/usr/bin/rcc \
+		QT_files/assets/anello.png \
+		QT_files/assets/piena.png \
+		QT_files/assets/quadro.png \
+		QT_files/assets/polso.png \
+		QT_files/assets/vuota.png \
+		QT_files/assets/diamante.png \
+		QT_files/assets/tavolozza.png \
+		QT_files/assets/orlogiopolso.png
+	/usr/bin/rcc -name risorse risorse.qrc -o qrc_risorse.cpp
+
 compiler_moc_predefs_make_all: moc_predefs.h
 compiler_moc_predefs_clean:
 	-$(DEL_FILE) moc_predefs.h
@@ -703,7 +733,7 @@ compiler_yacc_impl_make_all:
 compiler_yacc_impl_clean:
 compiler_lex_make_all:
 compiler_lex_clean:
-compiler_clean: compiler_moc_predefs_clean compiler_moc_header_clean 
+compiler_clean: compiler_rcc_clean compiler_moc_predefs_clean compiler_moc_header_clean 
 
 ####### Compile
 
@@ -805,6 +835,9 @@ rightside.o: QT_files/rightside.cpp QT_files/headers/rightside.h \
 
 show.o: QT_files/show.cpp 
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o show.o QT_files/show.cpp
+
+qrc_risorse.o: qrc_risorse.cpp 
+	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o qrc_risorse.o qrc_risorse.cpp
 
 moc_aggiungidialog.o: moc_aggiungidialog.cpp 
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o moc_aggiungidialog.o moc_aggiungidialog.cpp

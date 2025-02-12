@@ -31,10 +31,10 @@ private:
     QHBoxLayout *imageDescLayout;
     QLabel *imageLabel;
     QLabel *descriptionLabel;
+    QPushButton *preferitiButton;
+    QHBoxLayout *preferitiLayout;
     leftside *left;
-    void eliminaItem();
     void inviaDatiAggiunti(const QString &tipo, const QVariantMap &dati);
-
 public:
     rightside(leftside *left, QWidget *parent = nullptr);
 
@@ -45,10 +45,9 @@ public:
     void aggiungere();
 
     signals:
-        void itemPointed(const QString& itemName);
-        void eliminazione(const QString& nomeElemento);
+		void itemPointed(const QString& itemName);
         void oggettoAggiunto(const QString &tipo, const QVariantMap &dati);
-
+        void preferitoCambiato(bool);
 };
 
 #endif

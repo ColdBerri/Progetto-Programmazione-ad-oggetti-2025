@@ -26,19 +26,19 @@ leftside::leftside(QWidget *parent) : QWidget(parent){
     toolBar = new QToolBar(this);
     salvaAzione = new QAction("Salva", this);
     importa = new QAction("Importa", this);
-
+    bottonePreferiti = new QPushButton("PREFERITI");
     toolBar->addAction(salvaAzione);
     toolBar->addAction(importa);
-
     bottoneArte->setCheckable(true);
     bottoenOrologi->setCheckable(true);
     bottoneGioielli->setCheckable(true);
-
+    bottonePreferiti->setCheckable(true);
     left->addWidget(toolBar);
     left->addWidget(ricerca);
     left->addWidget(bottoneArte);
     left->addWidget(bottoenOrologi);
     left->addWidget(bottoneGioielli);
+    left->addWidget(bottonePreferiti);
     left->addWidget(listaItems);
 
     //connect elemento cliccato con rightside
@@ -68,6 +68,8 @@ leftside::leftside(QWidget *parent) : QWidget(parent){
     connect(bottoneArte, &QPushButton::clicked, this, [this]() { filtraPerCategoria("arte", bottoneArte); });
     connect(bottoenOrologi, &QPushButton::clicked, this, [this]() { filtraPerCategoria("orologi", bottoenOrologi); });
     connect(bottoneGioielli, &QPushButton::clicked, this, [this]() { filtraPerCategoria("gioielli", bottoneGioielli); });
+    connect(bottonePreferiti, &QPushButton::clicked, this, [this]() {filtraPerCategoria("preferiti", bottonePreferiti); });
+
     //conncet dei salva e importa
     connect(salvaAzione, &QAction::triggered, this, &leftside::salvaLista);
     connect(importa, &QAction::triggered, this, &leftside::importaLista);
@@ -207,7 +209,20 @@ void leftside::loadJson(const std::string& filePath) {
 void leftside::popolaLista(){
     listaItems->clear();
     for(biblioteca* obj : oggetti) {
-        listaItems->addItem(QString::fromStdString(obj->getNome()));
+        if(dynamic_cast<orologi*>(obj)) {
+            QListWidgetItem *icons = new QListWidgetItem(QString::fromStdString(obj->getNome()));
+            icons->setIcon(QIcon(":QT_files/assets/orlogiopolso.png"));
+            listaItems->addItem(icons);
+        }else if(dynamic_cast<arte*>(obj)){
+            QListWidgetItem *icons = new QListWidgetItem(QString::fromStdString(obj->getNome()));
+            icons->setIcon(QIcon(":QT_files/assets/tavolozza.png"));
+            listaItems->addItem(icons);
+        }else if(dynamic_cast<gioielli*>(obj)) {
+            QListWidgetItem *icons = new QListWidgetItem(QString::fromStdString(obj->getNome()));
+            icons->setIcon(QIcon(":QT_files/assets/diamante.png"));
+            listaItems->addItem(icons);
+        }
+        listaItems->setIconSize(QSize(24, 24));
     }
 }
 
@@ -237,6 +252,7 @@ void leftside::filtraPerCategoria(const QString &categoria, QPushButton *bottone
         bottoneArte->setChecked(bottoneSelezionato == bottoneArte);
         bottoenOrologi->setChecked(bottoneSelezionato == bottoenOrologi);
         bottoneGioielli->setChecked(bottoneSelezionato == bottoneGioielli);
+        bottonePreferiti->setChecked(bottoneSelezionato == bottonePreferiti);
     }
     listaItems->clear();
     for (biblioteca* obj : oggetti) {
@@ -248,9 +264,37 @@ void leftside::filtraPerCategoria(const QString &categoria, QPushButton *bottone
         } else if (dynamic_cast<gioielli*>(obj)) {
             tipo = "gioielli";
         }
-        if (filtroAttivo.isEmpty() || QString::fromStdString(tipo) == filtroAttivo) {
-            listaItems->addItem(QString::fromStdString(obj->getNome()));
+        bool flag = obj->getPreferiti();
+        if(filtroAttivo == QString::fromStdString("preferiti") && flag==true) {
+            if(dynamic_cast<arte*>(obj)) {
+                QListWidgetItem *icons = new QListWidgetItem(QString::fromStdString(obj->getNome()));
+                icons->setIcon(QIcon(":QT_files/assets/tavolozza.png"));
+                listaItems->addItem(icons);
+            }else if(dynamic_cast<orologi*>(obj)) {
+                QListWidgetItem *icons = new QListWidgetItem(QString::fromStdString(obj->getNome()));
+                icons->setIcon(QIcon(":QT_files/assets/orlogiopolso.png"));
+                listaItems->addItem(icons);
+            }else if(dynamic_cast<gioielli*>(obj)) {
+                QListWidgetItem *icons = new QListWidgetItem(QString::fromStdString(obj->getNome()));
+                icons->setIcon(QIcon(":QT_files/assets/diamante.png"));
+                listaItems->addItem(icons);
+            }
         }
+        else if (QString::fromStdString(tipo) == filtroAttivo) {
+            if(dynamic_cast<arte*>(obj)) {
+                QListWidgetItem *icons = new QListWidgetItem(QString::fromStdString(obj->getNome()));
+                icons->setIcon(QIcon(":QT_files/assets/tavolozza.png"));
+                listaItems->addItem(icons);
+            }else if(dynamic_cast<orologi*>(obj)) {
+                QListWidgetItem *icons = new QListWidgetItem(QString::fromStdString(obj->getNome()));
+                icons->setIcon(QIcon(":QT_files/assets/orlogiopolso.png"));
+                listaItems->addItem(icons);
+            }else if(dynamic_cast<gioielli*>(obj)) {
+                QListWidgetItem *icons = new QListWidgetItem(QString::fromStdString(obj->getNome()));
+                icons->setIcon(QIcon(":QT_files/assets/diamante.png"));
+                listaItems->addItem(icons);
+            }
+        }else if(filtroAttivo.isEmpty()) popolaLista();
     }
 }
 
@@ -263,17 +307,22 @@ void leftside::salvaLista() {
     bottoneArte->setChecked(false);
     bottoenOrologi->setChecked(false);
     bottoneGioielli->setChecked(false);
-  	QMessageBox::StandardButton risposta;
-    risposta = QMessageBox::question(this, "Conferma Salvataggio",
+    if (jsonFilePath != nullptr) {
+		QMessageBox::StandardButton risposta;
+    	risposta = QMessageBox::question(this, "Conferma Salvataggio",
                                      "Sei sicuro di voler salvare le modifiche sul file corrente?",
                                      QMessageBox::Yes | QMessageBox::No);
-
-	if(risposta == QMessageBox::Yes) {
-   	    popolaLista();
-        bool salvataggio = saveToJson();
-    if (salvataggio) QMessageBox::information(this, "Salvataggio", "Lista salvata correttamente!");
-	}else return;
-
+		if(risposta == QMessageBox::Yes) {
+   	    	popolaLista();
+        	bool salvataggio = saveToJson();
+    	if (salvataggio) QMessageBox::information(this, "Salvataggio", "Lista salvata correttamente!");
+		}else return;
+    }
+    else{
+		popolaLista();
+		bool salvataggio = saveToJson();
+    	if (salvataggio) QMessageBox::information(this, "Salvataggio", "Lista salvata correttamente!");
+    }
 }
 
 //importazione del file json
@@ -313,7 +362,8 @@ void leftside::rimuoviItem(const QString& itemName) {
 
     if (risposta == QMessageBox::Yes) {
         if (it != oggetti.end()) {
-            delete *it;
+
+          	delete *it;
             oggetti.erase(it);
             popolaLista();
         }
@@ -398,7 +448,9 @@ void leftside::costruisciOggetto(const QString &tipo, const QVariantMap &dati) {
         );
         if(orol) {
             oggetti.push_back(orol);
-            popolaLista();}
+            popolaLista();
+        }
     }
 }
+
 

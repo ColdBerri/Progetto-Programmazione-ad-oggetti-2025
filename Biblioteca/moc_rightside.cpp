@@ -22,8 +22,8 @@ QT_BEGIN_MOC_NAMESPACE
 QT_WARNING_PUSH
 QT_WARNING_DISABLE_DEPRECATED
 struct qt_meta_stringdata_rightside_t {
-    QByteArrayData data[15];
-    char stringdata0[160];
+    QByteArrayData data[14];
+    char stringdata0[152];
 };
 #define QT_MOC_LITERAL(idx, ofs, len) \
     Q_STATIC_BYTE_ARRAY_DATA_HEADER_INITIALIZER_WITH_OFFSET(len, \
@@ -36,24 +36,22 @@ QT_MOC_LITERAL(0, 0, 9), // "rightside"
 QT_MOC_LITERAL(1, 10, 11), // "itemPointed"
 QT_MOC_LITERAL(2, 22, 0), // ""
 QT_MOC_LITERAL(3, 23, 8), // "itemName"
-QT_MOC_LITERAL(4, 32, 12), // "eliminazione"
-QT_MOC_LITERAL(5, 45, 12), // "nomeElemento"
-QT_MOC_LITERAL(6, 58, 15), // "oggettoAggiunto"
-QT_MOC_LITERAL(7, 74, 4), // "tipo"
-QT_MOC_LITERAL(8, 79, 4), // "dati"
-QT_MOC_LITERAL(9, 84, 10), // "updateInfo"
-QT_MOC_LITERAL(10, 95, 11), // "biblioteca*"
-QT_MOC_LITERAL(11, 107, 12), // "selectedItem"
-QT_MOC_LITERAL(12, 120, 17), // "svuotaDescrizione"
-QT_MOC_LITERAL(13, 138, 10), // "modificare"
-QT_MOC_LITERAL(14, 149, 10) // "aggiungere"
+QT_MOC_LITERAL(4, 32, 15), // "oggettoAggiunto"
+QT_MOC_LITERAL(5, 48, 4), // "tipo"
+QT_MOC_LITERAL(6, 53, 4), // "dati"
+QT_MOC_LITERAL(7, 58, 17), // "preferitoCambiato"
+QT_MOC_LITERAL(8, 76, 10), // "updateInfo"
+QT_MOC_LITERAL(9, 87, 11), // "biblioteca*"
+QT_MOC_LITERAL(10, 99, 12), // "selectedItem"
+QT_MOC_LITERAL(11, 112, 17), // "svuotaDescrizione"
+QT_MOC_LITERAL(12, 130, 10), // "modificare"
+QT_MOC_LITERAL(13, 141, 10) // "aggiungere"
 
     },
     "rightside\0itemPointed\0\0itemName\0"
-    "eliminazione\0nomeElemento\0oggettoAggiunto\0"
-    "tipo\0dati\0updateInfo\0biblioteca*\0"
-    "selectedItem\0svuotaDescrizione\0"
-    "modificare\0aggiungere"
+    "oggettoAggiunto\0tipo\0dati\0preferitoCambiato\0"
+    "updateInfo\0biblioteca*\0selectedItem\0"
+    "svuotaDescrizione\0modificare\0aggiungere"
 };
 #undef QT_MOC_LITERAL
 
@@ -72,22 +70,22 @@ static const uint qt_meta_data_rightside[] = {
 
  // signals: name, argc, parameters, tag, flags
        1,    1,   49,    2, 0x06 /* Public */,
-       4,    1,   52,    2, 0x06 /* Public */,
-       6,    2,   55,    2, 0x06 /* Public */,
+       4,    2,   52,    2, 0x06 /* Public */,
+       7,    1,   57,    2, 0x06 /* Public */,
 
  // slots: name, argc, parameters, tag, flags
-       9,    1,   60,    2, 0x0a /* Public */,
-      12,    0,   63,    2, 0x0a /* Public */,
-      13,    0,   64,    2, 0x0a /* Public */,
-      14,    0,   65,    2, 0x0a /* Public */,
+       8,    1,   60,    2, 0x0a /* Public */,
+      11,    0,   63,    2, 0x0a /* Public */,
+      12,    0,   64,    2, 0x0a /* Public */,
+      13,    0,   65,    2, 0x0a /* Public */,
 
  // signals: parameters
     QMetaType::Void, QMetaType::QString,    3,
-    QMetaType::Void, QMetaType::QString,    5,
-    QMetaType::Void, QMetaType::QString, QMetaType::QVariantMap,    7,    8,
+    QMetaType::Void, QMetaType::QString, QMetaType::QVariantMap,    5,    6,
+    QMetaType::Void, QMetaType::Bool,    2,
 
  // slots: parameters
-    QMetaType::Void, 0x80000000 | 10,   11,
+    QMetaType::Void, 0x80000000 | 9,   10,
     QMetaType::Void,
     QMetaType::Void,
     QMetaType::Void,
@@ -102,8 +100,8 @@ void rightside::qt_static_metacall(QObject *_o, QMetaObject::Call _c, int _id, v
         (void)_t;
         switch (_id) {
         case 0: _t->itemPointed((*reinterpret_cast< const QString(*)>(_a[1]))); break;
-        case 1: _t->eliminazione((*reinterpret_cast< const QString(*)>(_a[1]))); break;
-        case 2: _t->oggettoAggiunto((*reinterpret_cast< const QString(*)>(_a[1])),(*reinterpret_cast< const QVariantMap(*)>(_a[2]))); break;
+        case 1: _t->oggettoAggiunto((*reinterpret_cast< const QString(*)>(_a[1])),(*reinterpret_cast< const QVariantMap(*)>(_a[2]))); break;
+        case 2: _t->preferitoCambiato((*reinterpret_cast< bool(*)>(_a[1]))); break;
         case 3: _t->updateInfo((*reinterpret_cast< biblioteca*(*)>(_a[1]))); break;
         case 4: _t->svuotaDescrizione(); break;
         case 5: _t->modificare(); break;
@@ -120,15 +118,15 @@ void rightside::qt_static_metacall(QObject *_o, QMetaObject::Call _c, int _id, v
             }
         }
         {
-            using _t = void (rightside::*)(const QString & );
-            if (*reinterpret_cast<_t *>(_a[1]) == static_cast<_t>(&rightside::eliminazione)) {
+            using _t = void (rightside::*)(const QString & , const QVariantMap & );
+            if (*reinterpret_cast<_t *>(_a[1]) == static_cast<_t>(&rightside::oggettoAggiunto)) {
                 *result = 1;
                 return;
             }
         }
         {
-            using _t = void (rightside::*)(const QString & , const QVariantMap & );
-            if (*reinterpret_cast<_t *>(_a[1]) == static_cast<_t>(&rightside::oggettoAggiunto)) {
+            using _t = void (rightside::*)(bool );
+            if (*reinterpret_cast<_t *>(_a[1]) == static_cast<_t>(&rightside::preferitoCambiato)) {
                 *result = 2;
                 return;
             }
@@ -184,16 +182,16 @@ void rightside::itemPointed(const QString & _t1)
 }
 
 // SIGNAL 1
-void rightside::eliminazione(const QString & _t1)
+void rightside::oggettoAggiunto(const QString & _t1, const QVariantMap & _t2)
 {
-    void *_a[] = { nullptr, const_cast<void*>(reinterpret_cast<const void*>(std::addressof(_t1))) };
+    void *_a[] = { nullptr, const_cast<void*>(reinterpret_cast<const void*>(std::addressof(_t1))), const_cast<void*>(reinterpret_cast<const void*>(std::addressof(_t2))) };
     QMetaObject::activate(this, &staticMetaObject, 1, _a);
 }
 
 // SIGNAL 2
-void rightside::oggettoAggiunto(const QString & _t1, const QVariantMap & _t2)
+void rightside::preferitoCambiato(bool _t1)
 {
-    void *_a[] = { nullptr, const_cast<void*>(reinterpret_cast<const void*>(std::addressof(_t1))), const_cast<void*>(reinterpret_cast<const void*>(std::addressof(_t2))) };
+    void *_a[] = { nullptr, const_cast<void*>(reinterpret_cast<const void*>(std::addressof(_t1))) };
     QMetaObject::activate(this, &staticMetaObject, 2, _a);
 }
 QT_WARNING_POP

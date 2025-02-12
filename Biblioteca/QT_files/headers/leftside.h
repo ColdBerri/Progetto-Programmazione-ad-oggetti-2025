@@ -27,6 +27,7 @@ class leftside : public QWidget {
     Q_OBJECT
 
     private:
+        std::vector<biblioteca*> preferitiList;
         QVBoxLayout *left;
         QPushButton *bottoneArte;
         QPushButton *bottoneGioielli;
@@ -39,6 +40,7 @@ class leftside : public QWidget {
         QAction *salvaAzione;
         QAction* importa;
         QString *jsonFilePath;
+        QPushButton *bottonePreferiti;
         void popolaLista();
         void loadJson(const std::string& filePath);
         void importaLista();
@@ -55,7 +57,6 @@ class leftside : public QWidget {
         void rimuoviItem(const QString& itemName);
         void aggiornaItem(biblioteca* );
         void costruisciOggetto(const QString &tipo, const QVariantMap &dati);
-
     signals :
         void itemSelected(biblioteca *selectedItem);
         void elementoDeselezionato();

@@ -245,7 +245,11 @@ void AggiungiDialog::salvaNuovo() {
             materiali.append(mList->item(i)->text());
         }
         dati["materiali"] = materiali;
-
+        if (materiali.empty()) {
+            QMessageBox::warning(this, "Errore di Salvataggio",
+            "Non puoi salvare un gioiello senza almeno un materiale!");
+            return;
+        }
     } else if (bottoneOrologi->isChecked()) {
         dati["tipo"] = "Orologi";
         dati["modello"] = modelloNew->text();
