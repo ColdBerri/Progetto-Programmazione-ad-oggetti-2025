@@ -237,7 +237,19 @@ void leftside::filtraListaRicerca() {
         QString nomeOggetto = QString::fromStdString(obj->getNome()).toLower();
 
         if (nomeOggetto.contains(filtro)) {
-            listaItems->addItem(QString::fromStdString(obj->getNome()));
+            if(dynamic_cast<arte*>(obj)) {
+                QListWidgetItem *icons = new QListWidgetItem(QString::fromStdString(obj->getNome()));
+                icons->setIcon(QIcon(":QT_files/assets/tavolozza.png"));
+                listaItems->addItem(icons);
+            }else if(dynamic_cast<orologi*>(obj)) {
+                QListWidgetItem *icons = new QListWidgetItem(QString::fromStdString(obj->getNome()));
+                icons->setIcon(QIcon(":QT_files/assets/orlogiopolso.png"));
+                listaItems->addItem(icons);
+            }else if(dynamic_cast<gioielli*>(obj)) {
+                QListWidgetItem *icons = new QListWidgetItem(QString::fromStdString(obj->getNome()));
+                icons->setIcon(QIcon(":QT_files/assets/diamante.png"));
+                listaItems->addItem(icons);
+            }
         }
     }
 }
@@ -375,7 +387,7 @@ void leftside::rimuoviItem(const QString& itemName) {
 
 
 void leftside::aggiornaItem(biblioteca *item) {
-    int j=0;
+    long unsigned int j=0;
     while(oggetti[j]->getNome() != item->getNome()) {
         ++j;
     }
