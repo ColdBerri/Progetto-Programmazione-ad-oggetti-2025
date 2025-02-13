@@ -265,7 +265,7 @@ void leftside::filtraPerCategoria(const QString &categoria, QPushButton *bottone
             tipo = "gioielli";
         }
         bool flag = obj->getPreferiti();
-        if(filtroAttivo == QString::fromStdString("preferiti") && flag==true) {
+        if(filtroAttivo.isEmpty() || (filtroAttivo == QString::fromStdString("preferiti") && flag==true)) {
             if(dynamic_cast<arte*>(obj)) {
                 QListWidgetItem *icons = new QListWidgetItem(QString::fromStdString(obj->getNome()));
                 icons->setIcon(QIcon(":QT_files/assets/tavolozza.png"));
@@ -280,7 +280,7 @@ void leftside::filtraPerCategoria(const QString &categoria, QPushButton *bottone
                 listaItems->addItem(icons);
             }
         }
-        else if (QString::fromStdString(tipo) == filtroAttivo) {
+        else if (filtroAttivo.isEmpty() || QString::fromStdString(tipo) == filtroAttivo) {
             if(dynamic_cast<arte*>(obj)) {
                 QListWidgetItem *icons = new QListWidgetItem(QString::fromStdString(obj->getNome()));
                 icons->setIcon(QIcon(":QT_files/assets/tavolozza.png"));
@@ -294,7 +294,7 @@ void leftside::filtraPerCategoria(const QString &categoria, QPushButton *bottone
                 icons->setIcon(QIcon(":QT_files/assets/diamante.png"));
                 listaItems->addItem(icons);
             }
-        }else if(filtroAttivo.isEmpty()) popolaLista();
+        }
     }
 }
 
