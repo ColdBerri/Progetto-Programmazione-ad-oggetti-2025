@@ -1,8 +1,7 @@
 #include "headers/gioielli.h"
 
-gioielli::gioielli(std::string n, std::string d, std::string a, std::string dc, 
-double vt, bool p,
-std::list<std::string> ma, std::string ora) :
+gioielli::gioielli(std::string n, std::string d, std::string a, int dc,
+double vt, bool p, std::list<std::string> ma, std::string ora) :
 biblioteca(n, d, a, dc, vt, p), materiali(ma), orafo(ora) {}
 
 gioielli::~gioielli(){}

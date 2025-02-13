@@ -146,7 +146,7 @@ void leftside::loadJson(const std::string& filePath) {
             std::string nome = jsonObj["nome"].get<std::string>();
             std::string descrizione = jsonObj["descrizione"].get<std::string>();
             std::string autentica = jsonObj["autentica"].get<std::string>();
-            std::string data = jsonObj["data creazione"].get<std::string>();
+            int data = jsonObj["data creazione"].get<int>();
             double v = jsonObj["valore"].get<double>();
             bool b = jsonObj["preferiti"].get<bool>();
             std::list<std::string> ma;
@@ -166,7 +166,7 @@ void leftside::loadJson(const std::string& filePath) {
             std::string nome = jsonObj["nome"].get<std::string>();
             std::string descrizione = jsonObj["descrizione"].get<std::string>();
             std::string autentica = jsonObj["autentica"].get<std::string>();
-            std::string data = jsonObj["data creazione"].get<std::string>();
+            int data = jsonObj["data creazione"].get<int>();
             double v = jsonObj["valore"].get<double>();
             bool b = jsonObj["preferiti"].get<bool>();
             std::string modello = jsonObj["modello"].get<std::string>();
@@ -180,7 +180,7 @@ void leftside::loadJson(const std::string& filePath) {
             std::string nome = jsonObj["nome"].get<std::string>();
             std::string descrizione = jsonObj["descrizione"].get<std::string>();
             std::string autentica = jsonObj["autentica"].get<std::string>();
-            std::string data = jsonObj["data creazione"].get<std::string>();
+            int data = jsonObj["data creazione"].get<int>();
             double v = jsonObj["valore"].get<double>();
             bool b = jsonObj["preferiti"].get<bool>();
             std::string artista = jsonObj["artista"].get<std::string>();
@@ -404,31 +404,42 @@ void leftside::deselezionaElemento() {
 
 void leftside::costruisciOggetto(const QString &tipo, const QVariantMap &dati) {
     if (tipo == "Arte") {
+        QStringList esposizioni_qstringlist = dati["esposizioni"].toStringList();
+        std::list<std::string> esposizioni;
+        for (const QString &esposizione : esposizioni_qstringlist) {
+            esposizioni.push_back(esposizione.toStdString());
+        }
         arte *art = new arte(
             dati["nome"].toString().toStdString(),
             dati["descrizione"].toString().toStdString(),
             dati["autentica"].toString().toStdString(),
-            dati["data creazione"].toString().toStdString(),
+            dati["data creazione"].toInt(),
             dati["valore"].toDouble(),
             dati["preferiti"].toBool(),
             dati["artista"].toString().toStdString(),
             dati["tipo opera"].toString().toStdString(),
             dati["artista vivo"].toBool(),
-            {dati["esposizioni"].toString().toStdString()});
+            esposizioni);
             if(art) {
                 oggetti.push_back(art);
                 popolaLista();
             }
     } else if (tipo == "Gioielli") {
+
+        QStringList materiali_qstringlist = dati["materiali"].toStringList();
+        std::list<std::string> materiali;
+        for (const QString &materiale : materiali_qstringlist) {
+            materiali.push_back(materiale.toStdString());
+        }
         gioielli *gio = new gioielli(
             dati["nome"].toString().toStdString(),
-        dati["descrizione"].toString().toStdString(),
-        dati["autentica"].toString().toStdString(),
-        dati["data creazione"].toString().toStdString(),
-        dati["valore"].toDouble(),
-        dati["preferiti"].toBool(),
-        {dati["materiali"].toString().toStdString()},  // Se è una lista, converti ogni elemento
-        dati["orafo"].toString().toStdString());
+            dati["descrizione"].toString().toStdString(),
+            dati["autentica"].toString().toStdString(),
+            dati["data creazione"].toInt(),
+            dati["valore"].toDouble(),
+            dati["preferiti"].toBool(),
+            materiali,
+            dati["orafo"].toString().toStdString());
         if(gio) {
             oggetti.push_back(gio);
             popolaLista();
@@ -438,14 +449,13 @@ void leftside::costruisciOggetto(const QString &tipo, const QVariantMap &dati) {
             dati["nome"].toString().toStdString(),
             dati["descrizione"].toString().toStdString(),
             dati["autentica"].toString().toStdString(),
-            dati["data creazione"].toString().toStdString(),
+            dati["data creazione"].toInt(),
             dati["valore"].toDouble(),
             dati["preferiti"].toBool(),
             dati["modello"].toString().toStdString(),
             dati["marca"].toString().toStdString(),
             dati["esemplari"].toInt(),
-            dati["meccanismo"].toString().toStdString()
-        );
+            dati["meccanismo"].toString().toStdString());
         if(orol) {
             oggetti.push_back(orol);
             popolaLista();

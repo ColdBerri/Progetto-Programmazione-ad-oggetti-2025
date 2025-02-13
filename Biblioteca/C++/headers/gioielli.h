@@ -12,7 +12,7 @@ class gioielli : public biblioteca {
         std::string orafo;
     public:
         //costruttore e distruttore
-        gioielli(std::string n, std::string d, std::string a, std::string dc, 
+        gioielli(std::string n, std::string d, std::string a, int dc,
         double vt, bool p, std::list<std::string> ma, std::string ora);
         ~gioielli();
 

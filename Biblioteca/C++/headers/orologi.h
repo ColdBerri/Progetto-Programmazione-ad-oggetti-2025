@@ -13,7 +13,7 @@ class orologi : public biblioteca{
         int nEsemplari; //se non è numerato non appare
         std::string meccanismo;
     public:
-        orologi(std::string n, std::string d, std::string a, std::string dc, 
+        orologi(std::string n, std::string d, std::string a, int dc,
         double v, bool p, std::string mod,
         std::string ma, int ne, std::string tm);
         ~orologi();

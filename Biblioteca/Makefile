@@ -63,8 +63,7 @@ SOURCES       = main.cpp \
 		QT_files/leftside.cpp \
 		QT_files/mainwindow.cpp \
 		QT_files/modificadialog.cpp \
-		QT_files/rightside.cpp \
-		QT_files/show.cpp qrc_risorse.cpp \
+		QT_files/rightside.cpp qrc_risorse.cpp \
 		moc_aggiungidialog.cpp \
 		moc_leftside.cpp \
 		moc_mainwindow.cpp \
@@ -82,7 +81,6 @@ OBJECTS       = main.o \
 		mainwindow.o \
 		modificadialog.o \
 		rightside.o \
-		show.o \
 		qrc_risorse.o \
 		moc_aggiungidialog.o \
 		moc_leftside.o \
@@ -254,8 +252,7 @@ DIST          = /usr/lib/qt/mkspecs/features/spec_pre.prf \
 		QT_files/headers/libs.h \
 		QT_files/headers/mainwindow.h \
 		QT_files/headers/modificadialog.h \
-		QT_files/headers/rightside.h \
-		QT_files/headers/show.h main.cpp \
+		QT_files/headers/rightside.h main.cpp \
 		C++/arte.cpp \
 		C++/biblioteca.cpp \
 		C++/descriptionBuildvisitor.cpp \
@@ -266,8 +263,7 @@ DIST          = /usr/lib/qt/mkspecs/features/spec_pre.prf \
 		QT_files/leftside.cpp \
 		QT_files/mainwindow.cpp \
 		QT_files/modificadialog.cpp \
-		QT_files/rightside.cpp \
-		QT_files/show.cpp
+		QT_files/rightside.cpp
 QMAKE_TARGET  = Biblioteca
 DESTDIR       = 
 TARGET        = Biblioteca
@@ -604,8 +600,8 @@ distdir: FORCE
 	$(COPY_FILE) --parents $(DIST) $(DISTDIR)/
 	$(COPY_FILE) --parents risorse.qrc risorse.qrc $(DISTDIR)/
 	$(COPY_FILE) --parents /usr/lib/qt/mkspecs/features/data/dummy.cpp $(DISTDIR)/
-	$(COPY_FILE) --parents C++/headers/arte.h C++/headers/biblioteca.h C++/headers/bibliotecaVisitorInterface.h C++/headers/descriptionBuildVisitor.h C++/headers/gioielli.h C++/headers/jsonVisitorSave.h C++/headers/orologi.h C++/headers/pietre.h QT_files/headers/aggiungidialog.h QT_files/headers/leftside.h QT_files/headers/libs.h QT_files/headers/mainwindow.h QT_files/headers/modificadialog.h QT_files/headers/rightside.h QT_files/headers/show.h $(DISTDIR)/
-	$(COPY_FILE) --parents main.cpp C++/arte.cpp C++/biblioteca.cpp C++/descriptionBuildvisitor.cpp C++/gioielli.cpp C++/jsonVisitorSave.cpp C++/orologi.cpp QT_files/aggiungidialog.cpp QT_files/leftside.cpp QT_files/mainwindow.cpp QT_files/modificadialog.cpp QT_files/rightside.cpp QT_files/show.cpp $(DISTDIR)/
+	$(COPY_FILE) --parents C++/headers/arte.h C++/headers/biblioteca.h C++/headers/bibliotecaVisitorInterface.h C++/headers/descriptionBuildVisitor.h C++/headers/gioielli.h C++/headers/jsonVisitorSave.h C++/headers/orologi.h C++/headers/pietre.h QT_files/headers/aggiungidialog.h QT_files/headers/leftside.h QT_files/headers/libs.h QT_files/headers/mainwindow.h QT_files/headers/modificadialog.h QT_files/headers/rightside.h $(DISTDIR)/
+	$(COPY_FILE) --parents main.cpp C++/arte.cpp C++/biblioteca.cpp C++/descriptionBuildvisitor.cpp C++/gioielli.cpp C++/jsonVisitorSave.cpp C++/orologi.cpp QT_files/aggiungidialog.cpp QT_files/leftside.cpp QT_files/mainwindow.cpp QT_files/modificadialog.cpp QT_files/rightside.cpp $(DISTDIR)/
 
 
 clean: compiler_clean 
@@ -832,9 +828,6 @@ rightside.o: QT_files/rightside.cpp QT_files/headers/rightside.h \
 		QT_files/headers/modificadialog.h \
 		QT_files/headers/aggiungidialog.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o rightside.o QT_files/rightside.cpp
-
-show.o: QT_files/show.cpp 
-	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o show.o QT_files/show.cpp
 
 qrc_risorse.o: qrc_risorse.cpp 
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o qrc_risorse.o qrc_risorse.cpp

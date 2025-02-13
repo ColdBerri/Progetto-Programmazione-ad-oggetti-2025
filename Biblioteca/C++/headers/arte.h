@@ -14,7 +14,7 @@ class arte : public biblioteca{
         std::list<std::string> esposizione;
     public:
         //costruttore e distruttore
-        arte(std::string n, std::string d, std::string a, std::string dc, double v, bool p,
+        arte(std::string n, std::string d, std::string a, int dc, double v, bool p,
         std::string artista, std::string tipoOpera, bool artistaVivo, std::list<std::string> esposizione);
         ~arte();
 

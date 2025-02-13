@@ -1,7 +1,7 @@
 #include "headers/arte.h"
 
 //costruttore e edistruttore
-arte::arte(std::string n, std::string d, std::string a, std::string dc, double v,
+arte::arte(std::string n, std::string d, std::string a, int dc, double v,
 bool p, std::string ar, std::string to,
 bool viv, std::list<std::string> esp) : biblioteca(n, d, a, dc, v, p), artista(ar), tipoOpera(to),
 artistaVivo(viv), esposizione(esp) {}

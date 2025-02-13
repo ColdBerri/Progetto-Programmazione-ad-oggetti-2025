@@ -13,7 +13,6 @@ class bibliotecaVisitorInterface {
         virtual void visitOrologi(orologi& orologio)=0;
         virtual void visitArte(arte& opera)=0;
         virtual void visitGioielli(gioielli& gioiello)=0;
-
 };
 
 #endif

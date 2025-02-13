@@ -25,7 +25,7 @@ ModificaDialog::ModificaDialog(biblioteca *item, QWidget *parent) :
     descrizioneEdit = new QLineEdit(QString::fromStdString(item->getDescrizione()), this);
     valoreEdit = new QLineEdit(QString::number(item->getValAtt()), this);
     autenticaEdit = new QLineEdit(QString::fromStdString(item->getAutentica()), this);
-    dataEdit = new QLineEdit(QString::fromStdString(item->getDataCreazione()), this);
+    dataEdit = new QLineEdit(QString::number(item->getDataCreazione()), this);
 
     formLayout->addRow("Nome:", nomeEdit);
     formLayout->addRow("Descrizione:", descrizioneEdit);
@@ -156,8 +156,12 @@ void ModificaDialog::salvaModifiche() {
     item->setDescrizione(descrizioneEdit->text().toStdString());
     item->setVal(valoreEdit->text().toDouble());
     item->setAutentica(autenticaEdit->text().toStdString());
-    item->setData(dataEdit->text().toStdString());
-
+    item->setData(dataEdit->text().toInt());
+    if (item->getNome().empty()) {
+        QMessageBox::warning(this, "Errore di Salvataggio",
+                             "NON PUOI SALVARE UN OGGETTO SENZA NOME!");
+        return;
+    }
     if (auto a = dynamic_cast<arte*>(item)) {
         a->setArtista(artistaEdit->text().toStdString());
         a->setVivo(bottoneSi->isChecked());

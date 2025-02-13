@@ -186,6 +186,11 @@ void AggiungiDialog::mostraOrologi() {
     dataNew = new QLineEdit(this);
 
     formLayout->addRow("Nome:", nomeNew);
+    /*if (nomeNew->text().isEmpty()) {
+        QMessageBox::warning(this, "Errore di Salvataggio",
+                     "NON PUOI SALVARE UN OGGETTO SENZA NOME!");
+        return;
+    }*/
     formLayout->addRow("Descrizione:", descrizioneNew);
     formLayout->addRow("Valore (€):", valoreNew);
     formLayout->addRow("Autentica:", autenticaNew);
@@ -218,6 +223,12 @@ void AggiungiDialog::pulisciForm() {
 
 void AggiungiDialog::salvaNuovo() {
     QVariantMap dati;
+    if (nomeNew->text().isEmpty()) {
+        QMessageBox::warning(this, "Errore di Salvataggio",
+                     "NON PUOI SALVARE UN OGGETTO SENZA NOME!");
+        return;
+    }
+
     dati["nome"] = nomeNew->text();
     dati["descrizione"] = descrizioneNew->text();
     dati["valore"] = valoreNew->text();

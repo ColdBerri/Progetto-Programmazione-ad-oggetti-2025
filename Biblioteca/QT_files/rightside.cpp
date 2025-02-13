@@ -7,12 +7,9 @@ rightside::rightside (leftside* left, QWidget *parent) :
 QWidget(parent), left(left) {
     right = new QVBoxLayout(this);
 
-    modifica = new QPushButton("Modifica item");
-    modifica->setFixedSize(250,30);
-    elimina = new QPushButton("Elimina item");
-    elimina->setFixedSize(250,30);
-    aggiungi = new QPushButton("Aggiungi item");
-    aggiungi->setFixedSize(250,30);
+    modifica = new QPushButton("MODIFICA ITEM");
+    elimina = new QPushButton("ELIMINA ITEM");
+    aggiungi = new QPushButton("AGGIUNGI ITEM");
     infobox = new QVBoxLayout();
     imageDescLayout = new QHBoxLayout();
     imageLabel = new QLabel(this);

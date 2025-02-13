@@ -1,6 +1,6 @@
 #include "headers/orologi.h"
 
-orologi::orologi(std::string n, std::string d, std::string a, std::string dc, 
+orologi::orologi(std::string n, std::string d, std::string a, int dc,
 double v, bool p, std::string mod,
 std::string ma, int ne, std::string tm) : biblioteca(n, d, a, dc, v, p), modello(mod),
 marca(ma), nEsemplari(ne), meccanismo(tm) {}
