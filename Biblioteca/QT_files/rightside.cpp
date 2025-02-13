@@ -43,6 +43,9 @@ QWidget(parent), left(left) {
     //connect per elimina
     connect(left, &leftside::elementoDeselezionato, this, [this]() {
         currentItem = nullptr;
+        preferitiButton->setChecked(false); // Evita stati incoerenti
+        preferitiButton->setIcon(QIcon(":/QT_files/assets/vuota.png"));
+        preferitiButton->setEnabled(false);
     });
     connect(elimina, &QPushButton::clicked, this, [this]() {
         if (currentItem) {
@@ -54,22 +57,18 @@ QWidget(parent), left(left) {
         }
     });
 
+
     connect(preferitiButton, &QPushButton::toggled, this, [this](bool checked) {
-    // Aggiorna l'attributo "preferiti" dell'oggetto corrente (se presente)
-    if (currentItem) {
-        currentItem->setPreferiti(checked);
-    }
-
-    // Aggiorna l'icona in base allo stato
-    if (checked) {
-        preferitiButton->setIcon(QIcon(":/QT_files/assets/piena.png"));
-    } else {
-        preferitiButton->setIcon(QIcon(":/QT_files/assets/vuota.png"));
-    }
-
-    // Se necessario, emetti il segnale per notificare il cambiamento
-    emit preferitoCambiato(checked);
-});
+        if(currentItem) {
+            currentItem->setPreferiti(checked);
+            if (checked) {
+                preferitiButton->setIcon(QIcon(":/QT_files/assets/piena.png"));
+            } else {
+                preferitiButton->setIcon(QIcon(":/QT_files/assets/vuota.png"));
+            }
+        emit preferitoCambiato(checked);
+        }
+    });
 
     //connect modifca e aggiungi
     connect(modifica, &QPushButton::clicked, this, &rightside::modificare);
