@@ -384,28 +384,39 @@ void leftside::rimuoviItem(const QString& itemName) {
         qDebug() << "Eliminazione annullata.";
     }
 }
+void leftside::checkName(biblioteca* item) {
+    QString baseName = QString::fromStdString(item->getNome());
+    QString nuovoNome = baseName;
+    int contatore = 0;
+    bool nomeEsistente = true;
 
+    while (nomeEsistente) {
+        nomeEsistente = false;
+        for (int i = 0; i < listaItems->count(); ++i) {
+            QListWidgetItem *listItem = listaItems->item(i);
+            if (listItem->text() == nuovoNome) {
+                nomeEsistente = true;
+                break;
+            }
+        }
+        if (nomeEsistente) {
+            contatore++;
+            nuovoNome = baseName + " " + QString::number(contatore);
+        }
+    }
+    item->setNome(nuovoNome.toStdString());
+}
 
 void leftside::aggiornaItem(biblioteca *item) {
-    long unsigned int j=0;
-    while(oggetti[j]->getNome() != item->getNome()) {
-        ++j;
-    }
-
-    for(long unsigned int i = 0; i < oggetti.size(); i++) {
-        if(oggetti[i]->getNome() == item->getNome() && i!=j) {
-            std::string nome = item->getNome() + " " + std::to_string(i+1);
-            item->setNome(nome);
-            break;
-        }
-        }
-        for (int i = 0; i < listaItems->count(); ++i) {
-            QListWidgetItem *list = listaItems->item(i);
-            list->setText(QString::fromStdString(item->getNome()));
+    checkName(item);
+    for (int i = 0; i < listaItems->count(); ++i) {
+        QListWidgetItem *list = listaItems->item(i);
+        list->setText(QString::fromStdString(item->getNome()));
         break;
-        }
+    }
     popolaLista();
 }
+
 
 //deselezione dell'elemento
 void leftside::deselezionaElemento() {
@@ -432,10 +443,12 @@ void leftside::costruisciOggetto(const QString &tipo, const QVariantMap &dati) {
             dati["tipo opera"].toString().toStdString(),
             dati["artista vivo"].toBool(),
             esposizioni);
-            if(art) {
-                oggetti.push_back(art);
-                popolaLista();
-            }
+
+        if(art) {
+            checkName(art);
+            oggetti.push_back(art);
+            popolaLista();
+        }
     } else if (tipo == "Gioielli") {
 
         QStringList materiali_qstringlist = dati["materiali"].toStringList();
@@ -453,6 +466,7 @@ void leftside::costruisciOggetto(const QString &tipo, const QVariantMap &dati) {
             materiali,
             dati["orafo"].toString().toStdString());
         if(gio) {
+            checkName(gio);
             oggetti.push_back(gio);
             popolaLista();
         }
@@ -468,6 +482,7 @@ void leftside::costruisciOggetto(const QString &tipo, const QVariantMap &dati) {
             dati["marca"].toString().toStdString(),
             dati["esemplari"].toInt(),
             dati["meccanismo"].toString().toStdString());
+        checkName(orol);
         if(orol) {
             oggetti.push_back(orol);
             popolaLista();

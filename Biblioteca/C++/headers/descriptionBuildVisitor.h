@@ -9,7 +9,7 @@ class descriptionBuildVisitor : public bibliotecaVisitorInterface {
 public:
     QString descrizioneBuild;
     explicit descriptionBuildVisitor(QString& desc) : descrizioneBuild(desc) {}
-
+    ~descriptionBuildVisitor()=default;
     void visitOrologi(orologi& oro) override;
     void visitArte(arte& art) override;
     void visitGioielli(gioielli& gio) override;

@@ -10,7 +10,7 @@
 class jsonVisitorSave : public bibliotecaVisitorInterface{
     public :
         QJsonArray arrayJ;
-
+        ~jsonVisitorSave()=default;
         void visitArte(arte& a) override;
         void visitGioielli(gioielli& g) override;
         void visitOrologi(orologi& o) override;

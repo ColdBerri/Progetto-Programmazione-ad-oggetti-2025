@@ -153,15 +153,11 @@ ModificaDialog::ModificaDialog(biblioteca *item, QWidget *parent) :
 void ModificaDialog::salvaModifiche() {
 
     item->setNome(nomeEdit->text().toStdString());
+
     item->setDescrizione(descrizioneEdit->text().toStdString());
     item->setVal(valoreEdit->text().toDouble());
     item->setAutentica(autenticaEdit->text().toStdString());
     item->setData(dataEdit->text().toInt());
-    if (item->getNome().empty()) {
-        QMessageBox::warning(this, "Errore di Salvataggio",
-                             "NON PUOI SALVARE UN OGGETTO SENZA NOME!");
-        return;
-    }
     if (auto a = dynamic_cast<arte*>(item)) {
         a->setArtista(artistaEdit->text().toStdString());
         a->setVivo(bottoneSi->isChecked());
@@ -174,9 +170,12 @@ void ModificaDialog::salvaModifiche() {
             }
         }
         if (esposizioniStd.empty()) {
-            esposizioniStd.push_back("Nessuna esposizione");
+            std::list<std::string> espoNulla = {""};
+            a->setEsposizione(espoNulla);
+        }else {
+            a->setEsposizione(esposizioniStd);
         }
-        a->setEsposizione(esposizioniStd);
+
 
         QString tipoOp = tipoOperaEdit->currentText();
         a->setTipoOpera(tipoOp.toStdString());
@@ -202,7 +201,6 @@ void ModificaDialog::salvaModifiche() {
         o->setEsemplari(esemplariEdit->text().toInt());
         QString mecca = meccanismoEdit->currentText();
         o->setMecc(mecca.toStdString());
-
     }
     if (item->getNome().empty()) {
         QMessageBox::warning(this, "Errore di Salvataggio",
@@ -220,10 +218,9 @@ void ModificaDialog::aggiungiAListaEsp() {
         for (int i = 0; i < eList->count(); ++i) {
             if (eList->item(i)->text().isEmpty()) {
                 delete eList->takeItem(i);
-                i--; // Decrementa l'indice perché la lista si riduce di uno
+                i--;
             }
         }
-        // Aggiunge la nuova esposizione solo se non è vuota
         eList->addItem(nuovaEsposizione);
         nuovaEsposizioneInput->clear();
     }else QMessageBox::information(this, "Esposizione Nulla","Stai cercando di inserire una stringa vuota!");

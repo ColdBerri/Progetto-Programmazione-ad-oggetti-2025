@@ -1,15 +1,9 @@
 #include "headers/descriptionBuildVisitor.h"
 #include <sstream>
 void descriptionBuildVisitor::visitArte(arte &art) {
-    std::string result;
-    std::list<std::string> lista = art.getEspo();
-    for (auto it = lista.begin(); it != lista.end(); it++) {
-        result += *it;
-        if (std::next(it) != lista.end()) {
-            result += ";";
-        }
-    }
-    QString desc = QString ("🎨 <b>Opera d'Arte</b>: %1<br>"
+    std::list<std::string>et = {""};
+    if (art.getEspo().empty() || art.getEspo() == et) {
+        QString desc = QString ("🎨 <b>Opera d'Arte</b>: %1<br>"
                            "🔹 <b>Descrizione</b>: %2<br>"
                            "✅ <b>Autenticità</b>: %3<br>"
                            "📆 <b>Data Creazione</b>: %4<br>"
@@ -26,8 +20,38 @@ void descriptionBuildVisitor::visitArte(arte &art) {
             .arg(QString::fromStdString(art.getArtista()))
             .arg(QString::fromStdString(art.getTipoOpera()))
             .arg(art.getVivo() ? "Sì" : "No")
-            .arg(QString::fromStdString(result));
-    descrizioneBuild = desc;
+            .arg(QString::fromStdString("Nessuna Esposizione"));
+        descrizioneBuild = desc;
+    }else {
+        std::string result;
+        std::list<std::string> lista = art.getEspo();
+        for (auto it = lista.begin(); it != lista.end(); it++) {
+            result += *it;
+            if (std::next(it) != lista.end()) {
+                result += ";";
+            }
+        }
+        QString desc = QString ("🎨 <b>Opera d'Arte</b>: %1<br>"
+                               "🔹 <b>Descrizione</b>: %2<br>"
+                               "✅ <b>Autenticità</b>: %3<br>"
+                               "📆 <b>Data Creazione</b>: %4<br>"
+                               "💰 <b>Valore</b>: %5€<br>"
+                               "🖌️ <b>Artista</b>: %8<br>"
+                               "🏺 <b>Tipo Opera</b>: %9<br>"
+                               "👨‍🎨 <b>Artista Vivo</b>: %10<br>"
+                               "🏛️ <b>Esposizioni</b>: %11<br>")
+                .arg(QString::fromStdString(art.getNome()))
+                .arg(QString::fromStdString(art.getDescrizione()))
+                .arg(QString::fromStdString(art.getAutentica()))
+                .arg(art.getDataCreazione())
+                .arg(art.getValAtt())
+                .arg(QString::fromStdString(art.getArtista()))
+                .arg(QString::fromStdString(art.getTipoOpera()))
+                .arg(art.getVivo() ? "Sì" : "No")
+                .arg(QString::fromStdString(result));
+        descrizioneBuild = desc;
+    }
+
 }
 
 void descriptionBuildVisitor::visitGioielli(gioielli &gio) {
@@ -74,7 +98,7 @@ void descriptionBuildVisitor::visitOrologi(orologi &oro) {
         .arg(oro.getValAtt())
         .arg(QString::fromStdString(oro.getModello()))
         .arg(QString::fromStdString(oro.getMarca()))
-        .arg(QString::fromStdString("Numero esemplari non specificato"))
+        .arg(QString::fromStdString("Numero di esemplari non specificato"))
         .arg(QString::fromStdString(oro.getMecc()));
         descrizioneBuild = desc;
     }else {

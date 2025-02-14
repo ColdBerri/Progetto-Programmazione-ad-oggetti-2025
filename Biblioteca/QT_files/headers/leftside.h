@@ -46,7 +46,7 @@ class leftside : public QWidget {
         void importaLista();
         void deselezionaElemento();
         bool saveToJson();
-
+        void checkName(biblioteca* );
     public:
         leftside(QWidget *parent = nullptr);
 

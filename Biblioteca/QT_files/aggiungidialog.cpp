@@ -186,11 +186,6 @@ void AggiungiDialog::mostraOrologi() {
     dataNew = new QLineEdit(this);
 
     formLayout->addRow("Nome:", nomeNew);
-    /*if (nomeNew->text().isEmpty()) {
-        QMessageBox::warning(this, "Errore di Salvataggio",
-                     "NON PUOI SALVARE UN OGGETTO SENZA NOME!");
-        return;
-    }*/
     formLayout->addRow("Descrizione:", descrizioneNew);
     formLayout->addRow("Valore (€):", valoreNew);
     formLayout->addRow("Autentica:", autenticaNew);
