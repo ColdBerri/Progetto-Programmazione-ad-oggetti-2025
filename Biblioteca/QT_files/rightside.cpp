@@ -90,23 +90,31 @@ void rightside::updateInfo(biblioteca *selectedItem) {
 
         descriptionLabel->setText(visitor.descrizioneBuild);
         std::cout << "Descrizione aggiornata: " << selectedItem->getDescrizione() << std::endl;
-
-        if (dynamic_cast<orologi*>(selectedItem)) {
-            QPixmap pixmap(":/QT_files/assets/polso.png");
-            QPixmap scaledMap = pixmap.scaled(200, 200, Qt::KeepAspectRatio);
-            imageLabel->setPixmap(scaledMap);
-            imageLabel->setScaledContents(true);
-        } else if(dynamic_cast<arte*>(selectedItem)) {
-            QPixmap pixmap(":/QT_files/assets/quadro.png");
-            QPixmap scaledMap = pixmap.scaled(200, 200, Qt::KeepAspectRatio);
-            imageLabel->setPixmap(scaledMap);
-            imageLabel->setScaledContents(true);
-        } else if(dynamic_cast<gioielli*>(selectedItem)) {
-            QPixmap pixmap(":/QT_files/assets/anello.png");
+        if(selectedItem->getImage().empty()){
+            if (dynamic_cast<orologi*>(selectedItem)) {
+                QPixmap pixmap(":/QT_files/assets/polso.png");
+                QPixmap scaledMap = pixmap.scaled(200, 200, Qt::KeepAspectRatio);
+                imageLabel->setPixmap(scaledMap);
+                imageLabel->setScaledContents(true);
+            } else if(dynamic_cast<arte*>(selectedItem)) {
+                QPixmap pixmap(":/QT_files/assets/quadro.png");
+                QPixmap scaledMap = pixmap.scaled(200, 200, Qt::KeepAspectRatio);
+                imageLabel->setPixmap(scaledMap);
+                imageLabel->setScaledContents(true);
+            } else if(dynamic_cast<gioielli*>(selectedItem)) {
+                QPixmap pixmap(":/QT_files/assets/anello.png");
+                QPixmap scaledMap = pixmap.scaled(200, 200, Qt::KeepAspectRatio);
+                imageLabel->setPixmap(scaledMap);
+                imageLabel->setScaledContents(true);
+            }
+        }else{
+            QString immagine = QString::fromStdString(selectedItem->getImage());
+            QPixmap pixmap(immagine);
             QPixmap scaledMap = pixmap.scaled(200, 200, Qt::KeepAspectRatio);
             imageLabel->setPixmap(scaledMap);
             imageLabel->setScaledContents(true);
         }
+        
         currentItem = selectedItem;
 
         // Imposta lo stato del preferitiButton in base all'attributo "preferiti"

@@ -15,10 +15,12 @@ class biblioteca {
         int dataCreazione;
         double valore;
         bool preferiti;
+        std::string image;
+
     public:
         //costruttore e distruttore
         biblioteca(std::string n, std::string d, std::string a, 
-        int dc, double v, bool p);
+        int dc, double v, bool p, std::string image);
         virtual ~biblioteca()=0;
 
         //metodi getter
@@ -28,7 +30,7 @@ class biblioteca {
         int getDataCreazione()const;
         bool getPreferiti() const;
         double getValAtt() const;
-
+        std::string getImage()const;
         //metodi setter
         void setNome(const std::string);
         void setDescrizione(const std::string);
@@ -36,7 +38,7 @@ class biblioteca {
         void setData(int);
         void setVal(double);
         void setPreferiti(bool);
-
+        void setImage(std::string image);
         virtual void accetta(bibliotecaVisitorInterface& visitor) =0;
     };
 

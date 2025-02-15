@@ -37,7 +37,7 @@ MOVE          = mv -f
 TAR           = tar -cf
 COMPRESS      = gzip -9f
 DISTNAME      = Biblioteca1.0.0
-DISTDIR = /home/BRN/clion/Progetto-Programmazione-ad-oggetti-2025/Biblioteca/.tmp/Biblioteca1.0.0
+DISTDIR = /home/BRN/Scrivania/Progetto-Programmazione-ad-oggetti-2025/Biblioteca/.tmp/Biblioteca1.0.0
 LINK          = g++
 LFLAGS        = -Wl,-O1 -pipe -O2 -flto=8 -fno-fat-lto-objects -fuse-linker-plugin -fPIC
 LIBS          = $(SUBLIBS) /usr/lib/libQt5Widgets.so /usr/lib/libQt5Gui.so /usr/lib/libQt5Core.so -lGL -lpthread   
@@ -631,24 +631,36 @@ compiler_rcc_clean:
 qrc_risorse.cpp: risorse.qrc \
 		/usr/bin/rcc \
 		QT_files/assets/anello.png \
+		QT_files/assets/Rolex-sea.png \
 		QT_files/assets/piena.png \
+		QT_files/assets/the-souls.png \
 		QT_files/assets/quadro.png \
 		QT_files/assets/polso.png \
 		QT_files/assets/vuota.png \
 		QT_files/assets/diamante.png \
 		QT_files/assets/tavolozza.png \
+		QT_files/assets/girl-with-baloon.png \
+		QT_files/assets/Patek-calatrava.png \
+		QT_files/assets/orecchini-harry-winston.png \
+		QT_files/assets/platino-tiffany.png \
 		QT_files/assets/orlogiopolso.png
 	/usr/bin/rcc -name risorse risorse.qrc -o qrc_risorse.cpp
 
 qrc_risorse.cpp: risorse.qrc \
 		/usr/bin/rcc \
 		QT_files/assets/anello.png \
+		QT_files/assets/Rolex-sea.png \
 		QT_files/assets/piena.png \
+		QT_files/assets/the-souls.png \
 		QT_files/assets/quadro.png \
 		QT_files/assets/polso.png \
 		QT_files/assets/vuota.png \
 		QT_files/assets/diamante.png \
 		QT_files/assets/tavolozza.png \
+		QT_files/assets/girl-with-baloon.png \
+		QT_files/assets/Patek-calatrava.png \
+		QT_files/assets/orecchini-harry-winston.png \
+		QT_files/assets/platino-tiffany.png \
 		QT_files/assets/orlogiopolso.png
 	/usr/bin/rcc -name risorse risorse.qrc -o qrc_risorse.cpp
 
@@ -664,7 +676,7 @@ compiler_moc_header_clean:
 moc_aggiungidialog.cpp: QT_files/headers/aggiungidialog.h \
 		moc_predefs.h \
 		/usr/bin/moc
-	/usr/bin/moc $(DEFINES) --include /home/BRN/clion/Progetto-Programmazione-ad-oggetti-2025/Biblioteca/moc_predefs.h -I/usr/lib/qt/mkspecs/linux-g++ -I/home/BRN/clion/Progetto-Programmazione-ad-oggetti-2025/Biblioteca -I/home/BRN/clion/Progetto-Programmazione-ad-oggetti-2025/Biblioteca -I/usr/include/qt -I/usr/include/qt/QtWidgets -I/usr/include/qt/QtGui -I/usr/include/qt/QtCore -I/usr/include/c++/14.2.1 -I/usr/include/c++/14.2.1/x86_64-pc-linux-gnu -I/usr/include/c++/14.2.1/backward -I/usr/lib/gcc/x86_64-pc-linux-gnu/14.2.1/include -I/usr/local/include -I/usr/lib/gcc/x86_64-pc-linux-gnu/14.2.1/include-fixed -I/usr/include QT_files/headers/aggiungidialog.h -o moc_aggiungidialog.cpp
+	/usr/bin/moc $(DEFINES) --include /home/BRN/Scrivania/Progetto-Programmazione-ad-oggetti-2025/Biblioteca/moc_predefs.h -I/usr/lib/qt/mkspecs/linux-g++ -I/home/BRN/Scrivania/Progetto-Programmazione-ad-oggetti-2025/Biblioteca -I/home/BRN/Scrivania/Progetto-Programmazione-ad-oggetti-2025/Biblioteca -I/usr/include/qt -I/usr/include/qt/QtWidgets -I/usr/include/qt/QtGui -I/usr/include/qt/QtCore -I/usr/include/c++/14.2.1 -I/usr/include/c++/14.2.1/x86_64-pc-linux-gnu -I/usr/include/c++/14.2.1/backward -I/usr/lib/gcc/x86_64-pc-linux-gnu/14.2.1/include -I/usr/local/include -I/usr/lib/gcc/x86_64-pc-linux-gnu/14.2.1/include-fixed -I/usr/include QT_files/headers/aggiungidialog.h -o moc_aggiungidialog.cpp
 
 moc_leftside.cpp: QT_files/headers/leftside.h \
 		QT_files/headers/libs.h \
@@ -676,7 +688,7 @@ moc_leftside.cpp: QT_files/headers/leftside.h \
 		C++/headers/gioielli.h \
 		moc_predefs.h \
 		/usr/bin/moc
-	/usr/bin/moc $(DEFINES) --include /home/BRN/clion/Progetto-Programmazione-ad-oggetti-2025/Biblioteca/moc_predefs.h -I/usr/lib/qt/mkspecs/linux-g++ -I/home/BRN/clion/Progetto-Programmazione-ad-oggetti-2025/Biblioteca -I/home/BRN/clion/Progetto-Programmazione-ad-oggetti-2025/Biblioteca -I/usr/include/qt -I/usr/include/qt/QtWidgets -I/usr/include/qt/QtGui -I/usr/include/qt/QtCore -I/usr/include/c++/14.2.1 -I/usr/include/c++/14.2.1/x86_64-pc-linux-gnu -I/usr/include/c++/14.2.1/backward -I/usr/lib/gcc/x86_64-pc-linux-gnu/14.2.1/include -I/usr/local/include -I/usr/lib/gcc/x86_64-pc-linux-gnu/14.2.1/include-fixed -I/usr/include QT_files/headers/leftside.h -o moc_leftside.cpp
+	/usr/bin/moc $(DEFINES) --include /home/BRN/Scrivania/Progetto-Programmazione-ad-oggetti-2025/Biblioteca/moc_predefs.h -I/usr/lib/qt/mkspecs/linux-g++ -I/home/BRN/Scrivania/Progetto-Programmazione-ad-oggetti-2025/Biblioteca -I/home/BRN/Scrivania/Progetto-Programmazione-ad-oggetti-2025/Biblioteca -I/usr/include/qt -I/usr/include/qt/QtWidgets -I/usr/include/qt/QtGui -I/usr/include/qt/QtCore -I/usr/include/c++/14.2.1 -I/usr/include/c++/14.2.1/x86_64-pc-linux-gnu -I/usr/include/c++/14.2.1/backward -I/usr/lib/gcc/x86_64-pc-linux-gnu/14.2.1/include -I/usr/local/include -I/usr/lib/gcc/x86_64-pc-linux-gnu/14.2.1/include-fixed -I/usr/include QT_files/headers/leftside.h -o moc_leftside.cpp
 
 moc_mainwindow.cpp: QT_files/headers/mainwindow.h \
 		QT_files/headers/leftside.h \
@@ -691,7 +703,7 @@ moc_mainwindow.cpp: QT_files/headers/mainwindow.h \
 		C++/headers/descriptionBuildVisitor.h \
 		moc_predefs.h \
 		/usr/bin/moc
-	/usr/bin/moc $(DEFINES) --include /home/BRN/clion/Progetto-Programmazione-ad-oggetti-2025/Biblioteca/moc_predefs.h -I/usr/lib/qt/mkspecs/linux-g++ -I/home/BRN/clion/Progetto-Programmazione-ad-oggetti-2025/Biblioteca -I/home/BRN/clion/Progetto-Programmazione-ad-oggetti-2025/Biblioteca -I/usr/include/qt -I/usr/include/qt/QtWidgets -I/usr/include/qt/QtGui -I/usr/include/qt/QtCore -I/usr/include/c++/14.2.1 -I/usr/include/c++/14.2.1/x86_64-pc-linux-gnu -I/usr/include/c++/14.2.1/backward -I/usr/lib/gcc/x86_64-pc-linux-gnu/14.2.1/include -I/usr/local/include -I/usr/lib/gcc/x86_64-pc-linux-gnu/14.2.1/include-fixed -I/usr/include QT_files/headers/mainwindow.h -o moc_mainwindow.cpp
+	/usr/bin/moc $(DEFINES) --include /home/BRN/Scrivania/Progetto-Programmazione-ad-oggetti-2025/Biblioteca/moc_predefs.h -I/usr/lib/qt/mkspecs/linux-g++ -I/home/BRN/Scrivania/Progetto-Programmazione-ad-oggetti-2025/Biblioteca -I/home/BRN/Scrivania/Progetto-Programmazione-ad-oggetti-2025/Biblioteca -I/usr/include/qt -I/usr/include/qt/QtWidgets -I/usr/include/qt/QtGui -I/usr/include/qt/QtCore -I/usr/include/c++/14.2.1 -I/usr/include/c++/14.2.1/x86_64-pc-linux-gnu -I/usr/include/c++/14.2.1/backward -I/usr/lib/gcc/x86_64-pc-linux-gnu/14.2.1/include -I/usr/local/include -I/usr/lib/gcc/x86_64-pc-linux-gnu/14.2.1/include-fixed -I/usr/include QT_files/headers/mainwindow.h -o moc_mainwindow.cpp
 
 moc_modificadialog.cpp: QT_files/headers/modificadialog.h \
 		C++/headers/biblioteca.h \
@@ -701,7 +713,7 @@ moc_modificadialog.cpp: QT_files/headers/modificadialog.h \
 		C++/headers/orologi.h \
 		moc_predefs.h \
 		/usr/bin/moc
-	/usr/bin/moc $(DEFINES) --include /home/BRN/clion/Progetto-Programmazione-ad-oggetti-2025/Biblioteca/moc_predefs.h -I/usr/lib/qt/mkspecs/linux-g++ -I/home/BRN/clion/Progetto-Programmazione-ad-oggetti-2025/Biblioteca -I/home/BRN/clion/Progetto-Programmazione-ad-oggetti-2025/Biblioteca -I/usr/include/qt -I/usr/include/qt/QtWidgets -I/usr/include/qt/QtGui -I/usr/include/qt/QtCore -I/usr/include/c++/14.2.1 -I/usr/include/c++/14.2.1/x86_64-pc-linux-gnu -I/usr/include/c++/14.2.1/backward -I/usr/lib/gcc/x86_64-pc-linux-gnu/14.2.1/include -I/usr/local/include -I/usr/lib/gcc/x86_64-pc-linux-gnu/14.2.1/include-fixed -I/usr/include QT_files/headers/modificadialog.h -o moc_modificadialog.cpp
+	/usr/bin/moc $(DEFINES) --include /home/BRN/Scrivania/Progetto-Programmazione-ad-oggetti-2025/Biblioteca/moc_predefs.h -I/usr/lib/qt/mkspecs/linux-g++ -I/home/BRN/Scrivania/Progetto-Programmazione-ad-oggetti-2025/Biblioteca -I/home/BRN/Scrivania/Progetto-Programmazione-ad-oggetti-2025/Biblioteca -I/usr/include/qt -I/usr/include/qt/QtWidgets -I/usr/include/qt/QtGui -I/usr/include/qt/QtCore -I/usr/include/c++/14.2.1 -I/usr/include/c++/14.2.1/x86_64-pc-linux-gnu -I/usr/include/c++/14.2.1/backward -I/usr/lib/gcc/x86_64-pc-linux-gnu/14.2.1/include -I/usr/local/include -I/usr/lib/gcc/x86_64-pc-linux-gnu/14.2.1/include-fixed -I/usr/include QT_files/headers/modificadialog.h -o moc_modificadialog.cpp
 
 moc_rightside.cpp: QT_files/headers/rightside.h \
 		QT_files/headers/libs.h \
@@ -715,7 +727,7 @@ moc_rightside.cpp: QT_files/headers/rightside.h \
 		C++/headers/descriptionBuildVisitor.h \
 		moc_predefs.h \
 		/usr/bin/moc
-	/usr/bin/moc $(DEFINES) --include /home/BRN/clion/Progetto-Programmazione-ad-oggetti-2025/Biblioteca/moc_predefs.h -I/usr/lib/qt/mkspecs/linux-g++ -I/home/BRN/clion/Progetto-Programmazione-ad-oggetti-2025/Biblioteca -I/home/BRN/clion/Progetto-Programmazione-ad-oggetti-2025/Biblioteca -I/usr/include/qt -I/usr/include/qt/QtWidgets -I/usr/include/qt/QtGui -I/usr/include/qt/QtCore -I/usr/include/c++/14.2.1 -I/usr/include/c++/14.2.1/x86_64-pc-linux-gnu -I/usr/include/c++/14.2.1/backward -I/usr/lib/gcc/x86_64-pc-linux-gnu/14.2.1/include -I/usr/local/include -I/usr/lib/gcc/x86_64-pc-linux-gnu/14.2.1/include-fixed -I/usr/include QT_files/headers/rightside.h -o moc_rightside.cpp
+	/usr/bin/moc $(DEFINES) --include /home/BRN/Scrivania/Progetto-Programmazione-ad-oggetti-2025/Biblioteca/moc_predefs.h -I/usr/lib/qt/mkspecs/linux-g++ -I/home/BRN/Scrivania/Progetto-Programmazione-ad-oggetti-2025/Biblioteca -I/home/BRN/Scrivania/Progetto-Programmazione-ad-oggetti-2025/Biblioteca -I/usr/include/qt -I/usr/include/qt/QtWidgets -I/usr/include/qt/QtGui -I/usr/include/qt/QtCore -I/usr/include/c++/14.2.1 -I/usr/include/c++/14.2.1/x86_64-pc-linux-gnu -I/usr/include/c++/14.2.1/backward -I/usr/lib/gcc/x86_64-pc-linux-gnu/14.2.1/include -I/usr/local/include -I/usr/lib/gcc/x86_64-pc-linux-gnu/14.2.1/include-fixed -I/usr/include QT_files/headers/rightside.h -o moc_rightside.cpp
 
 compiler_moc_objc_header_make_all:
 compiler_moc_objc_header_clean:

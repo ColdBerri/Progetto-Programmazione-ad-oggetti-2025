@@ -149,6 +149,7 @@ void leftside::loadJson(const std::string& filePath) {
             int data = jsonObj["data creazione"].get<int>();
             double v = jsonObj["valore"].get<double>();
             bool b = jsonObj["preferiti"].get<bool>();
+            std::string im = jsonObj ["immagine"].get<std::string>();
             std::list<std::string> ma;
             std::string materiali = jsonObj["materiali"].get<std::string>();
             std::istringstream iss(materiali);
@@ -159,7 +160,7 @@ void leftside::loadJson(const std::string& filePath) {
                 }
             }
             std::string orafo = jsonObj["orafo"].get<std::string>();
-            biblioteca *g = new gioielli(nome, descrizione, autentica, data, v, b, ma, orafo);
+            biblioteca *g = new gioielli(nome, descrizione, autentica, data, v, b, im, ma, orafo);
             oggetti.push_back(g);
         }
         else if (type == "orologi") {
@@ -169,11 +170,12 @@ void leftside::loadJson(const std::string& filePath) {
             int data = jsonObj["data creazione"].get<int>();
             double v = jsonObj["valore"].get<double>();
             bool b = jsonObj["preferiti"].get<bool>();
+            std::string im = jsonObj ["immagine"].get<std::string>();
             std::string modello = jsonObj["modello"].get<std::string>();
             std::string marca = jsonObj["marca"].get<std::string>();
             int ne = jsonObj["numero esemplari"].get<int>();
             std::string meccanismo = jsonObj["meccanismo"].get<std::string>();
-            biblioteca *o = new orologi(nome, descrizione, autentica, data, v, b, modello, marca, ne, meccanismo);
+            biblioteca *o = new orologi(nome, descrizione, autentica, data, v, b, im, modello, marca, ne, meccanismo);
             oggetti.push_back(o);  // Aggiungi l'oggetto alla lista
         }
         else if (type == "arte") {
@@ -183,10 +185,10 @@ void leftside::loadJson(const std::string& filePath) {
             int data = jsonObj["data creazione"].get<int>();
             double v = jsonObj["valore"].get<double>();
             bool b = jsonObj["preferiti"].get<bool>();
+            std::string im = jsonObj ["immagine"].get<std::string>();
             std::string artista = jsonObj["artista"].get<std::string>();
             std::string opera = jsonObj["tipo opera"].get<std::string>();
             bool vivo = jsonObj["artista vivo"].get<bool>();
-
             std::list<std::string> esp;
             std::string esposizioni = jsonObj["esposizione"].get<std::string>();
             std::istringstream iss(esposizioni);
@@ -196,7 +198,7 @@ void leftside::loadJson(const std::string& filePath) {
                     esp.push_back(word);
                 }
             }
-            biblioteca *a = new arte(nome, descrizione, autentica, data, v, b, artista, opera, vivo, esp);
+            biblioteca *a = new arte(nome, descrizione, autentica, data, v, b, im, artista, opera, vivo, esp);
             oggetti.push_back(a);
         }
     }
@@ -439,6 +441,7 @@ void leftside::costruisciOggetto(const QString &tipo, const QVariantMap &dati) {
             dati["data creazione"].toInt(),
             dati["valore"].toDouble(),
             dati["preferiti"].toBool(),
+            dati["immagine"].toString().toStdString(),
             dati["artista"].toString().toStdString(),
             dati["tipo opera"].toString().toStdString(),
             dati["artista vivo"].toBool(),
@@ -463,6 +466,7 @@ void leftside::costruisciOggetto(const QString &tipo, const QVariantMap &dati) {
             dati["data creazione"].toInt(),
             dati["valore"].toDouble(),
             dati["preferiti"].toBool(),
+            dati["immagine"].toString().toStdString(),
             materiali,
             dati["orafo"].toString().toStdString());
         if(gio) {
@@ -478,6 +482,7 @@ void leftside::costruisciOggetto(const QString &tipo, const QVariantMap &dati) {
             dati["data creazione"].toInt(),
             dati["valore"].toDouble(),
             dati["preferiti"].toBool(),
+            dati["immagine"].toString().toStdString(),
             dati["modello"].toString().toStdString(),
             dati["marca"].toString().toStdString(),
             dati["esemplari"].toInt(),
