@@ -391,16 +391,15 @@ void leftside::checkName(biblioteca* item) {
     QString nuovoNome = baseName;
     int contatore = 0;
     bool nomeEsistente = true;
-    int j=0;
-    while(item->getNome() != baseName.toStdString()){
-        j++;
-    }
+    int posizioneCorrente;
 
     while (nomeEsistente) {
         nomeEsistente = false;
         for (int i = 0; i < listaItems->count(); ++i) {
             QListWidgetItem *listItem = listaItems->item(i);
-            if (listItem->text() == nuovoNome && i!=j) {
+            if (oggetti [i] == item){
+                posizioneCorrente = i;}
+            if (listItem->text() == nuovoNome && i != posizioneCorrente){
                 nomeEsistente = true;
                 break;
             }

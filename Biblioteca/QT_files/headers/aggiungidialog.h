@@ -13,26 +13,7 @@
 
 class AggiungiDialog : public QDialog {
     Q_OBJECT
-public:
-    explicit AggiungiDialog(QWidget *parent = nullptr);
-
-    signals:
-        void datiInseriti(const QString &tipo, const QVariantMap &dati);
-
-    private slots:
-        void abilitaConferma();
-        void confermaScelta();
-        void salvaNuovo();
-    // Metodi per gestire eventuali aggiunte/rimozioni nella lista
-        void aggiungiAListaEsp();
-        void togliDaListaEsp();
-        void aggiungiAListaMat();
-        void togliDaListaMat();
-        void mostraArte();
-        void mostraGioielli();
-        void mostraOrologi();
-        void pulisciForm();
-private:
+    private:
     // Bottoni per la scelta del tipo
     QRadioButton *bottoneArte;
     QRadioButton *bottoneGioielli;
@@ -76,6 +57,27 @@ private:
     QLineEdit *marcaNew;
     QLineEdit *esemplariNew;
     QComboBox *meccanismoNew;
+
+public:
+    explicit AggiungiDialog(QWidget *parent = nullptr);
+
+    signals:
+        void datiInseriti(const QString &tipo, const QVariantMap &dati);
+
+    private slots:
+        void abilitaConferma();
+        void confermaScelta();
+        void salvaNuovo();
+    // Metodi per gestire eventuali aggiunte/rimozioni nella lista
+        void aggiungiAListaEsp();
+        void togliDaListaEsp();
+        void aggiungiAListaMat();
+        void togliDaListaMat();
+        void mostraArte();
+        void mostraGioielli();
+        void mostraOrologi();
+        void pulisciForm();
+
 };
 
 #endif // AGGIUNGIDIALOG_H

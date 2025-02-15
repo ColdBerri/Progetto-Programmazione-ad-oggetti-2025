@@ -7,7 +7,7 @@
 
 AggiungiDialog::AggiungiDialog(QWidget *parent) : QDialog(parent) {
     setWindowTitle("Aggiungi Elemento");
-    setFixedSize(700,600);
+    setFixedSize(700,675);
 
     QVBoxLayout *mainLayout = new QVBoxLayout(this);
 
