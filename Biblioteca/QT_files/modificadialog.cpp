@@ -26,12 +26,13 @@ ModificaDialog::ModificaDialog(biblioteca *item, QWidget *parent) :
     valoreEdit = new QLineEdit(QString::number(item->getValAtt()), this);
     autenticaEdit = new QLineEdit(QString::fromStdString(item->getAutentica()), this);
     dataEdit = new QLineEdit(QString::number(item->getDataCreazione()), this);
-
+    imageEdit = new QLineEdit(QString::fromStdString(item->getImage()), this);
     formLayout->addRow("Nome:", nomeEdit);
     formLayout->addRow("Descrizione:", descrizioneEdit);
     formLayout->addRow("Valore (€):", valoreEdit);
     formLayout->addRow("Autentica:" ,autenticaEdit);
     formLayout->addRow("Data della Creazione:", dataEdit);
+    formLayout->addRow("Percorso dell'immagine:", imageEdit);
 
     if (auto m = dynamic_cast<arte*>(item)) {
         //costruzione dei campi in base al tipo
@@ -158,6 +159,7 @@ void ModificaDialog::salvaModifiche() {
     item->setVal(valoreEdit->text().toDouble());
     item->setAutentica(autenticaEdit->text().toStdString());
     item->setData(dataEdit->text().toInt());
+    item->setImage(imageEdit->text().toStdString());
     if (auto a = dynamic_cast<arte*>(item)) {
         a->setArtista(artistaEdit->text().toStdString());
         a->setVivo(bottoneSi->isChecked());

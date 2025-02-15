@@ -30,7 +30,7 @@ private:
     QLineEdit *autenticaEdit;
     QLineEdit *dataEdit;
     QLineEdit *valoreEdit;
-
+    QLineEdit *imageEdit;
     //modifiche solo per arte
     QLineEdit *artistaEdit;
     QRadioButton *bottoneSi; //vivo

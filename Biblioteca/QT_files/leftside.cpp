@@ -391,19 +391,23 @@ void leftside::checkName(biblioteca* item) {
     QString nuovoNome = baseName;
     int contatore = 0;
     bool nomeEsistente = true;
+    int j=1;
+    while(item->getNome() != baseName.toStdString()){
+        j++;
+    }
 
     while (nomeEsistente) {
         nomeEsistente = false;
         for (int i = 0; i < listaItems->count(); ++i) {
             QListWidgetItem *listItem = listaItems->item(i);
-            if (listItem->text() == nuovoNome) {
+            if (listItem->text() == nuovoNome && i!=j) {
                 nomeEsistente = true;
                 break;
             }
         }
         if (nomeEsistente) {
             contatore++;
-            nuovoNome = baseName + " " + QString::number(contatore);
+            nuovoNome = baseName + " " + QString::number(contatore+1);
         }
     }
     item->setNome(nuovoNome.toStdString());
