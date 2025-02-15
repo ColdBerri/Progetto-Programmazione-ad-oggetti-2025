@@ -54,7 +54,7 @@ private:
     QLineEdit *valoreNew;
     QLineEdit *autenticaNew;
     QLineEdit *dataNew;
-
+    QLineEdit *imageNew;
     // Campi per "Arte"
     QLineEdit *artistaNew;
     QRadioButton *bottoneSi;

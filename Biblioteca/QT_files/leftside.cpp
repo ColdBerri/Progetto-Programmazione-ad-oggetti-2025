@@ -391,7 +391,7 @@ void leftside::checkName(biblioteca* item) {
     QString nuovoNome = baseName;
     int contatore = 0;
     bool nomeEsistente = true;
-    int j=1;
+    int j=0;
     while(item->getNome() != baseName.toStdString()){
         j++;
     }

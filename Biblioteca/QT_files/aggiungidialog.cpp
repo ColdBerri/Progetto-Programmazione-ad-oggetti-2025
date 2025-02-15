@@ -84,13 +84,13 @@ void AggiungiDialog::mostraArte() {
     valoreNew = new QLineEdit(this);
     autenticaNew = new QLineEdit(this);
     dataNew = new QLineEdit(this);
-
+    imageNew = new QLineEdit(this);
     formLayout->addRow("Nome:", nomeNew);
     formLayout->addRow("Descrizione:", descrizioneNew);
     formLayout->addRow("Valore (€):", valoreNew);
     formLayout->addRow("Autentica:", autenticaNew);
     formLayout->addRow("Data della Creazione:", dataNew);
-
+    formLayout->addRow("Percorso dell'immagine :\n(usare percorso completo\nsu linux e mac)", imageNew);
     // Campi specifici per Arte
     artistaNew = new QLineEdit(this);
     bottoneSi = new QRadioButton("Sì", this);
@@ -145,12 +145,13 @@ void AggiungiDialog::mostraGioielli() {
     valoreNew = new QLineEdit(this);
     autenticaNew = new QLineEdit(this);
     dataNew = new QLineEdit(this);
-
+    imageNew = new QLineEdit(this);
     formLayout->addRow("Nome:", nomeNew);
     formLayout->addRow("Descrizione:", descrizioneNew);
     formLayout->addRow("Valore (€):", valoreNew);
     formLayout->addRow("Autentica:", autenticaNew);
     formLayout->addRow("Data della Creazione:", dataNew);
+    formLayout->addRow("Percorso dell'immagine :\n(usare percorso completo\nsu linux e mac)", imageNew);
 
     // Campi specifici per Gioielli
     orafoNew = new QLineEdit(this);
@@ -184,12 +185,13 @@ void AggiungiDialog::mostraOrologi() {
     valoreNew = new QLineEdit(this);
     autenticaNew = new QLineEdit(this);
     dataNew = new QLineEdit(this);
-
+    imageNew = new QLineEdit(this);
     formLayout->addRow("Nome:", nomeNew);
     formLayout->addRow("Descrizione:", descrizioneNew);
     formLayout->addRow("Valore (€):", valoreNew);
     formLayout->addRow("Autentica:", autenticaNew);
     formLayout->addRow("Data della Creazione:", dataNew);
+    formLayout->addRow("Percorso dell'immagine :\n(usare percorso completo\nsu linux e mac)", imageNew);
 
     // Campi specifici per Orologi
     modelloNew = new QLineEdit(this);
@@ -229,7 +231,7 @@ void AggiungiDialog::salvaNuovo() {
     dati["valore"] = valoreNew->text();
     dati["autentica"] = autenticaNew->text();
     dati["data"] = dataNew->text();
-
+    dati["immagine"] = imageNew->text();
     if (bottoneArte->isChecked()) {
         dati["tipo"] = "Arte";
         dati["artista"] = artistaNew->text();

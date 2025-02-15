@@ -32,7 +32,7 @@ ModificaDialog::ModificaDialog(biblioteca *item, QWidget *parent) :
     formLayout->addRow("Valore (€):", valoreEdit);
     formLayout->addRow("Autentica:" ,autenticaEdit);
     formLayout->addRow("Data della Creazione:", dataEdit);
-    formLayout->addRow("Percorso dell'immagine:", imageEdit);
+    formLayout->addRow("Percorso dell'immagine: \n(usare percorso completo\nsu linux e mac)", imageEdit);
 
     if (auto m = dynamic_cast<arte*>(item)) {
         //costruzione dei campi in base al tipo
