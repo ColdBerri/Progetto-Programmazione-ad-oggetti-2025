@@ -23,7 +23,7 @@
         "modello": "Speedmaster",
         "nome": "Omega Speedmaster",
         "numero esemplari": 500,
-        "preferiti": false,
+        "preferiti": true,
         "tipo": "orologi",
         "valore": 15000
     },
@@ -72,7 +72,7 @@
         "data creazione": 2018,
         "descrizione": "Un anello con diamanti rari.",
         "immagine": ":/QT_files/assets/platino-tiffany.png",
-        "materiali": "Platino; Diamanti",   
+        "materiali": "Platino; Diamanti",
         "nome": "Anello di Platino",
         "orafo": "Tiffany & Co.",
         "preferiti": true,
