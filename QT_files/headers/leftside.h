@@ -21,7 +21,7 @@
 #include "libs.h"
 #include "C++/headers/biblioteca.h"
 #include "C++/headers/jsonVisitorSave.h"
-#include <nlohmann/json.hpp>
+#include "../nlohmann/json.hpp"
 #include <fstream>
 class leftside : public QWidget {
     Q_OBJECT
