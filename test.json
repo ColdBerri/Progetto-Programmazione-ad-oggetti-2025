@@ -8,7 +8,7 @@
         "esposizione": "Collezione privata",
         "immagine": ":/QT_files/assets/girl-with-baloon.png",
         "nome": "Girl with Balloon",
-        "preferiti": true,
+        "preferiti": false,
         "tipo": "arte",
         "tipo opera": "Quadro",
         "valore": 1200000
