@@ -37,7 +37,7 @@ MOVE          = mv -f
 TAR           = tar -cf
 COMPRESS      = gzip -9f
 DISTNAME      = Progetto-Programmazione-ad-oggetti-20251.0.0
-DISTDIR = /home/BRN/Scrivania/Progetto-Programmazione-ad-oggetti-2025/.tmp/Progetto-Programmazione-ad-oggetti-20251.0.0
+DISTDIR = /home/BRN/clion/Progetto-Programmazione-ad-oggetti-2025/.tmp/Progetto-Programmazione-ad-oggetti-20251.0.0
 LINK          = g++
 LFLAGS        = -Wl,-O1 -pipe -O2 -flto=8 -fno-fat-lto-objects -fuse-linker-plugin -fPIC
 LIBS          = $(SUBLIBS) /usr/lib/libQt5Widgets.so /usr/lib/libQt5Gui.so /usr/lib/libQt5Core.so -lGL -lpthread   
@@ -59,15 +59,15 @@ SOURCES       = main.cpp \
 		C++/gioielli.cpp \
 		C++/jsonVisitorSave.cpp \
 		C++/orologi.cpp \
-		QT_files/aggiungidialog.cpp \
+		QT_files/addPagina.cpp \
 		QT_files/leftside.cpp \
 		QT_files/mainwindow.cpp \
-		QT_files/modificadialog.cpp \
+		QT_files/modPagina.cpp \
 		QT_files/rightside.cpp qrc_risorse.cpp \
-		moc_aggiungidialog.cpp \
+		moc_addPagina.cpp \
 		moc_leftside.cpp \
 		moc_mainwindow.cpp \
-		moc_modificadialog.cpp \
+		moc_modPagina.cpp \
 		moc_rightside.cpp
 OBJECTS       = main.o \
 		arte.o \
@@ -76,16 +76,16 @@ OBJECTS       = main.o \
 		gioielli.o \
 		jsonVisitorSave.o \
 		orologi.o \
-		aggiungidialog.o \
+		addPagina.o \
 		leftside.o \
 		mainwindow.o \
-		modificadialog.o \
+		modPagina.o \
 		rightside.o \
 		qrc_risorse.o \
-		moc_aggiungidialog.o \
+		moc_addPagina.o \
 		moc_leftside.o \
 		moc_mainwindow.o \
-		moc_modificadialog.o \
+		moc_modPagina.o \
 		moc_rightside.o
 DIST          = /usr/lib/qt/mkspecs/features/spec_pre.prf \
 		/usr/lib/qt/mkspecs/common/unix.conf \
@@ -143,6 +143,10 @@ DIST          = /usr/lib/qt/mkspecs/features/spec_pre.prf \
 		/usr/lib/qt/mkspecs/modules/qt_lib_openglextensions.pri \
 		/usr/lib/qt/mkspecs/modules/qt_lib_openglextensions_private.pri \
 		/usr/lib/qt/mkspecs/modules/qt_lib_packetprotocol_private.pri \
+		/usr/lib/qt/mkspecs/modules/qt_lib_pdf.pri \
+		/usr/lib/qt/mkspecs/modules/qt_lib_pdf_private.pri \
+		/usr/lib/qt/mkspecs/modules/qt_lib_pdfwidgets.pri \
+		/usr/lib/qt/mkspecs/modules/qt_lib_pdfwidgets_private.pri \
 		/usr/lib/qt/mkspecs/modules/qt_lib_platformcompositor_support_private.pri \
 		/usr/lib/qt/mkspecs/modules/qt_lib_positioning.pri \
 		/usr/lib/qt/mkspecs/modules/qt_lib_positioning_private.pri \
@@ -201,6 +205,13 @@ DIST          = /usr/lib/qt/mkspecs/features/spec_pre.prf \
 		/usr/lib/qt/mkspecs/modules/qt_lib_vulkan_support_private.pri \
 		/usr/lib/qt/mkspecs/modules/qt_lib_webchannel.pri \
 		/usr/lib/qt/mkspecs/modules/qt_lib_webchannel_private.pri \
+		/usr/lib/qt/mkspecs/modules/qt_lib_webengine.pri \
+		/usr/lib/qt/mkspecs/modules/qt_lib_webengine_private.pri \
+		/usr/lib/qt/mkspecs/modules/qt_lib_webenginecore.pri \
+		/usr/lib/qt/mkspecs/modules/qt_lib_webenginecore_private.pri \
+		/usr/lib/qt/mkspecs/modules/qt_lib_webenginecoreheaders_private.pri \
+		/usr/lib/qt/mkspecs/modules/qt_lib_webenginewidgets.pri \
+		/usr/lib/qt/mkspecs/modules/qt_lib_webenginewidgets_private.pri \
 		/usr/lib/qt/mkspecs/modules/qt_lib_websockets.pri \
 		/usr/lib/qt/mkspecs/modules/qt_lib_websockets_private.pri \
 		/usr/lib/qt/mkspecs/modules/qt_lib_widgets.pri \
@@ -247,11 +258,11 @@ DIST          = /usr/lib/qt/mkspecs/features/spec_pre.prf \
 		C++/headers/jsonVisitorSave.h \
 		C++/headers/orologi.h \
 		C++/headers/pietre.h \
-		QT_files/headers/aggiungidialog.h \
+		QT_files/headers/addPagina.h \
 		QT_files/headers/leftside.h \
 		QT_files/headers/libs.h \
 		QT_files/headers/mainwindow.h \
-		QT_files/headers/modificadialog.h \
+		QT_files/headers/modPagina.h \
 		QT_files/headers/rightside.h \
 		QT_files/nlohmann/json.hpp \
 		QT_files/nlohmann/json_fwd.hpp main.cpp \
@@ -261,10 +272,10 @@ DIST          = /usr/lib/qt/mkspecs/features/spec_pre.prf \
 		C++/gioielli.cpp \
 		C++/jsonVisitorSave.cpp \
 		C++/orologi.cpp \
-		QT_files/aggiungidialog.cpp \
+		QT_files/addPagina.cpp \
 		QT_files/leftside.cpp \
 		QT_files/mainwindow.cpp \
-		QT_files/modificadialog.cpp \
+		QT_files/modPagina.cpp \
 		QT_files/rightside.cpp
 QMAKE_TARGET  = Progetto-Programmazione-ad-oggetti-2025
 DESTDIR       = 
@@ -333,6 +344,10 @@ Makefile: Progetto-Programmazione-ad-oggetti-2025.pro /usr/lib/qt/mkspecs/linux-
 		/usr/lib/qt/mkspecs/modules/qt_lib_openglextensions.pri \
 		/usr/lib/qt/mkspecs/modules/qt_lib_openglextensions_private.pri \
 		/usr/lib/qt/mkspecs/modules/qt_lib_packetprotocol_private.pri \
+		/usr/lib/qt/mkspecs/modules/qt_lib_pdf.pri \
+		/usr/lib/qt/mkspecs/modules/qt_lib_pdf_private.pri \
+		/usr/lib/qt/mkspecs/modules/qt_lib_pdfwidgets.pri \
+		/usr/lib/qt/mkspecs/modules/qt_lib_pdfwidgets_private.pri \
 		/usr/lib/qt/mkspecs/modules/qt_lib_platformcompositor_support_private.pri \
 		/usr/lib/qt/mkspecs/modules/qt_lib_positioning.pri \
 		/usr/lib/qt/mkspecs/modules/qt_lib_positioning_private.pri \
@@ -391,6 +406,13 @@ Makefile: Progetto-Programmazione-ad-oggetti-2025.pro /usr/lib/qt/mkspecs/linux-
 		/usr/lib/qt/mkspecs/modules/qt_lib_vulkan_support_private.pri \
 		/usr/lib/qt/mkspecs/modules/qt_lib_webchannel.pri \
 		/usr/lib/qt/mkspecs/modules/qt_lib_webchannel_private.pri \
+		/usr/lib/qt/mkspecs/modules/qt_lib_webengine.pri \
+		/usr/lib/qt/mkspecs/modules/qt_lib_webengine_private.pri \
+		/usr/lib/qt/mkspecs/modules/qt_lib_webenginecore.pri \
+		/usr/lib/qt/mkspecs/modules/qt_lib_webenginecore_private.pri \
+		/usr/lib/qt/mkspecs/modules/qt_lib_webenginecoreheaders_private.pri \
+		/usr/lib/qt/mkspecs/modules/qt_lib_webenginewidgets.pri \
+		/usr/lib/qt/mkspecs/modules/qt_lib_webenginewidgets_private.pri \
 		/usr/lib/qt/mkspecs/modules/qt_lib_websockets.pri \
 		/usr/lib/qt/mkspecs/modules/qt_lib_websockets_private.pri \
 		/usr/lib/qt/mkspecs/modules/qt_lib_widgets.pri \
@@ -488,6 +510,10 @@ Makefile: Progetto-Programmazione-ad-oggetti-2025.pro /usr/lib/qt/mkspecs/linux-
 /usr/lib/qt/mkspecs/modules/qt_lib_openglextensions.pri:
 /usr/lib/qt/mkspecs/modules/qt_lib_openglextensions_private.pri:
 /usr/lib/qt/mkspecs/modules/qt_lib_packetprotocol_private.pri:
+/usr/lib/qt/mkspecs/modules/qt_lib_pdf.pri:
+/usr/lib/qt/mkspecs/modules/qt_lib_pdf_private.pri:
+/usr/lib/qt/mkspecs/modules/qt_lib_pdfwidgets.pri:
+/usr/lib/qt/mkspecs/modules/qt_lib_pdfwidgets_private.pri:
 /usr/lib/qt/mkspecs/modules/qt_lib_platformcompositor_support_private.pri:
 /usr/lib/qt/mkspecs/modules/qt_lib_positioning.pri:
 /usr/lib/qt/mkspecs/modules/qt_lib_positioning_private.pri:
@@ -546,6 +572,13 @@ Makefile: Progetto-Programmazione-ad-oggetti-2025.pro /usr/lib/qt/mkspecs/linux-
 /usr/lib/qt/mkspecs/modules/qt_lib_vulkan_support_private.pri:
 /usr/lib/qt/mkspecs/modules/qt_lib_webchannel.pri:
 /usr/lib/qt/mkspecs/modules/qt_lib_webchannel_private.pri:
+/usr/lib/qt/mkspecs/modules/qt_lib_webengine.pri:
+/usr/lib/qt/mkspecs/modules/qt_lib_webengine_private.pri:
+/usr/lib/qt/mkspecs/modules/qt_lib_webenginecore.pri:
+/usr/lib/qt/mkspecs/modules/qt_lib_webenginecore_private.pri:
+/usr/lib/qt/mkspecs/modules/qt_lib_webenginecoreheaders_private.pri:
+/usr/lib/qt/mkspecs/modules/qt_lib_webenginewidgets.pri:
+/usr/lib/qt/mkspecs/modules/qt_lib_webenginewidgets_private.pri:
 /usr/lib/qt/mkspecs/modules/qt_lib_websockets.pri:
 /usr/lib/qt/mkspecs/modules/qt_lib_websockets_private.pri:
 /usr/lib/qt/mkspecs/modules/qt_lib_widgets.pri:
@@ -602,8 +635,8 @@ distdir: FORCE
 	$(COPY_FILE) --parents $(DIST) $(DISTDIR)/
 	$(COPY_FILE) --parents risorse.qrc risorse.qrc $(DISTDIR)/
 	$(COPY_FILE) --parents /usr/lib/qt/mkspecs/features/data/dummy.cpp $(DISTDIR)/
-	$(COPY_FILE) --parents C++/headers/arte.h C++/headers/biblioteca.h C++/headers/bibliotecaVisitorInterface.h C++/headers/descriptionBuildVisitor.h C++/headers/gioielli.h C++/headers/jsonVisitorSave.h C++/headers/orologi.h C++/headers/pietre.h QT_files/headers/aggiungidialog.h QT_files/headers/leftside.h QT_files/headers/libs.h QT_files/headers/mainwindow.h QT_files/headers/modificadialog.h QT_files/headers/rightside.h QT_files/nlohmann/json.hpp QT_files/nlohmann/json_fwd.hpp $(DISTDIR)/
-	$(COPY_FILE) --parents main.cpp C++/arte.cpp C++/biblioteca.cpp C++/descriptionBuildvisitor.cpp C++/gioielli.cpp C++/jsonVisitorSave.cpp C++/orologi.cpp QT_files/aggiungidialog.cpp QT_files/leftside.cpp QT_files/mainwindow.cpp QT_files/modificadialog.cpp QT_files/rightside.cpp $(DISTDIR)/
+	$(COPY_FILE) --parents C++/headers/arte.h C++/headers/biblioteca.h C++/headers/bibliotecaVisitorInterface.h C++/headers/descriptionBuildVisitor.h C++/headers/gioielli.h C++/headers/jsonVisitorSave.h C++/headers/orologi.h C++/headers/pietre.h QT_files/headers/addPagina.h QT_files/headers/leftside.h QT_files/headers/libs.h QT_files/headers/mainwindow.h QT_files/headers/modPagina.h QT_files/headers/rightside.h QT_files/nlohmann/json.hpp QT_files/nlohmann/json_fwd.hpp $(DISTDIR)/
+	$(COPY_FILE) --parents main.cpp C++/arte.cpp C++/biblioteca.cpp C++/descriptionBuildvisitor.cpp C++/gioielli.cpp C++/jsonVisitorSave.cpp C++/orologi.cpp QT_files/addPagina.cpp QT_files/leftside.cpp QT_files/mainwindow.cpp QT_files/modPagina.cpp QT_files/rightside.cpp $(DISTDIR)/
 
 
 clean: compiler_clean 
@@ -672,13 +705,13 @@ compiler_moc_predefs_clean:
 moc_predefs.h: /usr/lib/qt/mkspecs/features/data/dummy.cpp
 	g++ -pipe -O2 -flto -fno-fat-lto-objects -Wall -Wextra -dM -E -o moc_predefs.h /usr/lib/qt/mkspecs/features/data/dummy.cpp
 
-compiler_moc_header_make_all: moc_aggiungidialog.cpp moc_leftside.cpp moc_mainwindow.cpp moc_modificadialog.cpp moc_rightside.cpp
+compiler_moc_header_make_all: moc_addPagina.cpp moc_leftside.cpp moc_mainwindow.cpp moc_modPagina.cpp moc_rightside.cpp
 compiler_moc_header_clean:
-	-$(DEL_FILE) moc_aggiungidialog.cpp moc_leftside.cpp moc_mainwindow.cpp moc_modificadialog.cpp moc_rightside.cpp
-moc_aggiungidialog.cpp: QT_files/headers/aggiungidialog.h \
+	-$(DEL_FILE) moc_addPagina.cpp moc_leftside.cpp moc_mainwindow.cpp moc_modPagina.cpp moc_rightside.cpp
+moc_addPagina.cpp: QT_files/headers/addPagina.h \
 		moc_predefs.h \
 		/usr/bin/moc
-	/usr/bin/moc $(DEFINES) --include /home/BRN/Scrivania/Progetto-Programmazione-ad-oggetti-2025/moc_predefs.h -I/usr/lib/qt/mkspecs/linux-g++ -I/home/BRN/Scrivania/Progetto-Programmazione-ad-oggetti-2025 -I/home/BRN/Scrivania/Progetto-Programmazione-ad-oggetti-2025 -I/usr/include/qt -I/usr/include/qt/QtWidgets -I/usr/include/qt/QtGui -I/usr/include/qt/QtCore -I/usr/include/c++/14.2.1 -I/usr/include/c++/14.2.1/x86_64-pc-linux-gnu -I/usr/include/c++/14.2.1/backward -I/usr/lib/gcc/x86_64-pc-linux-gnu/14.2.1/include -I/usr/local/include -I/usr/lib/gcc/x86_64-pc-linux-gnu/14.2.1/include-fixed -I/usr/include QT_files/headers/aggiungidialog.h -o moc_aggiungidialog.cpp
+	/usr/bin/moc $(DEFINES) --include /home/BRN/clion/Progetto-Programmazione-ad-oggetti-2025/moc_predefs.h -I/usr/lib/qt/mkspecs/linux-g++ -I/home/BRN/clion/Progetto-Programmazione-ad-oggetti-2025 -I/home/BRN/clion/Progetto-Programmazione-ad-oggetti-2025 -I/usr/include/qt -I/usr/include/qt/QtWidgets -I/usr/include/qt/QtGui -I/usr/include/qt/QtCore -I/usr/include/c++/14.2.1 -I/usr/include/c++/14.2.1/x86_64-pc-linux-gnu -I/usr/include/c++/14.2.1/backward -I/usr/lib/gcc/x86_64-pc-linux-gnu/14.2.1/include -I/usr/local/include -I/usr/lib/gcc/x86_64-pc-linux-gnu/14.2.1/include-fixed -I/usr/include QT_files/headers/addPagina.h -o moc_addPagina.cpp
 
 moc_leftside.cpp: QT_files/headers/leftside.h \
 		QT_files/headers/libs.h \
@@ -691,7 +724,7 @@ moc_leftside.cpp: QT_files/headers/leftside.h \
 		QT_files/nlohmann/json.hpp \
 		moc_predefs.h \
 		/usr/bin/moc
-	/usr/bin/moc $(DEFINES) --include /home/BRN/Scrivania/Progetto-Programmazione-ad-oggetti-2025/moc_predefs.h -I/usr/lib/qt/mkspecs/linux-g++ -I/home/BRN/Scrivania/Progetto-Programmazione-ad-oggetti-2025 -I/home/BRN/Scrivania/Progetto-Programmazione-ad-oggetti-2025 -I/usr/include/qt -I/usr/include/qt/QtWidgets -I/usr/include/qt/QtGui -I/usr/include/qt/QtCore -I/usr/include/c++/14.2.1 -I/usr/include/c++/14.2.1/x86_64-pc-linux-gnu -I/usr/include/c++/14.2.1/backward -I/usr/lib/gcc/x86_64-pc-linux-gnu/14.2.1/include -I/usr/local/include -I/usr/lib/gcc/x86_64-pc-linux-gnu/14.2.1/include-fixed -I/usr/include QT_files/headers/leftside.h -o moc_leftside.cpp
+	/usr/bin/moc $(DEFINES) --include /home/BRN/clion/Progetto-Programmazione-ad-oggetti-2025/moc_predefs.h -I/usr/lib/qt/mkspecs/linux-g++ -I/home/BRN/clion/Progetto-Programmazione-ad-oggetti-2025 -I/home/BRN/clion/Progetto-Programmazione-ad-oggetti-2025 -I/usr/include/qt -I/usr/include/qt/QtWidgets -I/usr/include/qt/QtGui -I/usr/include/qt/QtCore -I/usr/include/c++/14.2.1 -I/usr/include/c++/14.2.1/x86_64-pc-linux-gnu -I/usr/include/c++/14.2.1/backward -I/usr/lib/gcc/x86_64-pc-linux-gnu/14.2.1/include -I/usr/local/include -I/usr/lib/gcc/x86_64-pc-linux-gnu/14.2.1/include-fixed -I/usr/include QT_files/headers/leftside.h -o moc_leftside.cpp
 
 moc_mainwindow.cpp: QT_files/headers/mainwindow.h \
 		QT_files/headers/leftside.h \
@@ -705,11 +738,13 @@ moc_mainwindow.cpp: QT_files/headers/mainwindow.h \
 		QT_files/nlohmann/json.hpp \
 		QT_files/headers/rightside.h \
 		C++/headers/descriptionBuildVisitor.h \
+		QT_files/headers/addPagina.h \
+		QT_files/headers/modPagina.h \
 		moc_predefs.h \
 		/usr/bin/moc
-	/usr/bin/moc $(DEFINES) --include /home/BRN/Scrivania/Progetto-Programmazione-ad-oggetti-2025/moc_predefs.h -I/usr/lib/qt/mkspecs/linux-g++ -I/home/BRN/Scrivania/Progetto-Programmazione-ad-oggetti-2025 -I/home/BRN/Scrivania/Progetto-Programmazione-ad-oggetti-2025 -I/usr/include/qt -I/usr/include/qt/QtWidgets -I/usr/include/qt/QtGui -I/usr/include/qt/QtCore -I/usr/include/c++/14.2.1 -I/usr/include/c++/14.2.1/x86_64-pc-linux-gnu -I/usr/include/c++/14.2.1/backward -I/usr/lib/gcc/x86_64-pc-linux-gnu/14.2.1/include -I/usr/local/include -I/usr/lib/gcc/x86_64-pc-linux-gnu/14.2.1/include-fixed -I/usr/include QT_files/headers/mainwindow.h -o moc_mainwindow.cpp
+	/usr/bin/moc $(DEFINES) --include /home/BRN/clion/Progetto-Programmazione-ad-oggetti-2025/moc_predefs.h -I/usr/lib/qt/mkspecs/linux-g++ -I/home/BRN/clion/Progetto-Programmazione-ad-oggetti-2025 -I/home/BRN/clion/Progetto-Programmazione-ad-oggetti-2025 -I/usr/include/qt -I/usr/include/qt/QtWidgets -I/usr/include/qt/QtGui -I/usr/include/qt/QtCore -I/usr/include/c++/14.2.1 -I/usr/include/c++/14.2.1/x86_64-pc-linux-gnu -I/usr/include/c++/14.2.1/backward -I/usr/lib/gcc/x86_64-pc-linux-gnu/14.2.1/include -I/usr/local/include -I/usr/lib/gcc/x86_64-pc-linux-gnu/14.2.1/include-fixed -I/usr/include QT_files/headers/mainwindow.h -o moc_mainwindow.cpp
 
-moc_modificadialog.cpp: QT_files/headers/modificadialog.h \
+moc_modPagina.cpp: QT_files/headers/modPagina.h \
 		C++/headers/biblioteca.h \
 		C++/headers/bibliotecaVisitorInterface.h \
 		C++/headers/arte.h \
@@ -717,7 +752,7 @@ moc_modificadialog.cpp: QT_files/headers/modificadialog.h \
 		C++/headers/orologi.h \
 		moc_predefs.h \
 		/usr/bin/moc
-	/usr/bin/moc $(DEFINES) --include /home/BRN/Scrivania/Progetto-Programmazione-ad-oggetti-2025/moc_predefs.h -I/usr/lib/qt/mkspecs/linux-g++ -I/home/BRN/Scrivania/Progetto-Programmazione-ad-oggetti-2025 -I/home/BRN/Scrivania/Progetto-Programmazione-ad-oggetti-2025 -I/usr/include/qt -I/usr/include/qt/QtWidgets -I/usr/include/qt/QtGui -I/usr/include/qt/QtCore -I/usr/include/c++/14.2.1 -I/usr/include/c++/14.2.1/x86_64-pc-linux-gnu -I/usr/include/c++/14.2.1/backward -I/usr/lib/gcc/x86_64-pc-linux-gnu/14.2.1/include -I/usr/local/include -I/usr/lib/gcc/x86_64-pc-linux-gnu/14.2.1/include-fixed -I/usr/include QT_files/headers/modificadialog.h -o moc_modificadialog.cpp
+	/usr/bin/moc $(DEFINES) --include /home/BRN/clion/Progetto-Programmazione-ad-oggetti-2025/moc_predefs.h -I/usr/lib/qt/mkspecs/linux-g++ -I/home/BRN/clion/Progetto-Programmazione-ad-oggetti-2025 -I/home/BRN/clion/Progetto-Programmazione-ad-oggetti-2025 -I/usr/include/qt -I/usr/include/qt/QtWidgets -I/usr/include/qt/QtGui -I/usr/include/qt/QtCore -I/usr/include/c++/14.2.1 -I/usr/include/c++/14.2.1/x86_64-pc-linux-gnu -I/usr/include/c++/14.2.1/backward -I/usr/lib/gcc/x86_64-pc-linux-gnu/14.2.1/include -I/usr/local/include -I/usr/lib/gcc/x86_64-pc-linux-gnu/14.2.1/include-fixed -I/usr/include QT_files/headers/modPagina.h -o moc_modPagina.cpp
 
 moc_rightside.cpp: QT_files/headers/rightside.h \
 		QT_files/headers/libs.h \
@@ -730,9 +765,11 @@ moc_rightside.cpp: QT_files/headers/rightside.h \
 		C++/headers/gioielli.h \
 		QT_files/nlohmann/json.hpp \
 		C++/headers/descriptionBuildVisitor.h \
+		QT_files/headers/addPagina.h \
+		QT_files/headers/modPagina.h \
 		moc_predefs.h \
 		/usr/bin/moc
-	/usr/bin/moc $(DEFINES) --include /home/BRN/Scrivania/Progetto-Programmazione-ad-oggetti-2025/moc_predefs.h -I/usr/lib/qt/mkspecs/linux-g++ -I/home/BRN/Scrivania/Progetto-Programmazione-ad-oggetti-2025 -I/home/BRN/Scrivania/Progetto-Programmazione-ad-oggetti-2025 -I/usr/include/qt -I/usr/include/qt/QtWidgets -I/usr/include/qt/QtGui -I/usr/include/qt/QtCore -I/usr/include/c++/14.2.1 -I/usr/include/c++/14.2.1/x86_64-pc-linux-gnu -I/usr/include/c++/14.2.1/backward -I/usr/lib/gcc/x86_64-pc-linux-gnu/14.2.1/include -I/usr/local/include -I/usr/lib/gcc/x86_64-pc-linux-gnu/14.2.1/include-fixed -I/usr/include QT_files/headers/rightside.h -o moc_rightside.cpp
+	/usr/bin/moc $(DEFINES) --include /home/BRN/clion/Progetto-Programmazione-ad-oggetti-2025/moc_predefs.h -I/usr/lib/qt/mkspecs/linux-g++ -I/home/BRN/clion/Progetto-Programmazione-ad-oggetti-2025 -I/home/BRN/clion/Progetto-Programmazione-ad-oggetti-2025 -I/usr/include/qt -I/usr/include/qt/QtWidgets -I/usr/include/qt/QtGui -I/usr/include/qt/QtCore -I/usr/include/c++/14.2.1 -I/usr/include/c++/14.2.1/x86_64-pc-linux-gnu -I/usr/include/c++/14.2.1/backward -I/usr/lib/gcc/x86_64-pc-linux-gnu/14.2.1/include -I/usr/local/include -I/usr/lib/gcc/x86_64-pc-linux-gnu/14.2.1/include-fixed -I/usr/include QT_files/headers/rightside.h -o moc_rightside.cpp
 
 compiler_moc_objc_header_make_all:
 compiler_moc_objc_header_clean:
@@ -761,7 +798,9 @@ main.o: main.cpp QT_files/headers/mainwindow.h \
 		C++/headers/gioielli.h \
 		QT_files/nlohmann/json.hpp \
 		QT_files/headers/rightside.h \
-		C++/headers/descriptionBuildVisitor.h
+		C++/headers/descriptionBuildVisitor.h \
+		QT_files/headers/addPagina.h \
+		QT_files/headers/modPagina.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o main.o main.cpp
 
 arte.o: C++/arte.cpp C++/headers/arte.h \
@@ -799,8 +838,8 @@ orologi.o: C++/orologi.cpp C++/headers/orologi.h \
 		C++/headers/bibliotecaVisitorInterface.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o orologi.o C++/orologi.cpp
 
-aggiungidialog.o: QT_files/aggiungidialog.cpp QT_files/headers/aggiungidialog.h
-	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o aggiungidialog.o QT_files/aggiungidialog.cpp
+addPagina.o: QT_files/addPagina.cpp QT_files/headers/addPagina.h
+	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o addPagina.o QT_files/addPagina.cpp
 
 leftside.o: QT_files/leftside.cpp QT_files/headers/leftside.h \
 		QT_files/headers/libs.h \
@@ -824,16 +863,18 @@ mainwindow.o: QT_files/mainwindow.cpp QT_files/headers/mainwindow.h \
 		C++/headers/gioielli.h \
 		QT_files/nlohmann/json.hpp \
 		QT_files/headers/rightside.h \
-		C++/headers/descriptionBuildVisitor.h
+		C++/headers/descriptionBuildVisitor.h \
+		QT_files/headers/addPagina.h \
+		QT_files/headers/modPagina.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o mainwindow.o QT_files/mainwindow.cpp
 
-modificadialog.o: QT_files/modificadialog.cpp QT_files/headers/modificadialog.h \
+modPagina.o: QT_files/modPagina.cpp QT_files/headers/modPagina.h \
 		C++/headers/biblioteca.h \
 		C++/headers/bibliotecaVisitorInterface.h \
 		C++/headers/arte.h \
 		C++/headers/gioielli.h \
 		C++/headers/orologi.h
-	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o modificadialog.o QT_files/modificadialog.cpp
+	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o modPagina.o QT_files/modPagina.cpp
 
 rightside.o: QT_files/rightside.cpp QT_files/headers/rightside.h \
 		QT_files/headers/libs.h \
@@ -846,15 +887,15 @@ rightside.o: QT_files/rightside.cpp QT_files/headers/rightside.h \
 		C++/headers/gioielli.h \
 		QT_files/nlohmann/json.hpp \
 		C++/headers/descriptionBuildVisitor.h \
-		QT_files/headers/modificadialog.h \
-		QT_files/headers/aggiungidialog.h
+		QT_files/headers/addPagina.h \
+		QT_files/headers/modPagina.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o rightside.o QT_files/rightside.cpp
 
 qrc_risorse.o: qrc_risorse.cpp 
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o qrc_risorse.o qrc_risorse.cpp
 
-moc_aggiungidialog.o: moc_aggiungidialog.cpp 
-	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o moc_aggiungidialog.o moc_aggiungidialog.cpp
+moc_addPagina.o: moc_addPagina.cpp 
+	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o moc_addPagina.o moc_addPagina.cpp
 
 moc_leftside.o: moc_leftside.cpp 
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o moc_leftside.o moc_leftside.cpp
@@ -862,8 +903,8 @@ moc_leftside.o: moc_leftside.cpp
 moc_mainwindow.o: moc_mainwindow.cpp 
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o moc_mainwindow.o moc_mainwindow.cpp
 
-moc_modificadialog.o: moc_modificadialog.cpp 
-	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o moc_modificadialog.o moc_modificadialog.cpp
+moc_modPagina.o: moc_modPagina.cpp 
+	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o moc_modPagina.o moc_modPagina.cpp
 
 moc_rightside.o: moc_rightside.cpp 
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o moc_rightside.o moc_rightside.cpp

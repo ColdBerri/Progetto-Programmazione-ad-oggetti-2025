@@ -1,16 +1,14 @@
-#include "headers/aggiungidialog.h"
+#include "headers/addPagina.h"
 #include <QVBoxLayout>
 #include <QFormLayout>
 #include <QHBoxLayout>
 #include <QLabel>
 #include <QMessageBox>
 
-AggiungiDialog::AggiungiDialog(QWidget *parent) : QDialog(parent) {
+addPagina::addPagina(QWidget *parent) : QWidget(parent) {
     setWindowTitle("Aggiungi Elemento");
     setFixedSize(700,675);
-
     QVBoxLayout *mainLayout = new QVBoxLayout(this);
-
     // Creazione dei bottoni per la scelta del tipo
     bottoneArte = new QRadioButton("Arte", this);
     bottoneGioielli = new QRadioButton("Gioielli", this);
@@ -41,25 +39,30 @@ AggiungiDialog::AggiungiDialog(QWidget *parent) : QDialog(parent) {
 
     // Bottoni finali
     salvaButton = new QPushButton("Salva", this);
+    salvaButton->setEnabled(false);
     annullaButton = new QPushButton("Annulla", this);
     mainLayout->addWidget(salvaButton);
     mainLayout->addWidget(annullaButton);
 
     // Connessioni
-    connect(bottoneArte, &QRadioButton::clicked, this, &AggiungiDialog::abilitaConferma);
-    connect(bottoneGioielli, &QRadioButton::clicked, this, &AggiungiDialog::abilitaConferma);
-    connect(bottoneOrologi, &QRadioButton::clicked, this, &AggiungiDialog::abilitaConferma);
-    connect(confermaTipoButton, &QPushButton::clicked, this, &AggiungiDialog::confermaScelta);
-    connect(salvaButton, &QPushButton::clicked, this, &AggiungiDialog::salvaNuovo);
-    connect(annullaButton, &QPushButton::clicked, this, &QDialog::reject);
+    connect(bottoneArte, &QRadioButton::clicked, this, &addPagina::abilitaConferma);
+    connect(bottoneGioielli, &QRadioButton::clicked, this, &addPagina::abilitaConferma);
+    connect(bottoneOrologi, &QRadioButton::clicked, this, &addPagina::abilitaConferma);
+    connect(confermaTipoButton, &QPushButton::clicked, this, &addPagina::confermaScelta);
+    connect(confermaTipoButton, &QPushButton::clicked, this, [this]() {
+        this->salvaButton->setEnabled(true);
+    });
+    connect(salvaButton, &QPushButton::clicked, this, &addPagina::salvaNuovo);
+    connect(annullaButton, &QPushButton::clicked, this, &addPagina::closeAddPagina);
     pulisciForm();
 }
 
-void AggiungiDialog::abilitaConferma() {
+
+void addPagina::abilitaConferma() {
     confermaTipoButton->setEnabled(true);
 }
 
-void AggiungiDialog::confermaScelta() {
+void addPagina::confermaScelta() {
     // Disabilita i bottoni di scelta e abilita il form
     bottoneArte->setEnabled(false);
     bottoneGioielli->setEnabled(false);
@@ -76,8 +79,52 @@ void AggiungiDialog::confermaScelta() {
     }
 }
 
+void addPagina::aggiungiAListaEsp() {
+    QString nuovaEsposizione = nuovaEsposizioneInput->text().trimmed();
+    if (!nuovaEsposizione.isEmpty()) {
+        for (int i = 0; i < eList->count(); ++i) {
+            if (eList->item(i)->text().isEmpty()) {
+                delete eList->takeItem(i);
+                i--;
+            }
+        }
+        eList->addItem(nuovaEsposizione);
+        nuovaEsposizioneInput->clear();
+    }else QMessageBox::information(this, "Esposizione Nulla","Stai cercando di inserire una stringa vuota!");
+}
+
+void addPagina::togliDaListaEsp() {
+    QListWidgetItem* selectedItem = eList->currentItem();
+    if (selectedItem) {
+        delete selectedItem;
+    }
+}
+
+void addPagina::aggiungiAListaMat() {
+    QString nuovoMateriale = nuovoMaterialeInput->text().trimmed();
+    if (!nuovoMateriale.isEmpty()) {
+        for (int i = 0; i < mList->count(); ++i) {
+            if (mList->item(i)->text().isEmpty()) {
+                delete mList->takeItem(i);
+                i--;
+            }
+        }
+
+        mList->addItem(nuovoMateriale);
+        nuovoMaterialeInput->clear();
+    }else QMessageBox::information(this, "Materiale Nullo","Stai cercando di inserire una stringa vuota!");
+}
+
+void addPagina::togliDaListaMat() {
+
+    QListWidgetItem* selectedItem = mList->currentItem();
+    if (selectedItem) {
+        delete selectedItem;
+    }
+}
+
 // Cambiato il return type in void, visto che non utilizziamo il valore restituito.
-void AggiungiDialog::mostraArte() {
+void addPagina::mostraArte() {
     // Campi comuni
     nomeNew = new QLineEdit(this);
     descrizioneNew = new QLineEdit(this);
@@ -129,8 +176,8 @@ void AggiungiDialog::mostraArte() {
     espLayout->addLayout(addLayout);
 
     // Usa i metodi della stessa classe (non ModificaDialog)
-    connect(emAddButton, &QPushButton::clicked, this, &AggiungiDialog::aggiungiAListaEsp);
-    connect(emDelButton, &QPushButton::clicked, this, &AggiungiDialog::togliDaListaEsp);
+    connect(emAddButton, &QPushButton::clicked, this, &addPagina::aggiungiAListaEsp);
+    connect(emDelButton, &QPushButton::clicked, this, &addPagina::togliDaListaEsp);
 
     formLayout->addRow("Artista:", artistaNew);
     formLayout->addRow("Artista Vivo:", radioWidget);
@@ -138,7 +185,7 @@ void AggiungiDialog::mostraArte() {
     formLayout->addRow("Esposizioni:", espLayout);
 }
 
-void AggiungiDialog::mostraGioielli() {
+void addPagina::mostraGioielli() {
     // Campi comuni
     nomeNew = new QLineEdit(this);
     descrizioneNew = new QLineEdit(this);
@@ -171,14 +218,14 @@ void AggiungiDialog::mostraGioielli() {
     addLayout->addWidget(emDelButton);
     matLayout->addLayout(addLayout);
 
-    connect(emAddButton, &QPushButton::clicked, this, &AggiungiDialog::aggiungiAListaMat);
-    connect(emDelButton, &QPushButton::clicked, this, &AggiungiDialog::togliDaListaMat);
+    connect(emAddButton, &QPushButton::clicked, this, &addPagina::aggiungiAListaMat);
+    connect(emDelButton, &QPushButton::clicked, this, &addPagina::togliDaListaMat);
 
     formLayout->addRow("Orafo:", orafoNew);
     formLayout->addRow("Materiali:", matLayout);
 }
 
-void AggiungiDialog::mostraOrologi() {
+void addPagina::mostraOrologi() {
     // Campi comuni
     nomeNew = new QLineEdit(this);
     descrizioneNew = new QLineEdit(this);
@@ -209,7 +256,7 @@ void AggiungiDialog::mostraOrologi() {
     formLayout->addRow("Meccanismo:", meccanismoNew);
 }
 
-void AggiungiDialog::pulisciForm() {
+void addPagina::pulisciForm() {
     QLayoutItem *item;
     while ((item = formLayout->takeAt(0)) != nullptr) {
         if(item->widget())
@@ -218,7 +265,7 @@ void AggiungiDialog::pulisciForm() {
     }
 }
 
-void AggiungiDialog::salvaNuovo() {
+void addPagina::salvaNuovo() {
     QVariantMap dati;
     if (nomeNew->text().isEmpty()) {
         QMessageBox::warning(this, "Errore di Salvataggio",
@@ -267,49 +314,5 @@ void AggiungiDialog::salvaNuovo() {
     }
 
     emit datiInseriti(dati["tipo"].toString(), dati);
-    accept();
-}
-
-void AggiungiDialog::aggiungiAListaEsp() {
-    QString nuovaEsposizione = nuovaEsposizioneInput->text().trimmed();
-    if (!nuovaEsposizione.isEmpty()) {
-        for (int i = 0; i < eList->count(); ++i) {
-            if (eList->item(i)->text().isEmpty()) {
-                delete eList->takeItem(i);
-                i--;
-            }
-        }
-        eList->addItem(nuovaEsposizione);
-        nuovaEsposizioneInput->clear();
-    }else QMessageBox::information(this, "Esposizione Nulla","Stai cercando di inserire una stringa vuota!");
-}
-
-void AggiungiDialog::togliDaListaEsp() {
-    QListWidgetItem* selectedItem = eList->currentItem();
-    if (selectedItem) {
-        delete selectedItem;
-    }
-}
-
-void AggiungiDialog::aggiungiAListaMat() {
-    QString nuovoMateriale = nuovoMaterialeInput->text().trimmed();
-    if (!nuovoMateriale.isEmpty()) {
-        for (int i = 0; i < mList->count(); ++i) {
-            if (mList->item(i)->text().isEmpty()) {
-                delete mList->takeItem(i);
-                i--;
-            }
-        }
-
-        mList->addItem(nuovoMateriale);
-        nuovoMaterialeInput->clear();
-    }else QMessageBox::information(this, "Materiale Nullo","Stai cercando di inserire una stringa vuota!");
-}
-
-void AggiungiDialog::togliDaListaMat() {
-
-    QListWidgetItem* selectedItem = mList->currentItem();
-    if (selectedItem) {
-        delete selectedItem;
-    }
+    emit confermaAdd();
 }

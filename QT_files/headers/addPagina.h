@@ -1,7 +1,9 @@
-#ifndef AGGIUNGIDIALOG_H
-#define AGGIUNGIDIALOG_H
+//
+// Created by BRN on 07/03/25.
+//
 
-#include <QDialog>
+#ifndef ADDPAGINA_H
+#define ADDPAGINA_H
 #include <QVariantMap>
 #include <QRadioButton>
 #include <QButtonGroup>
@@ -11,7 +13,7 @@
 #include <QListWidget>
 #include <QFormLayout>
 
-class AggiungiDialog : public QDialog {
+class addPagina : public QWidget {
     Q_OBJECT
     private:
     // Bottoni per la scelta del tipo
@@ -59,11 +61,12 @@ class AggiungiDialog : public QDialog {
     QComboBox *meccanismoNew;
 
 public:
-    explicit AggiungiDialog(QWidget *parent = nullptr);
+    explicit addPagina(QWidget *parent = nullptr);
 
     signals:
         void datiInseriti(const QString &tipo, const QVariantMap &dati);
-
+        void closeAddPagina();
+        void confermaAdd();
     private slots:
         void abilitaConferma();
         void confermaScelta();
@@ -79,5 +82,4 @@ public:
         void pulisciForm();
 
 };
-
-#endif // AGGIUNGIDIALOG_H
+#endif //ADDPAGINA_H

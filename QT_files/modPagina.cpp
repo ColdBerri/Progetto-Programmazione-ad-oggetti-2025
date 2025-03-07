@@ -1,5 +1,4 @@
-#include "headers/modificadialog.h"
-
+#include "headers/modPagina.h"
 #include <ios>
 #include <QVBoxLayout>
 #include <QFormLayout>
@@ -7,13 +6,9 @@
 #include <QHBoxLayout>
 #include <QLabel>
 #include <QMessageBox>
-#include <list>
-#include <string>
-#include <bits/ios_base.h>
-#include "../C++/headers/biblioteca.h"
 
-ModificaDialog::ModificaDialog(biblioteca *item, QWidget *parent) :
-    QDialog(parent), item(item){
+modPagina::modPagina(biblioteca *item, QWidget *parent) :
+    QWidget(parent), item(item){
 
     setWindowTitle("Modifica Elemento");
     setFixedSize(700, 675);
@@ -84,8 +79,8 @@ ModificaDialog::ModificaDialog(biblioteca *item, QWidget *parent) :
         addLayout->addWidget(emAddButton);
         addLayout->addWidget(emDelButton);
         espLayout->addLayout(addLayout);
-        connect(emAddButton, &QPushButton::clicked, this, &ModificaDialog::aggiungiAListaEsp);
-        connect(emDelButton, &QPushButton::clicked, this, &ModificaDialog::togliDaListaEsp);
+        connect(emAddButton, &QPushButton::clicked, this, &modPagina::aggiungiAListaEsp);
+        connect(emDelButton, &QPushButton::clicked, this, &modPagina::togliDaListaEsp);
 
         //assegnazione campi alla finestra
         formLayout->addRow("Artista:", artistaEdit);
@@ -117,8 +112,8 @@ ModificaDialog::ModificaDialog(biblioteca *item, QWidget *parent) :
         addLayout->addWidget(emAddButton);
         addLayout->addWidget(emDelButton);
         matLayout->addLayout(addLayout);
-        connect(emAddButton, &QPushButton::clicked, this, &ModificaDialog::aggiungiAListaMat);
-        connect(emDelButton, &QPushButton::clicked, this, &ModificaDialog::togliDaListaMat);
+        connect(emAddButton, &QPushButton::clicked, this, &modPagina::aggiungiAListaMat);
+        connect(emDelButton, &QPushButton::clicked, this, &modPagina::togliDaListaMat);
 
         formLayout->addRow("Orafo:", orafoEdit);
         formLayout->addRow("Materiali:", matLayout);
@@ -146,12 +141,11 @@ ModificaDialog::ModificaDialog(biblioteca *item, QWidget *parent) :
     layout->addWidget(salvaButton);
     layout->addWidget(annullaButton);
 
-    connect(salvaButton, &QPushButton::clicked, this, &ModificaDialog::salvaModifiche);
-    connect(annullaButton, &QPushButton::clicked, this, &QDialog::reject);
-
+    connect(salvaButton, &QPushButton::clicked, this, &modPagina::salvaModifiche);
+    connect(annullaButton, &QPushButton::clicked, this, &modPagina::closeModPagina);
 }
 
-void ModificaDialog::salvaModifiche() {
+void modPagina::salvaModifiche() {
 
     item->setNome(nomeEdit->text().toStdString());
 
@@ -177,7 +171,6 @@ void ModificaDialog::salvaModifiche() {
         }else {
             a->setEsposizione(esposizioniStd);
         }
-
 
         QString tipoOp = tipoOperaEdit->currentText();
         a->setTipoOpera(tipoOp.toStdString());
@@ -209,11 +202,10 @@ void ModificaDialog::salvaModifiche() {
                                         "Non puoi salvare un oggetto senza nome!");
         return;
     }
-    accept();
+    emit confermaMod();
 }
 
-
-void ModificaDialog::aggiungiAListaEsp() {
+void modPagina::aggiungiAListaEsp() {
     QString nuovaEsposizione = nuovaEsposizioneInput->text().trimmed();
     if (!nuovaEsposizione.isEmpty()) {
         // Cerca e rimuove eventuali elementi vuoti nella lista
@@ -230,30 +222,28 @@ void ModificaDialog::aggiungiAListaEsp() {
 
 
 // **Metodo per rimuovere un'esposizione selezionata**
-void ModificaDialog::togliDaListaEsp() {
+void modPagina::togliDaListaEsp() {
     QListWidgetItem* selectedItem = eList->currentItem();
     if (selectedItem) {
         delete selectedItem;
     }
 }
 
-void ModificaDialog::aggiungiAListaMat() {
+void modPagina::aggiungiAListaMat() {
     QString nuovoMateriale = nuovoMaterialeInput->text().trimmed();
     if (!nuovoMateriale.isEmpty()) {
-        // Cerca e rimuove eventuali elementi vuoti nella lista
         for (int i = 0; i < mList->count(); ++i) {
             if (mList->item(i)->text().isEmpty()) {
                 delete mList->takeItem(i);
                 i--; // Decrementa l'indice perché la lista si riduce di uno
             }
         }
-
         mList->addItem(nuovoMateriale);
         nuovoMaterialeInput->clear();
     }else QMessageBox::information(this, "Materiale Nullo","Stai cercando di inserire una stringa vuota!");
 }
 
-void ModificaDialog::togliDaListaMat() {
+void modPagina::togliDaListaMat() {
     QListWidgetItem* selectedItem = mList->currentItem();
     if (selectedItem) {
         delete selectedItem;

@@ -1,7 +1,6 @@
-#ifndef MODIFICADIALOG_H
-#define MODIFICADIALOG_H
+#ifndef MODPAGINA_H
+#define MODPAGINA_H
 
-#include <QDialog>
 #include <QLineEdit>
 #include <QFormLayout>
 #include <QPushButton>
@@ -17,11 +16,11 @@
 #include "C++/headers/arte.h"
 #include "C++/headers/gioielli.h"
 #include "C++/headers/orologi.h"
-class ModificaDialog : public QDialog {
+class modPagina : public QWidget {
     Q_OBJECT
 
 public:
-    explicit ModificaDialog(biblioteca *item, QWidget *parent = nullptr);
+    explicit modPagina(biblioteca *item, QWidget *parent = nullptr);
 
 private:
     biblioteca *item;
@@ -65,8 +64,9 @@ private slots:
     void togliDaListaEsp();
     void togliDaListaMat();
 
-
+signals:
+	void confermaMod();
+    void closeModPagina();
 };
 
-#endif // MODIFICADIALOG_H
-
+#endif //MODPAGINA_H

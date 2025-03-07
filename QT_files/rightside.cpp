@@ -1,10 +1,10 @@
 #include "headers/rightside.h"
-#include "headers/modificadialog.h"
-#include "headers/aggiungidialog.h"
-
 
 rightside::rightside (leftside* left, QWidget *parent) :
 QWidget(parent), left(left) {
+
+	stack = new QStackedWidget(this);
+	home = new QWidget(this);
     right = new QVBoxLayout(this);
 
     modifica = new QPushButton("MODIFICA ITEM");
@@ -20,6 +20,7 @@ QWidget(parent), left(left) {
     preferitiButton->setCheckable(true);
     preferitiButton->setIcon(QIcon(":/QT_files/assets/vuota.png"));
     preferitiButton->setIconSize(QSize(30, 30));
+
     descriptionLabel->setAlignment(Qt::AlignLeft);
     descriptionLabel->setWordWrap(true);
     imageLabel->setAlignment(Qt::AlignRight);
@@ -27,6 +28,7 @@ QWidget(parent), left(left) {
     imageDescLayout->addWidget(imageLabel, 2);
     descriptionLabel->setSizePolicy(QSizePolicy::Expanding, QSizePolicy::Expanding);
     imageLabel->setSizePolicy(QSizePolicy::Expanding, QSizePolicy::Expanding);
+
     preferitiLayout->addWidget(preferitiButton);
     infobox->addLayout(imageDescLayout);
     right->addWidget(modifica);
@@ -34,7 +36,12 @@ QWidget(parent), left(left) {
     right->addWidget(aggiungi);
     right->addLayout(infobox);
     right->addLayout(preferitiLayout);
-    setLayout(right);
+	home->setLayout(right);
+    stack->addWidget(home);
+
+    mainLayout = new QVBoxLayout(this);
+    mainLayout->addWidget(stack);
+    setLayout(mainLayout);
 
     //connect per fare update delle info dell'elemnto selezionato e per svuotare quando deselezionato
     connect(left, &leftside::itemSelected, this, &rightside::updateInfo);
@@ -57,7 +64,6 @@ QWidget(parent), left(left) {
         }
     });
 
-
     connect(preferitiButton, &QPushButton::toggled, this, [this](bool checked) {
         if(currentItem) {
             currentItem->setPreferiti(checked);
@@ -71,9 +77,14 @@ QWidget(parent), left(left) {
     });
 
     //connect modifca e aggiungi
-    connect(modifica, &QPushButton::clicked, this, &rightside::modificare);
+    connect(modifica, &QPushButton::clicked, this, [=]() {
+        if (currentItem) {
+            modificare();
+        } else {
+            QMessageBox::warning(this, "Errore", "Nessun elemento selezionato per la modifica.");
+        }
+    });
     connect(aggiungi, &QPushButton::clicked, this, &rightside::aggiungere);
-
 }
 
 //metodo di update delle informazioni dell'oggetto
@@ -143,17 +154,40 @@ void rightside::modificare() {
         return;
     }
 
-    ModificaDialog dialog(currentItem, this);
-    if (dialog.exec() == QDialog::Accepted) {
-        updateInfo(currentItem);
-        left->aggiornaItem(currentItem);
-    }
+    mPage = new modPagina(currentItem, this);
+	stack->addWidget(mPage);
+	stack->setCurrentWidget(mPage);
+
+    connect(mPage, &modPagina::confermaMod, this,[=](){
+		stack->setCurrentWidget(home);
+		stack->removeWidget(mPage);
+        mPage->deleteLater();
+    });
+
+    connect(mPage, &modPagina::closeModPagina, this,[=](){
+		stack->setCurrentWidget(home);
+        stack->removeWidget(mPage);
+        mPage->deleteLater();
+    });
 }
 
 void rightside::aggiungere() {
-    AggiungiDialog *dialog = new AggiungiDialog(this);
-    connect(dialog, &AggiungiDialog::datiInseriti, this, &rightside::inviaDatiAggiunti);
-    dialog->exec();
+    aPage = new addPagina(this);
+    stack->addWidget(aPage);
+    stack->setCurrentWidget(aPage);
+
+     connect(aPage, &addPagina::confermaAdd, this, [=]() {
+        stack->setCurrentWidget(home);
+        stack->removeWidget(aPage);
+        aPage->deleteLater();
+    });
+
+    connect(aPage, &addPagina::closeAddPagina, this, [=]() {
+        stack->setCurrentWidget(home);
+        stack->removeWidget(aPage);
+        aPage->deleteLater();
+    });
+    connect(aPage, &addPagina::datiInseriti, this, &rightside::inviaDatiAggiunti);
 }
 
 void rightside::inviaDatiAggiunti(const QString &tipo, const QVariantMap &dati) {
