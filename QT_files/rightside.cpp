@@ -157,15 +157,18 @@ void rightside::modificare() {
     mPage = new modPagina(currentItem, this);
 	stack->addWidget(mPage);
 	stack->setCurrentWidget(mPage);
+    left->setEnabled(false);
 
     connect(mPage, &modPagina::confermaMod, this,[=](){
 		stack->setCurrentWidget(home);
+        left->setEnabled(true);
 		stack->removeWidget(mPage);
         mPage->deleteLater();
     });
 
     connect(mPage, &modPagina::closeModPagina, this,[=](){
 		stack->setCurrentWidget(home);
+        left->setEnabled(true);
         stack->removeWidget(mPage);
         mPage->deleteLater();
     });
@@ -175,15 +178,17 @@ void rightside::aggiungere() {
     aPage = new addPagina(this);
     stack->addWidget(aPage);
     stack->setCurrentWidget(aPage);
-
+    left->setEnabled(false);
      connect(aPage, &addPagina::confermaAdd, this, [=]() {
         stack->setCurrentWidget(home);
+        left->setEnabled(true);
         stack->removeWidget(aPage);
         aPage->deleteLater();
     });
 
     connect(aPage, &addPagina::closeAddPagina, this, [=]() {
         stack->setCurrentWidget(home);
+        left->setEnabled(true);
         stack->removeWidget(aPage);
         aPage->deleteLater();
     });
