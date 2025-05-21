@@ -37,7 +37,7 @@ MOVE          = mv -f
 TAR           = tar -cf
 COMPRESS      = gzip -9f
 DISTNAME      = Progetto-Programmazione-ad-oggetti-20251.0.0
-DISTDIR = /home/BRN/clion/Progetto-Programmazione-ad-oggetti-2025/.tmp/Progetto-Programmazione-ad-oggetti-20251.0.0
+DISTDIR = /home/BRN/Scrivania/Progetto-Programmazione-ad-oggetti-2025/.tmp/Progetto-Programmazione-ad-oggetti-20251.0.0
 LINK          = g++
 LFLAGS        = -Wl,-O1 -pipe -O2 -flto=8 -fno-fat-lto-objects -fuse-linker-plugin -fPIC
 LIBS          = $(SUBLIBS) /usr/lib/libQt5Widgets.so /usr/lib/libQt5Gui.so /usr/lib/libQt5Core.so -lGL -lpthread   
@@ -711,7 +711,7 @@ compiler_moc_header_clean:
 moc_addPagina.cpp: QT_files/headers/addPagina.h \
 		moc_predefs.h \
 		/usr/bin/moc
-	/usr/bin/moc $(DEFINES) --include /home/BRN/clion/Progetto-Programmazione-ad-oggetti-2025/moc_predefs.h -I/usr/lib/qt/mkspecs/linux-g++ -I/home/BRN/clion/Progetto-Programmazione-ad-oggetti-2025 -I/home/BRN/clion/Progetto-Programmazione-ad-oggetti-2025 -I/usr/include/qt -I/usr/include/qt/QtWidgets -I/usr/include/qt/QtGui -I/usr/include/qt/QtCore -I/usr/include/c++/14.2.1 -I/usr/include/c++/14.2.1/x86_64-pc-linux-gnu -I/usr/include/c++/14.2.1/backward -I/usr/lib/gcc/x86_64-pc-linux-gnu/14.2.1/include -I/usr/local/include -I/usr/lib/gcc/x86_64-pc-linux-gnu/14.2.1/include-fixed -I/usr/include QT_files/headers/addPagina.h -o moc_addPagina.cpp
+	/usr/bin/moc $(DEFINES) --include /home/BRN/Scrivania/Progetto-Programmazione-ad-oggetti-2025/moc_predefs.h -I/usr/lib/qt/mkspecs/linux-g++ -I/home/BRN/Scrivania/Progetto-Programmazione-ad-oggetti-2025 -I/home/BRN/Scrivania/Progetto-Programmazione-ad-oggetti-2025 -I/usr/include/qt -I/usr/include/qt/QtWidgets -I/usr/include/qt/QtGui -I/usr/include/qt/QtCore -I/usr/include/c++/14.2.1 -I/usr/include/c++/14.2.1/x86_64-pc-linux-gnu -I/usr/include/c++/14.2.1/backward -I/usr/lib/gcc/x86_64-pc-linux-gnu/14.2.1/include -I/usr/local/include -I/usr/lib/gcc/x86_64-pc-linux-gnu/14.2.1/include-fixed -I/usr/include QT_files/headers/addPagina.h -o moc_addPagina.cpp
 
 moc_leftside.cpp: QT_files/headers/leftside.h \
 		QT_files/headers/libs.h \
@@ -724,7 +724,7 @@ moc_leftside.cpp: QT_files/headers/leftside.h \
 		QT_files/nlohmann/json.hpp \
 		moc_predefs.h \
 		/usr/bin/moc
-	/usr/bin/moc $(DEFINES) --include /home/BRN/clion/Progetto-Programmazione-ad-oggetti-2025/moc_predefs.h -I/usr/lib/qt/mkspecs/linux-g++ -I/home/BRN/clion/Progetto-Programmazione-ad-oggetti-2025 -I/home/BRN/clion/Progetto-Programmazione-ad-oggetti-2025 -I/usr/include/qt -I/usr/include/qt/QtWidgets -I/usr/include/qt/QtGui -I/usr/include/qt/QtCore -I/usr/include/c++/14.2.1 -I/usr/include/c++/14.2.1/x86_64-pc-linux-gnu -I/usr/include/c++/14.2.1/backward -I/usr/lib/gcc/x86_64-pc-linux-gnu/14.2.1/include -I/usr/local/include -I/usr/lib/gcc/x86_64-pc-linux-gnu/14.2.1/include-fixed -I/usr/include QT_files/headers/leftside.h -o moc_leftside.cpp
+	/usr/bin/moc $(DEFINES) --include /home/BRN/Scrivania/Progetto-Programmazione-ad-oggetti-2025/moc_predefs.h -I/usr/lib/qt/mkspecs/linux-g++ -I/home/BRN/Scrivania/Progetto-Programmazione-ad-oggetti-2025 -I/home/BRN/Scrivania/Progetto-Programmazione-ad-oggetti-2025 -I/usr/include/qt -I/usr/include/qt/QtWidgets -I/usr/include/qt/QtGui -I/usr/include/qt/QtCore -I/usr/include/c++/14.2.1 -I/usr/include/c++/14.2.1/x86_64-pc-linux-gnu -I/usr/include/c++/14.2.1/backward -I/usr/lib/gcc/x86_64-pc-linux-gnu/14.2.1/include -I/usr/local/include -I/usr/lib/gcc/x86_64-pc-linux-gnu/14.2.1/include-fixed -I/usr/include QT_files/headers/leftside.h -o moc_leftside.cpp
 
 moc_mainwindow.cpp: QT_files/headers/mainwindow.h \
 		QT_files/headers/leftside.h \
@@ -742,7 +742,7 @@ moc_mainwindow.cpp: QT_files/headers/mainwindow.h \
 		QT_files/headers/modPagina.h \
 		moc_predefs.h \
 		/usr/bin/moc
-	/usr/bin/moc $(DEFINES) --include /home/BRN/clion/Progetto-Programmazione-ad-oggetti-2025/moc_predefs.h -I/usr/lib/qt/mkspecs/linux-g++ -I/home/BRN/clion/Progetto-Programmazione-ad-oggetti-2025 -I/home/BRN/clion/Progetto-Programmazione-ad-oggetti-2025 -I/usr/include/qt -I/usr/include/qt/QtWidgets -I/usr/include/qt/QtGui -I/usr/include/qt/QtCore -I/usr/include/c++/14.2.1 -I/usr/include/c++/14.2.1/x86_64-pc-linux-gnu -I/usr/include/c++/14.2.1/backward -I/usr/lib/gcc/x86_64-pc-linux-gnu/14.2.1/include -I/usr/local/include -I/usr/lib/gcc/x86_64-pc-linux-gnu/14.2.1/include-fixed -I/usr/include QT_files/headers/mainwindow.h -o moc_mainwindow.cpp
+	/usr/bin/moc $(DEFINES) --include /home/BRN/Scrivania/Progetto-Programmazione-ad-oggetti-2025/moc_predefs.h -I/usr/lib/qt/mkspecs/linux-g++ -I/home/BRN/Scrivania/Progetto-Programmazione-ad-oggetti-2025 -I/home/BRN/Scrivania/Progetto-Programmazione-ad-oggetti-2025 -I/usr/include/qt -I/usr/include/qt/QtWidgets -I/usr/include/qt/QtGui -I/usr/include/qt/QtCore -I/usr/include/c++/14.2.1 -I/usr/include/c++/14.2.1/x86_64-pc-linux-gnu -I/usr/include/c++/14.2.1/backward -I/usr/lib/gcc/x86_64-pc-linux-gnu/14.2.1/include -I/usr/local/include -I/usr/lib/gcc/x86_64-pc-linux-gnu/14.2.1/include-fixed -I/usr/include QT_files/headers/mainwindow.h -o moc_mainwindow.cpp
 
 moc_modPagina.cpp: QT_files/headers/modPagina.h \
 		C++/headers/biblioteca.h \
@@ -752,7 +752,7 @@ moc_modPagina.cpp: QT_files/headers/modPagina.h \
 		C++/headers/orologi.h \
 		moc_predefs.h \
 		/usr/bin/moc
-	/usr/bin/moc $(DEFINES) --include /home/BRN/clion/Progetto-Programmazione-ad-oggetti-2025/moc_predefs.h -I/usr/lib/qt/mkspecs/linux-g++ -I/home/BRN/clion/Progetto-Programmazione-ad-oggetti-2025 -I/home/BRN/clion/Progetto-Programmazione-ad-oggetti-2025 -I/usr/include/qt -I/usr/include/qt/QtWidgets -I/usr/include/qt/QtGui -I/usr/include/qt/QtCore -I/usr/include/c++/14.2.1 -I/usr/include/c++/14.2.1/x86_64-pc-linux-gnu -I/usr/include/c++/14.2.1/backward -I/usr/lib/gcc/x86_64-pc-linux-gnu/14.2.1/include -I/usr/local/include -I/usr/lib/gcc/x86_64-pc-linux-gnu/14.2.1/include-fixed -I/usr/include QT_files/headers/modPagina.h -o moc_modPagina.cpp
+	/usr/bin/moc $(DEFINES) --include /home/BRN/Scrivania/Progetto-Programmazione-ad-oggetti-2025/moc_predefs.h -I/usr/lib/qt/mkspecs/linux-g++ -I/home/BRN/Scrivania/Progetto-Programmazione-ad-oggetti-2025 -I/home/BRN/Scrivania/Progetto-Programmazione-ad-oggetti-2025 -I/usr/include/qt -I/usr/include/qt/QtWidgets -I/usr/include/qt/QtGui -I/usr/include/qt/QtCore -I/usr/include/c++/14.2.1 -I/usr/include/c++/14.2.1/x86_64-pc-linux-gnu -I/usr/include/c++/14.2.1/backward -I/usr/lib/gcc/x86_64-pc-linux-gnu/14.2.1/include -I/usr/local/include -I/usr/lib/gcc/x86_64-pc-linux-gnu/14.2.1/include-fixed -I/usr/include QT_files/headers/modPagina.h -o moc_modPagina.cpp
 
 moc_rightside.cpp: QT_files/headers/rightside.h \
 		QT_files/headers/libs.h \
@@ -769,7 +769,7 @@ moc_rightside.cpp: QT_files/headers/rightside.h \
 		QT_files/headers/modPagina.h \
 		moc_predefs.h \
 		/usr/bin/moc
-	/usr/bin/moc $(DEFINES) --include /home/BRN/clion/Progetto-Programmazione-ad-oggetti-2025/moc_predefs.h -I/usr/lib/qt/mkspecs/linux-g++ -I/home/BRN/clion/Progetto-Programmazione-ad-oggetti-2025 -I/home/BRN/clion/Progetto-Programmazione-ad-oggetti-2025 -I/usr/include/qt -I/usr/include/qt/QtWidgets -I/usr/include/qt/QtGui -I/usr/include/qt/QtCore -I/usr/include/c++/14.2.1 -I/usr/include/c++/14.2.1/x86_64-pc-linux-gnu -I/usr/include/c++/14.2.1/backward -I/usr/lib/gcc/x86_64-pc-linux-gnu/14.2.1/include -I/usr/local/include -I/usr/lib/gcc/x86_64-pc-linux-gnu/14.2.1/include-fixed -I/usr/include QT_files/headers/rightside.h -o moc_rightside.cpp
+	/usr/bin/moc $(DEFINES) --include /home/BRN/Scrivania/Progetto-Programmazione-ad-oggetti-2025/moc_predefs.h -I/usr/lib/qt/mkspecs/linux-g++ -I/home/BRN/Scrivania/Progetto-Programmazione-ad-oggetti-2025 -I/home/BRN/Scrivania/Progetto-Programmazione-ad-oggetti-2025 -I/usr/include/qt -I/usr/include/qt/QtWidgets -I/usr/include/qt/QtGui -I/usr/include/qt/QtCore -I/usr/include/c++/14.2.1 -I/usr/include/c++/14.2.1/x86_64-pc-linux-gnu -I/usr/include/c++/14.2.1/backward -I/usr/lib/gcc/x86_64-pc-linux-gnu/14.2.1/include -I/usr/local/include -I/usr/lib/gcc/x86_64-pc-linux-gnu/14.2.1/include-fixed -I/usr/include QT_files/headers/rightside.h -o moc_rightside.cpp
 
 compiler_moc_objc_header_make_all:
 compiler_moc_objc_header_clean:
